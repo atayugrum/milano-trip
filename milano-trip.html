@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milano × Como — Ata & Zeynep 2026</title>
+<script src="https://maps.googleapis.com/maps/api/js?key=__GMAPS_KEY__&libraries=marker,geometry,places&loading=async" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F7F3EE;--ink:#1A1612;--terra:#C4593A;--sage:#7A8C6E;--gold:#C9A84C;--mist:#E8E2DA;--blue:#3D5A7A;--como:#4A7C8A;--white:#FDFAF7;--sh:0 2px 20px rgba(26,22,18,.08);--sh2:0 8px 40px rgba(26,22,18,.15)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(247,243,238,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--mist);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:58px}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;letter-spacing:.08em;color:var(--ink);text-decoration:none}
+.nav-tabs{display:flex;gap:2px;list-style:none;overflow-x:auto}
+.nav-tabs button{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);opacity:.45;padding:7px 14px;border-radius:18px;transition:all .2s}
+.nav-tabs button.active,.nav-tabs button:hover{opacity:1;background:var(--ink);color:var(--white)}
+.page{display:none;padding-top:58px;min-height:100vh}
+.page.active{display:block}
+
+/* HERO */
+.hero{height:calc(100vh - 58px);background:linear-gradient(155deg,#1A1612 0%,#2E2420 55%,#3D2E1A 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-content{text-align:center;position:relative;z-index:1}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:18px}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,6.5rem);font-weight:300;line-height:.9;color:var(--white);letter-spacing:-.02em}
+.hero-title em{font-style:italic;color:var(--terra)}
+.hero-sub{margin-top:20px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(253,250,247,.4)}
+.hero-dates{margin-top:44px;display:flex;gap:36px;justify-content:center;align-items:center}
+.hero-date{text-align:center}
+.hdl{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:3px}
+.hdv{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--white);font-weight:300}
+.hero-arr{color:var(--terra);font-size:1.4rem}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(253,250,247,.25);display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-hint::after{content:'';width:1px;height:36px;background:linear-gradient(to bottom,rgba(253,250,247,.25),transparent)}
+
+/* EXPLORE */
+.std-layout{max-width:1160px;margin:0 auto;padding:36px 22px 80px}
+.page-h1{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:300;margin-bottom:4px}
+.page-sub{font-size:.78rem;opacity:.45;margin-bottom:26px}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:24px}
+.f-btn{border:1px solid var(--mist);background:var(--white);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.7rem;letter-spacing:.04em;padding:5px 13px;border-radius:18px;color:var(--ink);transition:all .2s}
+.f-btn.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.explore-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.e-card{background:var(--white);border-radius:12px;border:1px solid var(--mist);overflow:hidden;cursor:pointer;transition:all .2s}
+.e-card:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.e-img{height:140px;background:var(--mist);display:flex;align-items:center;justify-content:center;font-size:2.4rem}
+.e-body{padding:14px}
+.e-cat{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;opacity:.4;margin-bottom:3px}
+.e-name{font-size:.9rem;font-weight:500;line-height:1.3;margin-bottom:5px}
+.e-fame{font-size:.72rem;opacity:.52;line-height:1.4}
+.e-badge{display:inline-flex;align-items:center;gap:4px;margin-top:9px;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:8px;background:var(--cream)}
+
+/* MAP */
+.map-wrap{display:grid;grid-template-columns:300px 1fr;height:calc(100vh - 58px)}
+.map-side{background:var(--white);border-right:1px solid var(--mist);overflow-y:auto;display:flex;flex-direction:column}
+.side-hd{padding:16px 18px;border-bottom:1px solid var(--mist);flex-shrink:0}
+.side-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600}
+.side-sub{font-size:.68rem;color:rgba(26,22,18,.4);margin-top:1px}
+.cat-filter{padding:10px 18px;display:flex;flex-wrap:wrap;gap:5px;border-bottom:1px solid var(--mist);flex-shrink:0}
+.cb{border:1px solid var(--mist);background:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.65rem;letter-spacing:.04em;padding:3px 9px;border-radius:11px;color:var(--ink);opacity:.55;transition:all .2s}
+.cb.active{opacity:1;border-color:var(--ink);background:var(--ink);color:var(--white)}
+.place-list{overflow-y:auto;flex:1}
+.pl-item{padding:12px 18px;border-bottom:1px solid rgba(232,226,218,.5);cursor:pointer;transition:background .15s}
+.pl-item:hover{background:var(--cream)}
+.pl-item.sel{background:var(--mist)}
+.pl-item.expanded{background:var(--mist)}
+.pl-expand{padding:0 18px 14px 33px;animation:pl-expand-in .18s ease}
+@keyframes pl-expand-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.pl-expand-img{width:100%;height:110px;object-fit:cover;border-radius:8px;margin-bottom:9px;display:block}
+.pl-row{display:flex;align-items:flex-start;gap:7px}
+.pl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.pl-name{font-size:.82rem;font-weight:500;line-height:1.3}
+.pl-cat{font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;opacity:.4;margin-top:1px}
+.pl-fame{font-size:.68rem;opacity:.5;margin-top:2px;line-height:1.3}
+#gmap{width:100%;height:100%}
+.map-bubble{position:absolute;transform:translate(-50%,-100%);margin-top:-16px;z-index:10;background:var(--white);border-radius:13px;box-shadow:var(--sh2);padding:11px 13px;min-width:190px;max-width:235px;font-family:'DM Sans',sans-serif;cursor:default}
+.map-bubble::after{content:'';position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);border-width:7px 7px 0 7px;border-style:solid;border-color:var(--white) transparent transparent transparent}
+.mb-img{width:100%;height:90px;object-fit:cover;border-radius:8px;margin-bottom:6px;display:block}
+.mb-cat{font-size:10px;text-transform:uppercase;letter-spacing:.06em;opacity:.45;margin-bottom:3px}
+.mb-name{font-size:13px;font-weight:500;margin-bottom:6px;line-height:1.25}
+.mb-fame{font-size:11px;opacity:.6;line-height:1.4;margin-bottom:10px}
+.mb-actions{display:flex;gap:6px;flex-wrap:wrap}
+.mb-btn{padding:6px 8px;border-radius:6px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;border:none}
+.mb-btn-p{flex:1;background:var(--ink);color:#fff}
+.mb-btn-s{background:var(--cream);border:1px solid var(--mist)}
+.mb-btn-del{background:#fee;border:1px solid #fca5a5;color:#b91c1c}
+.mode-row{display:flex;gap:5px;padding:10px 14px;border-bottom:1px solid var(--mist);flex-shrink:0}
+.mode-btn{flex:1;border:1px solid var(--mist);background:var(--white);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.68rem;letter-spacing:.02em;padding:7px 6px;border-radius:9px;color:var(--ink);opacity:.55;transition:all .2s}
+.mode-btn.active{opacity:1;border-color:var(--ink);background:var(--ink);color:var(--white)}
+.mode-panel{display:none;flex-direction:column;flex:1;overflow-y:auto}
+.mode-panel.active{display:flex}
+.route-hint{font-size:.68rem;opacity:.5;line-height:1.4;padding:12px 18px;border-bottom:1px solid var(--mist)}
+.travel-toggle{display:flex;gap:5px;padding:10px 18px;border-bottom:1px solid var(--mist)}
+.tt-btn{flex:1;border:1px solid var(--mist);background:var(--white);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.66rem;padding:6px 4px;border-radius:9px;color:var(--ink);opacity:.55;transition:all .2s}
+.tt-btn.active{opacity:1;border-color:var(--blue);background:var(--blue);color:#fff}
+.route-stops{padding:8px 14px;display:flex;flex-direction:column;gap:6px}
+.rs-item{display:flex;align-items:center;gap:8px;background:var(--cream);border-radius:8px;padding:7px 9px}
+.rs-num{width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;font-size:.62rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Mono',monospace}
+.rs-name{font-size:.76rem;flex:1;line-height:1.3}
+.rs-rm{background:none;border:none;cursor:pointer;opacity:.4;font-size:.7rem;flex-shrink:0;min-width:30px;min-height:30px}
+.rs-rm:hover{opacity:1}
+.rs-move{display:flex;flex-direction:column;gap:2px;flex-shrink:0}
+.rs-arr{background:var(--white);border:1px solid var(--mist);border-radius:5px;cursor:pointer;opacity:.6;font-size:.62rem;line-height:1;width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+.rs-arr:hover{opacity:1}
+.rs-arr:disabled{opacity:.15;cursor:default}
+.route-actions{display:flex;gap:8px;padding:10px 18px}
+.r-btn{flex:1;padding:8px;border-radius:9px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.74rem;transition:opacity .2s}
+.r-btn-p{background:var(--ink);color:#fff}
+.r-btn-p:hover{opacity:.8}
+.r-btn-s{background:var(--cream);color:var(--ink);border:1px solid var(--mist)}
+.r-btn-s:hover{background:var(--mist)}
+.route-summary{padding:0 18px 6px;font-size:.78rem;font-weight:500}
+.route-legs{padding:0 18px;display:flex;flex-direction:column;gap:7px;overflow-y:auto}
+.route-save-row{display:flex;gap:7px;padding:12px 18px;border-top:1px solid var(--mist);margin-top:8px}
+.route-save-row input{flex:1;font-family:'DM Sans',sans-serif;font-size:.76rem;border:1px solid var(--mist);border-radius:8px;padding:8px 10px;background:var(--white);color:var(--ink);outline:none}
+.saved-routes{padding:0 18px 14px;display:flex;flex-direction:column;gap:6px;overflow-y:auto}
+.sr-item{display:flex;align-items:center;gap:8px;background:var(--cream);border-radius:8px;padding:8px 10px}
+.sr-name{flex:1;font-size:.78rem;font-weight:500;cursor:pointer}
+.sr-meta{font-size:.62rem;opacity:.45;font-family:'DM Mono',monospace}
+.sr-load{background:var(--ink);color:#fff;border:none;border-radius:7px;padding:5px 10px;font-size:.66rem;cursor:pointer;font-family:'DM Sans',sans-serif}
+.sr-del{background:none;border:none;cursor:pointer;opacity:.35;font-size:.7rem;min-width:28px;min-height:28px}
+.sr-del:hover{opacity:1}
+.leg-item{display:flex;justify-content:space-between;align-items:baseline;font-size:.7rem;border-bottom:1px solid rgba(232,226,218,.6);padding-bottom:6px}
+.leg-name{opacity:.7;flex:1;padding-right:6px}
+.leg-meta{opacity:.45;font-family:'DM Mono',monospace;font-size:.62rem;flex-shrink:0;text-align:right}
+.add-loc-btn{flex-shrink:0;background:var(--ink);color:#fff;border:none;border-radius:14px;padding:6px 12px;font-family:'DM Sans',sans-serif;font-size:.68rem;cursor:pointer;transition:opacity .2s}
+.add-loc-btn:hover{opacity:.75}
+.pl-del{background:none;border:none;cursor:pointer;opacity:.35;font-size:.68rem;flex-shrink:0;margin-left:auto;align-self:center;min-width:30px;min-height:30px}
+.pl-del:hover{opacity:1}
+.day-map-btn{background:var(--cream);border:1px solid var(--mist);border-radius:14px;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:.66rem;cursor:pointer;color:var(--ink);transition:all .2s;min-height:30px}
+.day-map-btn:hover{background:var(--mist)}
+
+/* PLANNER */
+.planner-hd{margin-bottom:36px;border-bottom:1px solid var(--mist);padding-bottom:20px}
+.day-sec{margin-bottom:44px}
+.day-hd{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.day-badge{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:11px;flex-shrink:0}
+.day-badge.milano{background:var(--terra);color:#fff}
+.day-badge.como{background:var(--como);color:#fff}
+.day-badge.mixed{background:var(--ink);color:#fff}
+.day-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400}
+.day-date{font-family:'DM Mono',monospace;font-size:.65rem;opacity:.35;margin-left:auto}
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:var(--mist)}
+.t-slot{position:relative;margin-bottom:10px;display:grid;grid-template-columns:72px 1fr;gap:0}
+.t-dot{position:absolute;left:-26px;top:13px;width:9px;height:9px;border-radius:50%;background:var(--mist);border:2px solid var(--white);box-shadow:0 0 0 1px var(--mist)}
+.t-time{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.04em;opacity:.38;padding-top:11px;line-height:1}
+.t-card{background:var(--white);border-radius:9px;border:1px solid var(--mist);padding:11px 14px;transition:all .2s}
+.t-card:hover{box-shadow:var(--sh)}
+.t-card-hd{display:flex;align-items:center;gap:7px}
+.t-icon{font-size:.88rem}
+.t-place{font-size:.82rem;font-weight:500}
+.t-note{font-size:.71rem;opacity:.48;margin-top:3px;padding-left:26px}
+.add-row{display:grid;grid-template-columns:72px 1fr;gap:0;margin-bottom:10px;position:relative}
+.add-lbl{font-family:'DM Mono',monospace;font-size:.62rem;opacity:.35;padding-top:8px}
+.add-form{display:flex;gap:7px}
+.add-form input,.add-form select{font-family:'DM Sans',sans-serif;font-size:.78rem;border:1px solid var(--mist);border-radius:7px;padding:7px 10px;background:var(--white);color:var(--ink);outline:none;transition:border-color .2s}
+.add-form input:focus,.add-form select:focus{border-color:var(--ink)}
+.add-form input[type=time]{width:100px;flex-shrink:0}
+.add-form input[type=text]{flex:1}
+.add-form button{background:var(--ink);color:#fff;border:none;border-radius:7px;padding:7px 12px;cursor:pointer;font-size:.72rem;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.add-form button:hover{opacity:.7}
+.rm-slot{position:absolute;right:-24px;top:11px;width:19px;height:19px;border-radius:50%;background:none;border:1px solid var(--mist);cursor:pointer;font-size:.58rem;color:var(--ink);opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center}
+.t-slot:hover .rm-slot{opacity:.45}
+.rm-slot:hover{opacity:1!important;background:#fee}
+
+/* DASHBOARD */
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dash-panel{background:var(--white);border:1px solid var(--mist);border-radius:11px;padding:18px}
+.dash-hero{grid-column:1/-1;background:linear-gradient(135deg,var(--ink),#3B332C);color:var(--white);display:flex;align-items:flex-end;justify-content:space-between;gap:18px;min-height:150px}
+.dash-label{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.dash-count{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;line-height:1}
+.dash-mini{display:flex;flex-direction:column;gap:3px;text-align:right;font-size:.76rem;opacity:.55}
+.dash-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.dash-head h2{font-family:'Cormorant Garamond',serif;font-size:1.28rem;font-weight:400}
+.dash-head p{font-size:.7rem;opacity:.45;margin-top:1px}
+.mini-btn{border:1px solid var(--mist);background:var(--cream);border-radius:8px;padding:5px 9px;font-family:'DM Sans',sans-serif;font-size:.68rem;cursor:pointer;color:var(--ink)}
+.check-list,.budget-list{display:flex;flex-direction:column;gap:7px}
+.check-row,.budget-row{display:flex;align-items:center;gap:8px;border:1px solid rgba(232,226,218,.8);border-radius:8px;padding:8px 10px;font-size:.78rem}
+.check-row input{accent-color:var(--terra)}
+.check-row.done span{text-decoration:line-through;opacity:.42}
+.budget-row span:first-child{flex:1}
+.budget-row strong{font-family:'DM Mono',monospace;font-size:.72rem;font-weight:400}
+.row-rm{margin-left:auto;border:none;background:none;cursor:pointer;opacity:.35;color:var(--ink)}
+.row-rm:hover{opacity:1}
+.quick-add,.budget-add{display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:10px}
+.budget-add{grid-template-columns:1fr 82px auto}
+.quick-add input,.budget-add input,.search-input{font-family:'DM Sans',sans-serif;font-size:.78rem;border:1px solid var(--mist);border-radius:8px;padding:8px 10px;background:var(--white);color:var(--ink);outline:none}
+.quick-add button,.budget-add button{background:var(--ink);color:#fff;border:none;border-radius:8px;padding:8px 11px;font-family:'DM Sans',sans-serif;font-size:.72rem;cursor:pointer}
+.backup-actions{display:flex;gap:9px;align-items:center}
+.import-btn{flex:1;padding:8px;border-radius:9px;background:var(--cream);color:var(--ink);border:1px solid var(--mist);font-family:'DM Sans',sans-serif;font-size:.74rem;text-align:center;cursor:pointer}
+.import-btn input{display:none}
+.search-input{width:100%;margin-bottom:14px}
+
+/* COMO */
+.como-hero{background:linear-gradient(135deg,var(--como) 0%,#2A5A6E 100%);border-radius:18px;padding:44px;color:#fff;margin-bottom:36px;position:relative;overflow:hidden}
+.como-hero::before{content:'🌊';font-size:7rem;opacity:.07;position:absolute;right:-10px;top:-15px}
+.como-hero h1{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;margin-bottom:7px}
+.como-hero p{opacity:.72;font-size:.82rem}
+.como-eyebrow{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:10px;display:block}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:30px}
+.info-card{background:var(--white);border-radius:11px;border:1px solid var(--mist);padding:18px}
+.info-card h3{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;opacity:.38;margin-bottom:9px}
+.info-card p,.info-card li{font-size:.8rem;opacity:.7;line-height:1.6}
+.info-card ul{padding-left:13px}
+.como-tl-h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin-bottom:18px}
+
+/* MODAL */
+.modal-ov{position:fixed;inset:0;z-index:2000;background:rgba(26,22,18,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-ov.open{opacity:1;pointer-events:all}
+.modal{background:var(--white);border-radius:18px;width:90%;max-width:500px;max-height:82vh;overflow-y:auto;transform:translateY(18px) scale(.94);transition:transform .25s;box-shadow:0 30px 80px rgba(26,22,18,.22);position:relative}
+.modal-ov.open .modal{transform:translateY(0) scale(1)}
+.m-img{height:180px;background:var(--mist);display:flex;align-items:center;justify-content:center;font-size:3.2rem;border-radius:18px 18px 0 0;overflow:hidden}
+.m-body{padding:22px 26px}
+.m-cat{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;opacity:.38;margin-bottom:5px}
+.m-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;line-height:1.1;margin-bottom:10px}
+.m-fame{font-size:.82rem;opacity:.62;line-height:1.6;margin-bottom:18px}
+.m-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:18px}
+.m-tag{font-size:.62rem;letter-spacing:.06em;padding:3px 9px;border-radius:8px;background:var(--cream);opacity:.8}
+.m-actions{display:flex;gap:9px}
+.m-btn{flex:1;padding:9px;border-radius:9px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.76rem;transition:all .2s}
+.m-btn-p{background:var(--ink);color:#fff}
+.m-btn-p:hover{opacity:.8}
+.m-btn-s{background:var(--cream);color:var(--ink);border:1px solid var(--mist)}
+.m-btn-s:hover{background:var(--mist)}
+.m-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;background:rgba(26,22,18,.45);border:none;cursor:pointer;color:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:10}
+.m-close:hover{background:rgba(26,22,18,.75)}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;z-index:3000;background:var(--ink);color:#fff;padding:11px 18px;border-radius:9px;font-size:.76rem;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+.map-wrap{grid-template-columns:1fr;grid-template-rows:50vh 50vh}
+.dash-grid{grid-template-columns:1fr}
+.dash-hero{align-items:flex-start;flex-direction:column}
+.dash-mini{text-align:left}
+.info-grid{grid-template-columns:1fr}
+nav{padding:0 14px}
+.nav-logo{font-size:.9rem;white-space:nowrap}
+.nav-tabs button{padding:5px 9px;font-size:.64rem}
+.mode-row{flex-wrap:wrap}
+.mode-btn{flex:1 1 auto;min-height:36px;font-size:.72rem}
+.tt-btn{min-height:36px}
+.f-btn,.cb{min-height:30px;padding:7px 13px}
+.day-hd{gap:8px}
+.day-map-btn{flex:1 1 auto}
+.rs-arr{width:26px;height:26px}
+.rs-rm,.pl-del{min-width:34px;min-height:34px;font-size:.85rem}
+.m-close{width:36px;height:36px}
+.modal{width:94%}
+.add-form input[type=time]{width:88px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">A&Z · Milano 2026</a>
+  <ul class="nav-tabs">
+    <li><button onclick="showPage('hero')" class="active" id="tab-hero">Ana Sayfa</button></li>
+    <li><button onclick="showPage('dashboard')" id="tab-dashboard">Özet</button></li>
+    <li><button onclick="showPage('explore')" id="tab-explore">Keşfet</button></li>
+    <li><button onclick="showPage('map')" id="tab-map">Harita</button></li>
+    <li><button onclick="showPage('planner')" id="tab-planner">Planner</button></li>
+    <li><button onclick="showPage('como')" id="tab-como">Como</button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page active" id="page-hero">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">7 – 10 Temmuz 2026</div>
+      <h1 class="hero-title">Milano<br><em>& Como</em></h1>
+      <p class="hero-sub">Ata × Zeynep &nbsp;·&nbsp; Anniversary Trip</p>
+      <div class="hero-dates">
+        <div class="hero-date"><span class="hdl">Başlangıç</span><div class="hdv">Sal 15:00</div></div>
+        <div class="hero-arr">→</div>
+        <div class="hero-date"><span class="hdl">Como Günü</span><div class="hdv">9 Tem · Perş</div></div>
+        <div class="hero-arr">→</div>
+        <div class="hero-date"><span class="hdl">Bitiş</span><div class="hdv">Cum 10:00</div></div>
+      </div>
+    </div>
+    <div class="scroll-hint">keşfet</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="page" id="page-dashboard">
+  <div class="std-layout">
+    <div class="planner-hd">
+      <div class="page-h1">Trip Dashboard</div>
+      <div class="page-sub">Rezervasyon, bütçe ve hazırlık kontrolü</div>
+    </div>
+    <div class="dash-grid">
+      <section class="dash-panel dash-hero">
+        <div>
+          <div class="dash-label">Kalan süre</div>
+          <div class="dash-count" id="trip-countdown">--</div>
+        </div>
+        <div class="dash-mini">
+          <span>7-10 Temmuz 2026</span>
+          <span>Milano + Como</span>
+        </div>
+      </section>
+      <section class="dash-panel">
+        <div class="dash-head">
+          <div>
+            <h2>Rezervasyonlar</h2>
+            <p id="booking-progress">0/0 tamam</p>
+          </div>
+          <button class="mini-btn" onclick="resetChecklist('booking')">Sıfırla</button>
+        </div>
+        <div class="check-list" id="booking-list"></div>
+      </section>
+      <section class="dash-panel">
+        <div class="dash-head">
+          <div>
+            <h2>Paket Listesi</h2>
+            <p id="packing-progress">0/0 hazır</p>
+          </div>
+          <button class="mini-btn" onclick="resetChecklist('packing')">Sıfırla</button>
+        </div>
+        <div class="check-list" id="packing-list"></div>
+        <div class="quick-add">
+          <input id="packing-custom" type="text" placeholder="Ekstra eşya...">
+          <button onclick="addChecklistItem('packing')">Ekle</button>
+        </div>
+      </section>
+      <section class="dash-panel">
+        <div class="dash-head">
+          <div>
+            <h2>Bütçe</h2>
+            <p id="budget-total">€0 toplam</p>
+          </div>
+          <button class="mini-btn" onclick="resetBudget()">Temizle</button>
+        </div>
+        <div class="budget-list" id="budget-list"></div>
+        <div class="budget-add">
+          <input id="budget-name" type="text" placeholder="Kalem">
+          <input id="budget-amount" type="number" min="0" step="1" placeholder="€">
+          <button onclick="addBudgetItem()">Ekle</button>
+        </div>
+      </section>
+      <section class="dash-panel">
+        <div class="dash-head">
+          <div>
+            <h2>Yedek</h2>
+            <p>Planner, özel konumlar ve dashboard verileri</p>
+          </div>
+        </div>
+        <div class="backup-actions">
+          <button class="r-btn r-btn-p" onclick="exportTripData()">JSON indir</button>
+          <label class="import-btn">JSON yükle<input type="file" accept="application/json" onchange="importTripData(event)"></label>
+        </div>
+      </section>
+      <section class="dash-panel">
+        <div class="dash-head">
+          <div>
+            <h2>Gizlenen Mekanlar</h2>
+            <p id="hidden-count">0 mekan gizli</p>
+          </div>
+          <button class="mini-btn" onclick="restoreHiddenPlaces()">Tümünü Geri Getir</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- EXPLORE -->
+<div class="page" id="page-explore">
+  <div class="std-layout">
+    <div class="page-h1">Tüm Mekanlar</div>
+    <div class="page-sub" id="ex-count">Yükleniyor…</div>
+    <input class="search-input" id="place-search" type="search" placeholder="Mekan, etiket veya not ara..." oninput="renderEx()">
+    <div class="filter-row">
+      <button class="f-btn active" onclick="filterEx('all',this)">Tümü</button>
+      <button class="f-btn" onclick="filterEx('yemek',this)">🍝 Yemek</button>
+      <button class="f-btn" onclick="filterEx('bar-cafe',this)">☕ Bar & Kafe</button>
+      <button class="f-btn" onclick="filterEx('kultur',this)">🏛️ Kültür</button>
+      <button class="f-btn" onclick="filterEx('alisveris',this)">🛍️ Alışveriş</button>
+      <button class="f-btn" onclick="filterEx('gelato',this)">🍦 Gelato & Tatlı</button>
+      <button class="f-btn" onclick="filterEx('como',this)">🌊 Como</button>
+      <button class="f-btn" onclick="filterEx('custom',this)">📌 Özel</button>
+      <button class="f-btn" onclick="filterEx('stay',this)">🏠 Konaklama</button>
+    </div>
+    <div class="explore-grid" id="ex-grid"></div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div class="page" id="page-map">
+  <div class="map-wrap">
+    <div class="map-side">
+      <div class="side-hd" style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+        <div>
+          <div class="side-title">Milano Haritası</div>
+          <div class="side-sub" id="map-count">Tüm mekanlar</div>
+        </div>
+        <button class="add-loc-btn" onclick="openCustomModal()">+ Konum</button>
+      </div>
+      <div class="mode-row">
+        <button class="mode-btn active" id="mode-list" onclick="setMapMode('list')">📍 Liste</button>
+        <button class="mode-btn" id="mode-route" onclick="setMapMode('route')">🧭 Rota</button>
+        <button class="mode-btn" id="mode-area" onclick="setMapMode('area')">✏️ Alan</button>
+      </div>
+
+      <!-- LIST MODE -->
+      <div class="mode-panel active" id="panel-list">
+        <input class="search-input" id="map-search" type="search" placeholder="Mekan ara..." oninput="renderList()" style="margin:10px 18px 0;width:calc(100% - 36px)">
+        <div class="cat-filter">
+          <button class="cb active" onclick="filterMap('all',this)">Tümü</button>
+          <button class="cb" onclick="filterMap('yemek',this)">Yemek</button>
+          <button class="cb" onclick="filterMap('bar-cafe',this)">Bar & Kafe</button>
+          <button class="cb" onclick="filterMap('kultur',this)">Kültür</button>
+          <button class="cb" onclick="filterMap('alisveris',this)">Alışveriş</button>
+          <button class="cb" onclick="filterMap('gelato',this)">Gelato</button>
+          <button class="cb" onclick="filterMap('custom',this)">📌 Özel</button>
+          <button class="cb" onclick="filterMap('stay',this)">🏠 Konaklama</button>
+        </div>
+        <div class="place-list" id="pl-list"></div>
+      </div>
+
+      <!-- ROUTE MODE -->
+      <div class="mode-panel" id="panel-route">
+        <div class="route-hint">Haritada mekanlara sırayla tıkla, rotaya eklenir</div>
+        <div class="travel-toggle">
+          <button class="tt-btn active" id="tt-walk" onclick="setTravelMode('WALKING')">🚶 Yürüyüş</button>
+          <button class="tt-btn" id="tt-transit" onclick="setTravelMode('TRANSIT')">🚇 Toplu Taşıma</button>
+        </div>
+        <div class="route-stops" id="route-stops"></div>
+        <div class="route-actions">
+          <button class="r-btn r-btn-p" onclick="calcRoute()">Rotayı Hesapla</button>
+          <button class="r-btn r-btn-s" onclick="clearRoute()">Temizle</button>
+        </div>
+        <div class="route-summary" id="route-summary"></div>
+        <div class="route-legs" id="route-legs"></div>
+        <div class="route-save-row">
+          <input type="text" id="route-save-name" placeholder="Rota adı (örn. Gün 1)">
+          <button class="r-btn r-btn-p" onclick="saveCurrentRoute()">Kaydet</button>
+        </div>
+        <div class="saved-routes" id="saved-routes"></div>
+      </div>
+
+      <!-- AREA MODE -->
+      <div class="mode-panel" id="panel-area">
+        <div class="route-hint">Haritada bir alan çiz (poligon veya daire), içindeki mekanlar listelenir</div>
+        <div class="travel-toggle">
+          <button class="tt-btn active" id="area-polygon" onclick="setAreaShape('polygon')">⬠ Poligon</button>
+          <button class="tt-btn" id="area-circle" onclick="setAreaShape('circle')">⬤ Daire</button>
+        </div>
+        <div class="route-actions">
+          <button class="r-btn r-btn-p" id="poly-finish-btn" onclick="onPolyFinish()">✓ Poligonu Bitir</button>
+          <button class="r-btn r-btn-s" onclick="clearArea()">Alanı Temizle</button>
+        </div>
+        <div class="side-sub" id="area-count" style="padding:10px 18px 0"></div>
+        <div class="place-list" id="area-list"></div>
+      </div>
+    </div>
+    <div id="gmap"></div>
+  </div>
+</div>
+
+<!-- PLANNER -->
+<div class="page" id="page-planner">
+  <div class="std-layout">
+    <div class="planner-hd">
+      <div class="page-h1">Gezi Planı</div>
+      <div class="page-sub">Saatlik program — mekan ekleyip çıkarabilirsin</div>
+    </div>
+    <div id="planner-body"></div>
+  </div>
+</div>
+
+<!-- COMO -->
+<div class="page" id="page-como">
+  <div class="std-layout" style="max-width:860px">
+    <div class="como-hero">
+      <span class="como-eyebrow">9 Temmuz 2026 — Perşembe · Günübirlik</span>
+      <h1>Lago di Como</h1>
+      <p>Milano Cadorna → Como → Bellagio → Varenna → gün batımı → Milano gece</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card"><h3>🚂 Ulaşım</h3><ul>
+        <li>Milano Cadorna → Como Nord Laghi (Trenord, ~40dk, ~€5)</li>
+        <li>Varenna için Milano Centrale → Varenna (~50dk, €6)</li>
+        <li>Ferry Day Pass: ~€25-30 (tüm iskele geçişleri dahil)</li>
+        <li>Como → Bellagio ferry ~1 saat · Bellagio→Varenna ~15 dk</li>
+      </ul></div>
+      <div class="info-card"><h3>🏡 Villalar</h3><ul>
+        <li>Villa Carlotta — botanik bahçe, sanat müzesi (Tremezzo)</li>
+        <li>Villa Monastero — Varenna, eski manastır + bahçe</li>
+        <li>Villa Cipressi — Varenna, terras bahçe, göl</li>
+        <li>Villa del Balbianello — James Bond, tekneyle gidilir (Lenno)</li>
+      </ul></div>
+      <div class="info-card"><h3>🍽️ Yemek Önerileri</h3><ul>
+        <li>Dispensa 63 — Varenna, göl kenarı, yerel balık</li>
+        <li>Ristorante Suisse — Bellagio, 1894'ten beri klasik</li>
+        <li>Como merkez kahvaltı — Bar Sociale veya Pasticceria Monti</li>
+      </ul></div>
+      <div class="info-card"><h3>🌅 Gün Batımı Sonrası</h3><ul>
+        <li>Varenna'dan tren: 17:30-18:00 arası kalkmak ideal</li>
+        <li>Milano Centrale'ye ~50 dakika</li>
+        <li>Gece seçenekler: Bar Basso, Camparino, Navigli turu</li>
+        <li>Enerji varsa Terrazza Duomo 21 gece manzarası</li>
+      </ul></div>
+    </div>
+    <div class="como-tl-h2">Önerilen Güzergah</div>
+    <div class="timeline" id="como-tl"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-ov" id="modal-ov" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="m-close" onclick="closeModalDirect()">✕</button>
+    <div class="m-img" id="m-img"></div>
+    <div class="m-body">
+      <div class="m-cat" id="m-cat"></div>
+      <div class="m-name" id="m-name"></div>
+      <div class="m-fame" id="m-fame"></div>
+      <div class="m-tags" id="m-tags"></div>
+      <div class="m-actions">
+        <button class="m-btn m-btn-p" onclick="closeModalDirect();openAtp(selPlace&&selPlace.id)">+ Planera Ekle</button>
+        <a class="m-btn m-btn-s" id="m-maps" href="#" target="_blank">📍 Google Maps</a>
+      </div>
+      <button id="m-delete" onclick="removePlace(selPlace&&selPlace.id);closeModalDirect()" style="margin-top:9px;width:100%;padding:9px;border-radius:9px;border:1px solid #fca5a5;background:#fee;color:#b91c1c;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.76rem">🗑 Bu Konumu Listeden Kaldır</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const CAT_LABELS={yemek:'Yemek & Restoran','bar-cafe':'Bar & Kafe',kultur:'Kültür & Müze',alisveris:'Alışveriş',gelato:'Gelato & Tatlı',como:'Lake Como',custom:'Özel Eklenen',stay:'Konaklama'};
+const CAT_COLORS={yemek:'#C4593A','bar-cafe':'#C9A84C',kultur:'#3D5A7A',alisveris:'#7A8C6E',gelato:'#D4845A',como:'#4A7C8A',custom:'#8B5FBF',stay:'#1A1612'};
+const CAT_ICONS={yemek:'🍽️','bar-cafe':'☕',kultur:'🏛️',alisveris:'🛍️',gelato:'🍦',como:'🌊',custom:'📌',stay:'🏠'};
+
+const PLACES=[
+// KONAKLAMA
+{id:1000,name:'Airbnb — Via Lodovico Mancini 1',cat:'stay',icon:'🏠',fame:'Kaldığımız Airbnb. Via Lodovico Mancini 1, Milano, Lombardia 20129.',tags:['Konaklama','Airbnb','Check-in/out'],lat:45.463709,lng:9.209644},
+// YEMEK
+{id:1,name:'Ristorante da Oscar',cat:'yemek',photo:'places/ChIJRSwIPsfGhkcRjcaWseMghhM/photos/AaVGc3lOGcyf84B-RvdCVcz2jvP9xa8k8xL8IgdvZkdpEaV-Ykb-62sF9Si3KQKfgq_MJF3xs0Zkkt-0l6iaXSbmu7FUf3mUc8Saa9CzCZGLiCwbagwYDOGNEhO-yDd_1gOoCmEEZ4qLJ5x7Cs3aSbyYsEn0I97dqscXV04j4GPdmCCF6wkYpJ8i85F8C5xiOSt-eQYZy_rVOWGg218i1YvYXTyzL_B_pRpfB1A9w50hw-71ZNVj21bBjKLYIT4MTmywx1M80PrShzsFr3DTGbR5B5WfuZZwEJebmXSSogYOBcin5yqUZ971_O32H-XTULjPnFI-vvzj82EEfnQ9kmG98U71JPKE2REwgAnQeZmqg5OcE8mjUvNUMhnkOu9WUqUbC5EpPWnnIJ4TqhRts8Yr0PZHmdXn7_SK4wMbn63b7Abaxw',icon:'🍝',fame:'Navigli\'de otantik Milano mutfağı. Risotto alla Milanese ve ossobuco ile ünlü.',tags:['Navigli','Risotto','İtalyan'],lat:45.476449,lng:9.205949},
+{id:2,name:'Crazy Pizza',cat:'yemek',photo:'places/ChIJh2fKAJvBhkcRKdgck5Sv4X8/photos/AaVGc3lWw5X6thiAbgU0IpiWwKYW0YK1Cy42xRJLqfiBCL99d2xVoDxmS2u1NoNjT23wINm1eb2pvITG3kf-M8fEJd3zYmqmjcLw1b2EQIJvcAQWdlzjZDz1K4EBJpeZ_JWQwwih49hbDA6ustGKYP3zdCUcH7PRxrY5klUbf2iEFGwrdOmrHL_GUS2bJOrBOvcl0bkEcNHJ3P5gdOxUuHmzkXiAvxtntQSUMOVQ8ue_62yrKjF7q7DBcQGH2GLDEPuCF79LyWhXX0ZGodDd14JCgSOToan-LVHIjiHEkDwP0r2JWQ_KHVm_Hd5IntkqEZr8_6_btIZtIHpaKru_PS8NValAcUQkEhijITQ2dfV-naXU0ZL2dDgPQp9UvjZbsSLmzR0yAtaf7exC_BE9eGglANo8V1xnAhptZjq-vUGBekQhHg',icon:'🍕',fame:'Müzikli, trendy pizza restoranı. DJ set eşliğinde İtalyan pizza.',tags:['Pizza','Trendy','Eğlenceli'],lat:45.478898,lng:9.184369},
+{id:3,name:'Beefbar',cat:'yemek',photo:'places/ChIJzxSafBTHhkcRw4-9phM4vyk/photos/AaVGc3nqYoQk0Hbiue_95w_toFjt3tx7Kp8FIvUrMh7dAAoElCmCOMOqBmwx6Xkz5_ke-SngogNgYNuMTC8w1kuEXmeywlq2YHYzaOHA99dbgWjOgfoQs8EfCGpUGRR07Kq5vL3gvFzibu9CqDVMGU1TtWRdSuR-Hjnxsw5RfPjOseKb87P4LR8dMg4YaHJp-yVMS3tT-1VVIRodCXDRkhpLVDkeSyIQIIO_HgNnL-jhfNDn5UWG3p7Ol8Ku9iMoEPWl3YjrKSb0GuYD1ej3B15sVTdv105afcUnLTa2MrMTQy_BkLVNqJyahEpFNkAX7I1-NEXCAMrol1s6yYxHae1ml5f9JvLaQuTywpHOtdPwd7fhi_s700imz6_wRAVTgIXAQ_9O31baY_pA_boYhFJfVsMCi7SxjJ5cFcrKDpAHCQJHc_o',icon:'🥩',fame:'Premium et restoranı. Brasserie stili şık atmosfer.',tags:['Et','Lüks','Brasserie'],lat:45.468138,lng:9.197506},
+{id:4,name:'Miyabi',cat:'yemek',photo:'places/ChIJk9_vHHDHhkcRGIFXEKTc63Y/photos/AaVGc3ljmsGW4ICNNHUJlKN6WYCilwbgtIDdE1zXUtCQ4C-JuFpQrAsVmAH2CeEJxL_8sIsAOFM7V0m2BwpcJ1XE8kJNTiLmPzlgS1fFPfcUMj1HOZfn6I04QQVSiXNt8_7azggfv2wFBE4Ko6Cn_8_esYoaaY-RjHSxpSuVuQKCErmeBq82hw9Jp8NAe5kLN-kaPNhpLWDpnvyibV_Woevpq3pOmZRDKqHIVDL6gRGVcTUr5aP24QU4-DgLoJ3_nMAoc_h1lPbLrPj3OvaZmqolqAHjd6KJi9s77HWzGAxc8KfftN7B2d__NcEJ4lY5OXbI05AS9sJRPKQo6piIftH-47EqYHH4pZRtem0a5huTzaLviS-TsQL3xkLZ9rlrxxiHrFNOXFzF8CAbzTJQPwGNPRJn9GygotTWEBN6QgVtTUPkOoUsFIAZoBu9gLTbaEr0',icon:'🍣',fame:'Milano\'nun en iyi Japon restoranlarından. Omakase ve taze suşi.',tags:['Japon','Sushi','Omakase'],lat:45.466965,lng:9.201208},
+{id:5,name:'Da Giacomo',cat:'yemek',photo:'places/ChIJt4U_GpjGhkcRyGbbRiyTPnk/photos/AaVGc3nkIwE9orQwZDsbprlQ1-g0zQ0hSFYtAgE8oDxiqdLCOyULon7DcxL94eviCyb-a6y6RISuBhcm-ocOLoLeJZJJbxYfwOgAs0a0DZob8ogXKM4FYvkYkl9Ad-rOoDKrHszChNjWiY8NsobQjoS7l_CuiYdtvr_QnTvXVw9DOznB8l7WZ2VedgzenmizsiphQOkgwRXGluL-y8T5BuPrETMp_aZWLanR0GreE_8J-H0kvA79ChWwgKgBT4bKk4xBBFj2Yj6ZzSQzp72H7M40b4cExh-6PZW5l8qkRW3Z7Mz6ML10HCn6DrY1q21Nn6O39bzfIb11EGqe6Wwe6fvU76HfRhyULbOvuPZa4h7pBPLy7hiBViG8GrdWDGdp_e8WD114h1C5TrH95eIx-WlHAvfcHV_-1VyjkmY92T-M4EnkAg',icon:'🐟',fame:'Deniz ürünleri ve taze balık. Milano klasiği.',tags:['Balık','Klasik','Şık'],lat:45.46543,lng:9.208614},
+{id:6,name:'Il Salumaio di Montenapoleone',cat:'yemek',photo:'places/ChIJMYQd8LDGhkcRmWlJ1uGCm7w/photos/AaVGc3mGbtHx31n2IxnVWicUUyM0XbcSqTceX7N_X9pZjuZVP7lUAmFnND0PVHPvGZSDFXWPIDRVEI8aeg8Okba6ItvAsdjyAsU9CtkY1dRUxaL5GfBAKAoqbvYV-HwGoM9G9nbUhEIat9Q65h7funTszZK3NrO0CkMgOEJnSlR8SSZ6ym2gHA0YvclYxPT6HCFOECh-DC_ci13GDsEZ99tcebP57xi0XwtOledSXcDJn8TLbUo8DDizATZKg61OH1MIpWar7m7rPqfXx_IkjisxlqGA2jNaa9KbRi7SsnI1LPyaJ4NJnuam99SFs8nMa6lgfe-0nV_1_-lkPCB7RzyFvoefXVfE_gsS-XCQi0EFqjaRaWTsp2rerjPF1WjM05YkMiExGBtaFzdxUN1ktxZSQnhM82tB9OPWtCpuoC1kms9h7a--',icon:'🧀',fame:'Via Montenapoleone\'da tarihi şarküteri ve restoran.',tags:['Şarküteri','Lüks','Via Monte'],lat:45.469775,lng:9.194586},
+{id:7,name:'Obicà Rinascente Terrace',cat:'yemek',photo:'places/ChIJSXg-Wq7GhkcR20dQA669D6M/photos/AaVGc3lXSMzD8h9stqK11Iqtm7jvuM6371n_cPetN7-O00kAgdmKeOD_2vapKdu_dIQPC4-qQlSAEk8GeEebpm-2BtUr57igcoKALnPXsoGirprWDgFy2EiSc4DtYtRijDitY0wQxyEM5RMNJyIznMLW2Zw86PGyFzio494lODK5fqs4YqPhIsrVCIQY1pvmctI1M-WHRYpRPJx5ijMW0mzqVJefyoMxRfBnRdjGg0GBdcEt9edeLfYuSsiuzXbWMDrCy2V3IfNghvnqWGpdfHfm4ALcD451uLRv4oaJKH9GXd9QZmG6gBsgkOHsWI8fjPy2H98ip-qvUZC36dYRQMnB0H0NFBawDU3zfh--L_XlDKczewB_rgBafZ69VC5hc63JO_IP8_1iuFYPoQvGz0EQy66onlQJBB7fn2zhHOT-gwziDA',icon:'🫙',fame:'Rinascente tepesinde mozzarella bar ve Duomo manzarası.',tags:['Mozzarella','Manzara','Terrazza'],lat:45.464803,lng:9.192095},
+{id:8,name:'Felix Navigli',cat:'yemek',photo:'places/ChIJtfp6hfnDhkcRhNBT4OQCFU0/photos/AaVGc3mELmv7CsOkwAul8e9x3CPZqWmNJxnX6u2tC5K7Gqul-tMA3aogFshFrs0xD5NdlRHh7dTNhvInLhiZbUKWiEiU_eGA1O1M0tLUd8edOSO6VVuvRRIRFVFdJIR9AIwlG_1S8Wua1Wve5bu9bWi_2NjyEvgRIBHjj-jJc8a-gdIxWsZNMcX2lNg7g_RXLj5iSkSjTdrynr1JC5fBouMEt_63njm1PAQJDGNM3tzdB8xjJPICJ6XbRdjhfMctDdmZuCyMJAc8SU6X0cILIkD6mZS_yR61e3xMR-IjpeCyit8WNyG-6Kvh_wkcMv8jzTF3433DABeQnvQJDNnZzzvzzBWJltC7y6lUTG-XKsSVuWSc-mkMGSaJx4XYiqyA8UBT7-Ieey5x7J7o97MmhXTqUz-dra3n2kw2QX1pjLitsiLrggs',icon:'🍷',fame:'Navigli kanalı kenarında aperitivo ve yemek. Harika atmosfer.',tags:['Navigli','Aperitivo','Kanal'],lat:45.451423,lng:9.174203},
+{id:9,name:"All'Antico Vinaio",cat:'yemek',photo:'places/ChIJ981lJZHHhkcRWGi0iWPtFDo/photos/AaVGc3nJsI5U7CkefpK3I46JOc9WduJ3Pa4xqFr1DJDlajIb2YE-yHyQoNqcyXzWTF3bUFzL0k1Jh39vyJciJOP1BvJ2e_rkXzCSAshO0WkGpiu_LsyWMYrhBPPWe1CVTc1ZzPfTvzF5fwrzF2hE_y_9f3oZW9Y2Ulawd8BaL72RvnnBfp4y7cBaD97kr1LA_dXU7AAZFhwVZxn2Hq16WMvBUAYAqTDEqGWlKjzlMvkHcih66pz8yOcDNCRj7ubZQCIxF63P2Ug8g4KkhzEvqSDZsDffFwczoAf2OZgaoZjXqAZNj-5EhhZ9UCqwHTTFvmwyLGQEcPUupQ3tMHDVmDK_o2Wfy_z4yBOPkqimjP45kDTKcwYD3e8uTulR9gN9P8zwE8wGibi1GOMelYqij3S2tC6pAgf_bPccVFMdUoDxUZYu7he9',icon:'🥪',fame:'Floransa kökenli ünlü sandviç zinciri. Nefis şarküterili sandviç.',tags:['Sandviç','Floransa','Şarküteri'],lat:45.461299,lng:9.186402},
+{id:10,name:'Osteria Fortunata',cat:'yemek',photo:'places/ChIJi_ImYjbBhkcR8EVbhWqn4vw/photos/AaVGc3lvoaAR76dXQhq92M50ZfPxXIFKId0cXR0HmaH-46XtkNBsF8MhNHU-ta601HGaFv54W72SAMTqZmPVrsx-pFOlLdJPEkzOKLgRAVKP2KHW_MPZrutxc-iHGS8YF5Zf8WTuUzAzuYteCCh6kmzXeQLFZMadFdeW9xkCLGfz6_z6b-xo2k40F1v2iBlriab6jfACVGBtfEEhvNfbIW5koKa-DDZaWc49k5OtYLequQhf2dXxF9YJYZWD1FDi_dMf5vc-WlBGmPyTB1XQyYROJ6YCJqfcnEfqPVhzRzqRsrfZS-Y6aKTkcV-aINq_prl-Asfulc_Yt8913Wi1YPZm56u8PRNNtNDslTwJnzd8ldxC_uNN-hy3uS0VAVycjIms-VGMAhEzo_YmkDMNLdqoClTomriNr0XLJeNmFwQ1-xuBPyCRnKjRbL7Hq9MqvQ',icon:'🍝',fame:'Taze el yapımı pasta. Carbonara ve Amatriciana klasikleri.',tags:['Pasta','El yapımı','Klasik'],lat:45.471922,lng:9.185331},
+{id:11,name:"Pasta d'Autore",cat:'yemek',photo:'places/ChIJn9zrbVXBhkcRIpaeSKJxvlo/photos/AaVGc3kUBIMQYKt4M78v-dRc-TOteYAX4gc3rDLq6NOiIOz12TOP-CmKYkJhbeQ4d9WG-tvz84HcsNjhcJcfX7d0fy4R2VBo26itmLvdoY4BbU30m7FAyDB62lOhGfj72obi0FPgIubxfeVAlkmeLUktfeOFV7DoGxnnKmDJXh3pL_RHnuhthD6dUeSCAKeX0Za2jNlK3Z4YG9AyQ1nHQq-DZL4a20jQ02-d6ODNvV5503xKK5k2Qjn7ZINyH3haWNajtXfEIfAOZIQJZXLrn1E02KHmxA-qcoroYVVUAE2yugX5WBHGF5Pj1dpkMYr2oS4FTztewLZMEb8gvoDuGsl4jtqovEawIURCLLlm3B4niTfCe4Mg06xtVfk0qXcV2SBk0WeMIHKNWa3oznWwN2b_2Ma27XB3I5uoGYwpQPabwwY',icon:'🍝',fame:'Artisan pasta ve İtalyan ev yemeği.',tags:['Pasta','Artisan','Günlük'],lat:45.458759,lng:9.180943},
+{id:12,name:'Miscusi',cat:'yemek',photo:'places/ChIJ8U_uucXGhkcREBKJvKkDxTA/photos/AaVGc3lBn1z4CEbmdI99vvlA6wzzDgkCW7UUHPNeMpi4HsXiPkb1LPlaR7Y-tgdnXxij0MHMiLI6MtGPFUevrn3qa04yyqE6e0BOh39IoQvyFoeT9wfkj3i5oRN2wgsWIZ19FDmb0Cuq4x1vC70SnXHcvArk6zClkk24_LByvsFkOZVgUKhTeOuntzLM-_hKb2d0eH6FAWHLSd8rclilqQjOeFRZ7oFpnA8itUxSbs3WSvEZPl0r202U9LR43_mWO9vvgSeL6dcN7w4sHShYwzmDY7P5eWfuE55zDroeINxphLd0kU_t6bAgtQnX51P8TQbKPjS4aW3EowFL3BH70fNuI7JplY4V_vxXzfloHWnyDFypBNKzOJnf-QPq2XfGjCWTo7TmRSXVr2bnZZPEBjM_DkY7xYfWCLuntWyVSf1rgHrOxDkQMBwreMtZ9TFXyEni',icon:'🍝',fame:'Sürdürülebilir İtalyan pasta restoranı. Modern ve uygun fiyatlı.',tags:['Pasta','Modern','Sürdürülebilir'],lat:45.481795,lng:9.203283},
+{id:13,name:'Trattoria Ciumbia',cat:'yemek',photo:'places/ChIJP2Bpa8LBhkcRmM003nz3r8g/photos/AaVGc3ndyJBKd2Ir0XcTORAYAJsz6oXJ0jPdplMFgeARhEBXrGj9RpG82Qzwg5slIGZPmg-TfT3eWd0xIAzNezmmR-VfD4PNSOvPkqXU83Gk4km3L_YxhLMUhAUDpr97tFh9mkanD919QFel_PhkLZ0-G3bKU9jIkFUYBSpgtCBQDBe8TQHXDsR01DQWH4jLFypy49dcZkAQNJHb2fpk5BYCk4hWMBDMPmh9zzyzuMNCO-4pgsGBUWtmsAcoS-ywltgXlh4oo0IVAwxaMkie3EWG0yEZvvM3LMQgPHznQoxOmJgQT7zOooHIE24895SKq7ftgJknlA_If_Klc2EEWierQu3T9GigmoVqc5Sz5rPfNLVlgEPMKxl19J-4-p6MNerhBcK10oN2LoqVLoks80gt4LYwWJ7KnGqz1XXBxsLxZL6-pw',icon:'🏠',fame:'Nostaljik Milanese trattoria. Yerel favorisi.',tags:['Trattoria','Yerel','Nostaljik'],lat:45.471853,lng:9.184733},
+{id:14,name:'Brera 29 Cucina & Cocktails',cat:'yemek',photo:'places/ChIJgw1fA2jHhkcRLerD4axb84A/photos/AaVGc3k3buysCtJ04oja3yWLY3tWSnQ1X-wHP7bP_9G91V_i2b2HiPmBBoeoBFyEkTLR616hdg70E10aGfCFYxbFddPz_OoqGeLiWix0ThB3Y4zKCA5qhTlisdlGSQfWoTc1PGwTit0wgWOVJWWwwRutOb2XeaBuhzazpeocBHk4K_jTD2bV0LVNbnyOaWSUWIu6DC_2qVI_qYT_qnwVeAKyeZQ6Y394AeVvoqspXBYFJiWg8Ql1eZuJ13qqS3ke2F9vQvv1LFz0xqRhGp7BjWE-sSlEUWrLRWtivH93KhEzW-yeJeODz9AJ5qrq8pfYv3waG38ItPAjWK1baD5CvIEjSzd-r2QoNnkJHYv_WogZY2T3mPTMa7EhReMUfT3ouw2lJ-YX-QeshclDpAA2lXFj6nOmh4teHGU9EgAdCfraENemug',icon:'🍸',fame:'Brera\'da şık kokteyl-yemek kombinasyonu.',tags:['Brera','Kokteyl','Modern'],lat:45.472784,lng:9.187294},
+{id:15,name:'Come Na Vorta Pasta e Vino',cat:'yemek',photo:'places/ChIJW8jPD3HBhkcR_OpQcJyHG28/photos/AaVGc3k8g4vk7n6tAgwrh4xz7a6HwWh6SHj81mREFGbztt4D0WkIFvcEBOXSEGp92yzQPKdRl5THoZd9XC9sKpj8btTCer8PodtZBXEBPDeKjNAejGI17DVTiNlJKwi_3z20fil45PGM3uS3RxFx1RzalRgngD-U6QiVH-kCEmJJWa48jA26yjPun5NKoB_8UexT_-af1jNlCTG5_cfmyObCNCWxz8V9ZLIwxKcOYkC8abwL4ttvmtCOsW1RJLSrULz-Abw2Hpj8AYOp2hHyFQPi9V8jH8w48a0iwgw7fV0qzQDv9mx9rYvqR-f3f05zKA5ffNvuKdnh5eNu4eoRcXXi9Rta93khJQ1Xdwo8p-n9hqr8En_x8NbgSGYBV97qtxExI2JNHYq5cemGo9YVezo35yKRsPpQ56avqsEjWcYmZrriZQ',icon:'🍷',fame:'Kasaba atmosferi, taze pasta ve doğal şarap.',tags:['Pasta','Şarap','Kasaba'],lat:45.460735,lng:9.182407},
+{id:16,name:'Dal Bolognese',cat:'yemek',photo:'places/ChIJRWmcH8nGhkcRm8C4SOmNG-A/photos/AaVGc3kwFb17MLlQctqTi5LCrd8I2qXngjAslbZBpVQ0LnSXUFe7IXw24a4Lh1T4bpsgsAsBatPQFwF7zPAKRJyH695vRG_DiXkC0a7rL7OUxQogJanv82PbtFdXtmIka7qY4e9ffhT3_Qo_Ub-fjzj0zdEOWkVPuZHQC7WgX9w62iz-toNWk1O6K2vRCDafK1H-ApQQcjkxHnGLR8xcbTnFCz_mahWrsixMMukcEtwyORJJ_y2_xc88BqH69G03xfMkN1lfzRnFhPaTIs83FgaO2VLGaKhd780cUlKzE-h_L2LhWq_K523-XmoQ5_XtO16nNjuL72cjOXqulIMvdUdouOkYB6Xr3ZiGobIQpFBySA73IzMmGT9a3tXcVbZrBtZ923xvsHSMxbEmipIAwZVh_gQMhZSebRt2bIjcifjtxs5pTw',icon:'🍝',fame:'Bolognese mutfağı uzmanı. Şık ve klasik.',tags:['Bologna','Lüks','Klasik'],lat:45.458875,lng:9.186981},
+{id:17,name:'Terrazza Duomo 21',cat:'yemek',photo:'places/ChIJUY43hqXHhkcRy0hDb9CKlAg/photos/AaVGc3loZQ7pKzZ9FNTE-tSTvr6_3h_1vyxFAaDpjyPF2vFwrZ6Jg446Td2SXkFLcxSE72-aEqVMVppojml_Qpk72N4UAhnxlRKwbmi8iPRXKrdot9oRDfcsXZsLYib54AXgv1Q_PWCeMvEAX_y2rbdPgUe3nFvLHEhVVMMjUpSESsqFW6h8ZO9SWvCIzVUe2sB4YKrWKmT1Kg8eLJKwyOTXA7CyC0z7M47WbZs2sgrs8iACm0hFzQ2c-XUaxaQEXDJLxZaEVrc47llS5aC2DCZl1OvBCcJlGtoce7WGAl5Imfkm7RFkTTg8LZe2iQiSXaGFvF2S0p0jj2P84VoTsj2aF4ioXjcQM5I-NH8Hzw1eb1Uw-IAIQrDyXS3XESEZ9_r7OlwWVo-ljqQcuf0_xqFVfL-PFrwDD0hchP5Ug6OB1_Q',icon:'🏛️',fame:'Duomo\'ya karşı teras. Milano\'nun en ikonik manzaralı restoranı.',tags:['Duomo','Manzara','Lüks'],lat:45.464776,lng:9.189668},
+{id:18,name:'Lubar',cat:'yemek',photo:'places/ChIJF_FZIwrHhkcRJqmXjDAq3Ag/photos/AaVGc3ndnRm8nESe-hY-YGrk525weLOJyPGrBNQ-ZwXptmuS3Qd1T-LRJm1e5l96BAvxeNJPwF2wkhJ-vL8NQ-6dLFgVPY1HwVNj6kG4ePTGlns7HDFq_r3emKL34E3x1Duv1R887T8EfDM1M0G4hfAL9r_O5TkdTsuB-hUcvwwepiaQA3DkZOxX-IrRuP7-clPRPNq8EtsQmAl5uVLaZ1TbLJl5FWiZI4f2gBc5DYyzC5i2HNsb57dURNPNQe7QUC5y3Vaz4Dzbr0N5OzT4n95xRgi8ptdaWwz8hPh-9didvLOXEIFrgi9HD1EVAGPBivNyt25xQmmx6g1KHjckSQAmI8tJNe5M_RpxRawKaKQ6MoHCBarJXeYGFe5PXCKkHVpcoqVfbkn00uoFS6QqQ3fvjNO9YeIvw1Fn3Ts53hVfCSAIjHnvyzWlckGKPiTkxsMZ',icon:'🐟',fame:'Deniz ürünleri odaklı şık restoran. Taze balık ve Sicilya mutfağı.',tags:['Balık','Sicilya','Şık'],lat:45.472704,lng:9.200151},
+{id:19,name:'A Santa Lucia',cat:'yemek',photo:'places/ChIJFQjE9K_GhkcRVmHrBsKD0Ew/photos/AaVGc3nNOsmswdAiqdQ6tybodpnsXZgU11VlvntO5NbIaIeBLSPr_nSNvU7-dfbJ5rweInsy1Wq4kgq4xbHkTd_06TSblTIvE2tACYfq_HIwYridsVTk8WidQhDhR-1hWfdKPc7cbPfK7ooOOecpNabFB9n6l7cKDUspMpaXly3VUyQfgHuGow8LFi6S3Oq5OJLdPTkJ_AbGp9VnSye5JRCFsMBsi92wDEPkrgviaL5jTR4jSbwZssYa_Yf30pyHVGFVYOPsIfP94PijNxBCuR8eSm-gOcAOu7ju4ZeqMR_6ffcbKAPJQOqaVusVfLG4avBOikrNKlPoTKiXHyfyL0Rnn3sX95u4S2HWIKUkvAJ1v2k8pxHkWL4H7K_ULbbR3B5hjby_Fwl9_RU2vbxVh7ksry7eVm9uelVhmP9WiGwsNA7296B1',icon:'🍕',fame:'1929\'dan beri açık. Napoli stili pizza ve deniz ürünleri.',tags:['1929','Napoli','Tarihi'],lat:45.465641,lng:9.195655},
+{id:20,name:'Panzerotti Luini',cat:'yemek',photo:'places/ChIJoUEJQq7GhkcRI153LB6-eXY/photos/AaVGc3mBALWcH_aoop92RXqN7z5T9c_-bXFuiVOLPXe1u67mH008vgtU6bTbtIByiBbCYu5BiEXNB5WNhn26E1rC5uR4NQtxihWiFrf0KHLxlTa32Z0mmX7JTmVQoZRJMMlXhLtjoapqqqdHlQDExUQzmr0-eqnVu4aaTTGArOgx35TxS5EMg2F7oYP1nHbBAMTfy7-s-MPVOySFq8EM56T_JFLNCvVjjstOtFyCUzq5ESsdXnKV6lrU9CQhXBcKFyUG-zyVABdB3hCYmt5_8H0bVi_zEAB1VuBag-lTydWdvuCdeuXfsshuqo0rLcWNTsuOgOb7-tt9d2_RkX9IuEsyVqGzL-w_W3JRfkdsJtekFAeldqjdgG6pY5oitg0Muc5YTxcF6C8uE6ryGmtb05s7sCOuzMHtYHPivLjzx9u2G4nLtwZA3ZtXmcevO8YOOIZ2',icon:'🥟',fame:'Milano\'nun simgesi. 1888\'den beri panzerotti. Kuyruğa değer!',tags:['1888','Panzerotti','İkonik'],lat:45.465829,lng:9.191558},
+{id:21,name:'Spontini Milano',cat:'yemek',icon:'🍕',fame:'Dilim pizza Milano tarzı. Kalın, peynirli klasik.',tags:['Pizza','Dilim','Klasik'],lat:45.466452,lng:9.195641},
+{id:22,name:'Confine Pizza',cat:'yemek',photo:'places/ChIJI1e9RebBhkcRrHT22FWPQbg/photos/AaVGc3npH5v_UyUn9h1jdgocuqPQXibs5hwoEbSae0dGZImWnrFR_feJpvjABe4P0sSsaYTvwQdQ3BkqNsmNSgy7gIVjku6OQMmvoFJsNtIrhdPefOID4qVng5WMwDA7waxFaaP1dbvNGPxRzXI3DMoUYzXCkZMRsneDB3kPb_NB9NXd_9iLlRQxuXVYlDcPqB-XadgLmoGKJgtbD3-pIqDk0OSz7cvP39IjcSJ0rlqb3NW1x1Y9VvqGF5gyHlwwZBVYtVQB-SWOrKdoAdh1WKtrznVwgC_OpOmea6ZnrNuTociI1wH3XFrt176d4A-dVIMD-o898eY-Odil2rplfqdq8J2z1O4iFCnPFZrxhfesBgLQeUOXd75cBluqC_Mw6CAl-QoKgKjj3mUzFjgimhudh_jEhp8LIadUUg8wkDCJUd0',icon:'🍕',fame:'Artisan pizza, doğal maya. Modern Milanese pizza.',tags:['Artisan','Doğalmaya','Modern'],lat:45.461439,lng:9.181302},
+{id:23,name:'Kantina Isola dal 1896',cat:'yemek',photo:'places/ChIJfav1wDnBhkcRAG7aokbP5p8/photos/AaVGc3lhfTB8lGfBJNpunFOUsTbGyTuj49VqYmrQdjERPHLnVMK6156C_Ec9-3XnhBm7k0O76T-JO1AhlHjWgilHN6bdJR5iMbIehJzBizkYIeOHSPKWKjE0S4Y28VZBTZsLFFJmBFwQGM51zF2pKwV6of52Uq8ciW35gKvJgoLWUyBxpphzWMsI2GpYEBxA_OX9764XmvJpDtgwzh8RbU8RitHHuh-9o1A_ijHjxOk5FWzOKLdAsovPrEjDsewP02bYVd03NSN2fNk8vooo-2nK_s-_FuN4cy87DFuri-73Gyf3d2nJesH4XzdGnJQiuHIPdl48EKpGQ4Me_YmalF5lSxfct-Bcc-V6wBhcIzQca5gmUBGPhbQqM5hPBn9WWY5CATN_ZeYVoXIORL4Fn9FnYYlXMV0nmgUcPgvOi0vavRtKtg',icon:'🍷',fame:'1896\'dan beri açık enoteca-osteria. Isola mahallesinde.',tags:['1896','Şarap','Enoteca'],lat:45.481468,lng:9.176249},
+{id:24,name:'Trattoria Torre di Pisa',cat:'yemek',photo:'places/ChIJcxvPrEzBhkcRJGavtpkUkKY/photos/AaVGc3mwwfI6mdxjFWUexlaERNq40oBQkbkyrt_KLtBzwi0WQ0G2tUf5uroDRvj7aoFlqHP-5ZsQ5fCtEmBk6rp-9Ael993BaRTZK2hbmDaEiFGVxldiTscwpek3GOKZsb56HOHZdWPz-ETMM_bhSLsHTjCQozmuqblT_ed5wce1V3wQ1XwCyPODERU2uizy_--MFE5PNbV8MgABBghDGTU7ZesdeMIFOMex6IGbMXM1t6QoeVhoDAKRWfzVTqUhHrrLpSZ1nyHnjMyDzuaj2dwuNQ2CIVt1vMdckJ-x_3zzv8uXXiod0i97V1HbFeNJHdlzcT0Gn_B2nRgI_Dr7ZVWZMYUWO6OSXFRRTKyvjXIC7mjjDJHumrbIKw-ju0yEEgtMNnwxgpuceukb1W45_FAHxXNMt9aQofTd6xTuUzuXQ8oBrg',icon:'🏠',fame:'Brera\'nın saklı trattoriası. Toscan ve Milanese karışımı.',tags:['Brera','Toscan','Saklı gem'],lat:45.471748,lng:9.184513},
+{id:25,name:'Osteria Binari',cat:'yemek',photo:'places/ChIJM-ZQUPvDhkcRK7grUbNL0uw/photos/AaVGc3lYD6f5nlHCOuN7MMMx-SHFolgtduNyNfHLQOiz53YfrNJV0j25AfWH0AgbkGX1ajirX48Z3I-WZin8L7zTHzYJTBA4RQlCZEV83w5C6qUt5GkkOV8mTwDkKCRj0uNCij68JotNeEHQ84PB0s3VAK1PqrHD9YPM_GkybHRuEDzw8d1Z9VmtAZUmEeLuSECTclSTaLwPRuZgExNXh4h-x9ZZgHHR92pxx_9GcUWwowGMol2Fy2zJIkpa-biPqel8tMZChMs0dd92GBmVesfdI95DyZ9U2j53Spxb9MvuSPlcz-kGLIDAFAfZiflVEcmCsBhKaXid5_oRvP-0GC-_-0_jvAMNJjce4W9ZDVdd-tKUZb6HaaHvoZ-7tMT_lsbmh_nLK6MoqD9dPL8hpTMQOHm1z7848Om2Rlbu9WQ-b4qiSWdf',icon:'🚂',fame:'Eski tren deposunda restoran. Otantik İtalyan atmosferi.',tags:['Tarihi','Tren','Atmosfer'],lat:45.453711,lng:9.168743},
+{id:26,name:'Speciale Osteria',cat:'yemek',photo:'places/ChIJf-udVr7BhkcR-3V2Aiq4QA0/photos/AaVGc3n6jqwjtwsYglbffvlhQaTVeRYZGmAL56k8Y9k-TJLRB0jUvGezeEvBzXlIVcmjU2qHaxcl6WWpwXF9a6niEfPIJuGarAensFQ8ufbsdR5HK_OFSHbJPhJ-OMJSYno4bi5IT7LHkW5SsJyVMHvkla2HKzp-4WnvqS9d23J3dVJbsWzUoPBafgKvWWWEsT8hLHTUShoyRq2uriAwilHXSwjCbryB4impIXsxGC8bBnSg0pYhojXn-rw9Psu5BdjWV5irW-xDkjdh8Vc0Pl1dC1EcAb2UE6KsTPJbUhIFOZLxHuw7cmqchcUjy_fFLx5MdifM7t_NNqe5P0JKtCiPiEO0EGny8GCggACsgQbpR6XbFXvo9HvbNFBd_1PX5itycEWhhvq8vwJiGxhclEqRZFKsVw861GBUlH0WlJiR0j8CCaSrHAu4LlVJIpPqPFet',icon:'🍷',fame:'Küçük, otantik osteria. Rezervasyon şart.',tags:['Otantik','Küçük','Gizli gem'],lat:45.486479,lng:9.186678},
+{id:27,name:'Belladonne Bistrot',cat:'yemek',photo:'places/ChIJJ3zQ4uTDhkcRUyzcdslIX38/photos/AaVGc3ky2kf8XQIn5TrgYcSF3v7Rq1r8imgcm8OmcCqj_eeJUlgzJHsslDXMmqDNu7lQW4A0aVFn3K6r-CJLSpx4gxXrhIyWupgXK79Vmb5mHTt8duRVDfKligI3fxnyK6x4cpstNFws8IC_5py3ZXdZ3aSn0fXtdsm3GVb1NIOsIc_gv5wyDLlj1dMJojws4ovQT0slDOylyq6aapunisU_pykVnwn8pMIoNs-czoj2pixluZhWTSFSqPRJPQ-OSfAw0z4zg4KNHXHE_9ojM_fpVXXz7lvo92DM8oHa5RBnHKkiT0aPPkgh29NHQJkWn_YDL9otYqDPtk1-al8CAmiiXYeBgjAi8CmJfA50324Y__GdBUCAhYN8lEARDBV1y5IYnGPo-_pkWNofV0MzwQrwipOjCuVPKdYgwoppc5k_5-PtQPi3k_uaibz_hKUVXXRf',icon:'🌸',fame:'Brera\'da romantik bistro. Hafif İtalyan-Fransız mutfağı.',tags:['Romantik','Brera','Fransız'],lat:45.452906,lng:9.166235},
+{id:28,name:'Gio Gios',cat:'yemek',photo:'places/ChIJV7-kWXfBhkcRj1XyUSv8kDs/photos/AaVGc3knJ8Prmf-Cok4m61jrGzKteHvHTXnVQBYTj2xL1KLFvqeBw_KQw-njweWH6g5raoa-xnQ9SQAd0rK2UvGvwU1qC2SzCbLYGRlAgJN1exohDkgBUL833YpvqnrjfblTcPATAD3dcMlMTTpJs7Txe9wxJfHPmVDZvzewchWrzVQSzJyl7hqp6m3dmiux4t1k2eifH1C0RH__Dl-c0GBt5QZPR-sy_tsi4BCWerR6ozbcnMMdc1NAcTodEYLVBn9F9RrdZ5j-c5_QN3jiI7qVN23HyCWsCfF0DpHNaYy3n3ksh558cWshJlij7JJDO_MRD6nrzLtpWYG4kBLXcM15y01UGhwe0YuKJ9AAz9GX8ZCKelS7NneeyTNiwEzC29QkUbyZIBVsiEvrAkUlEno6EVKf7SW50vZY2OurBfE01X_Xs8QZ6Ed7pZ43Z8SKV5UY',icon:'🍝',fame:'Navigli\'nin canlı ve sevilen restoranı.',tags:['Navigli','Canlı','İtalyan'],lat:45.459462,lng:9.177542},
+{id:29,name:'Pepe',cat:'yemek',photo:'places/ChIJfZJtZGfHhkcR3bc6k_toLbU/photos/AaVGc3nlSWrkrG91oArBHYoCPvqKqLOLf_kuzACkpgSFHG0IvFSU5QihI0CASVw8iZJfWiB3g38qeEx2kvaLX0j14f-3sSDBW4bD7phL-0TCmA0667c7HN1HPHbZNUg2H76BI97d_lahIOKVSnzh0HFRWQriEFWSwcfZewZyFxEZy3s8pOBZgXY15-Anz0beFAWFF02U2E7EGzIoJkwg6G1kupp3hWNqI8pMDdf633TYbdkpeyJKG8p2Sb2_ghjwdrOYhBDVN_wVU5SfmwJfikmzAJIIvUQhE42po4pKNzWAvMABBnmxLdbRf6xrgUf1CeAek9L2nzIvOtvBjdAvC7i0QYfUABpYbz9GMwBzfYkulh2teNvyrLcwXuOVIdwNE7wdJFdOD2AbLRsOQBQhaF7C8Fepj7ONhdV1WwJdQMip0pXL9Pxjt0-aqbOqebCkrR9F',icon:'🌶️',fame:'Yaratıcı İtalyan-füzyon. Baharat odaklı tabaklar.',tags:['Fusion','Yaratıcı','Baharat'],lat:45.467011,lng:9.1963},
+{id:30,name:'Nobuya',cat:'yemek',photo:'places/ChIJ3fPBWfPBhkcR58QSZ83lbhI/photos/AaVGc3muS_TXJEgGnhY_t-yWpiYK5-GiAaAhVLgeXG_uCoIYu0yO9o3vIlYGxRzN3U223jdEdnZH2J0SwwiHPCluJXrTnohagmQ9-_i4yTYZq4VW8MaYA0o1Qcl9TrijZVN987nnkhuuwn5MaEyehqKxTSlF4xogupwS8rjr2RSvbcLySugfRYNTCbHQkN4e6ytrl3uLDNiOYvasq8TTzCtNP9QuoA2vnZkcNIqJxYqBSW-gPUo05_XHkN7bnls6ARYs4jW09fJO-VelQqaNH6zLVj2LidimOlkYJLXjfkhNTkizTavQ7Sg0m1_tOZcQrSNGSg4THux1j2TGNDhZCW22w2sqCo_G4ieiWILigdRBn6id3xCcw_DKks5FmSQKKFJ4dffkjF4SqO2udhYmr2C5tr1dOtPcZU3TDayVVNtfMyY',icon:'🍣',fame:'Yüksek kalite Japon-füzyon. Nobu espriti.',tags:['Fusion','Nobu','Premium'],lat:45.466641,lng:9.176777},
+{id:31,name:'God Save the Food',cat:'yemek',photo:'places/ChIJ5V4gKE3BhkcRnohk0NFGIWU/photos/AaVGc3n3encG4QXDPGbkWVg5u3abX5hPdUkXvpMWgg6vFdyWJCh06Jpo_IS0FYjedUHKUBR3azvu7SHo7AEEn42EgrRFJm7P-Hs2uDnGNUHIFFlhzScCc-WhPZ2Ge9dzfzxcKLqOj0S1wmnlVyPgjhF6-9RYG5NV34pEtQqZ-nbxjWBt5l1mwpdgTWPxXNiqXzDVLaO4utIFVI_ONeLSyHO2Ede0o3XQCGAJCuTXb3WLyHwwNqKSLmLujviQve4AAfCrBvaoZTGRu5renu5FpuKpKEsIpSSWL5dugPhViAfHdvI7gr9EdIUnuZGZKCYZeL-FBAU0KV7yCpAPw5jVoPgAczhFzt6rs40PHPDrb3tb5vNdyMiD68RF2uVASL_E9DDEiUHDilHBy2V889nWsvN9PN7vi5as5Wtzc2IfaFx0J9xjeA',icon:'🍔',fame:'Burger ve İtalyan lezzetlerin modern yorumu.',tags:['Burger','Modern','Fun'],lat:45.470172,lng:9.185535},
+{id:32,name:'Orti 16',cat:'yemek',photo:'places/ChIJHXtkrh_EhkcRLkYohRajkA8/photos/AaVGc3ly5XbOMVC1Z2-YL8IalJXX6LhNgnCb2MwNN5G9XckCrcdnP7vT-tLrMje4u0LVGsyJQk7My0W9nwYJGibWFWPramBsC_U7YezlPovBdwyQfsxLEnodJA0CLO2ROCzkwv1qN3rXt0MPBC11txyok3MB3WAG2GYMgTMFFq7TaTKPRi6CV5AZZRzzvDC7k4Tnq4ejF6hvw8SVTVVSTUYhxcJdHiatO2_8OA5sPCNbBVfTxUnm22a5J8sKhN9schZlYoKnGgAR07c057Z72iZ5xlm3676G5vowpTGiTqZESTG4RKKA8PlGB5sjEeCHaArHoC8ufKLCSxhWubfT79M7ybjz4Qpu0BhGvfv9BfSN0nU-_5j_1AzbnKLHuM7mLeyxosSWx5IN6O5kleTkrckHKI3iZjxUStbUSIxDVNrUBeojbsJO',icon:'🌿',fame:'Bahçe konseptli, mevsimsel İtalyan mutfağı.',tags:['Bahçe','Mevsimsel','Modern'],lat:45.455259,lng:9.201821},
+// BAR & KAFE
+{id:50,name:'Camparino in Galleria',cat:'bar-cafe',photo:'places/ChIJp12yKazGhkcRf6_h7JBATK0/photos/AaVGc3ksV_T286I7rPon-gXYXh3IjQitZj2VE6CsHzmabL_wT0hMCYJBMnvA0L46kJINjhINxkKGPImb6CJg9zFIhER1KZ6AxDkeSUO_QOeDH4jYPFv7soaI66CxI7sRiJRhECc3tx4Hq9bLZ-gc3O32EK_4HzSEIdFixBQObzUFvwp3ZL9Mgoela6TJs5I2zv7v3vAzlIkcGvVsBc_WL9rLnwtwxWCZNyAAeb4RvJjCQUZeIZPRubMNfRQ1wmtubnRT-5quhetljarbS0FRNpVaYn44g49br8wS0X0NXfcK3UPlnx6IqcL97Py5O3d5ghq52F33k_ENI8xqYTLNes-ILTHIKNLxld3jafyHRt_ZWDl7YvVf4ZO6byWIp3tztTPaTEASNWLmu-X85Xeu0NQ7V36G1FWxpPJGQjHOsBNTOxwNpOU1X8eh-Gsol08cWg-n',icon:'🍊',fame:'1915\'ten beri Galleria\'nın ikonik Campari barı. Mutlaka ziyaret et!',tags:['1915','İkonik','Campari','Galleria'],lat:45.464806,lng:9.189924},
+{id:51,name:'Bar Basso',cat:'bar-cafe',photo:'places/ChIJo4rohezGhkcRHZ6K_OnXbow/photos/AaVGc3lz9ub2ub6foH5V0bH9TuovlTNRkehVP7eqWwEOeLbFXtj5o0KOio_8p5aC3iIytq88m5zNDE5vGwW49214O6bmcU262K73BkgkWYFS-rhDhXOFz7-GiiCGkuGgq6a6e5n9E-Pyk5txOuRBewWwnzu10otKMoXhFqIJOzaYt-yt7nb02A7l7aTJassZZQqM4yAQThx2qppXntZGZTC9ysrH6e8nFUDkG3Aa2vOH6UPbW6xng5Dg6nyc8WCNQgzNGSwXSaRehSx9oRhvr5Y32kSFGVRzZDeMHPXWCKjeNBuyxM9XAK0i5VU1h3pPtlzoFB6BEk699SEkYsYzbhr75iNOUNLDfcG972HvoECKa-pqoV--NSdAP5R4BCFNDfMrsWEOKfM4qfN9yUrVFdYrnPEQSUBADeaB4-kPNiAsOx4',icon:'🍸',fame:'Negroni Sbagliato\'nun icatçısı. Dünyaca ünlü Milanese bar.',tags:['Negroni','İkonik','1947'],lat:45.476784,lng:9.217543},
+{id:52,name:'Martini Bar',cat:'bar-cafe',photo:'places/ChIJSajBw7rGhkcRx7zXaCdHQQQ/photos/AaVGc3knvf1cj4n1IbWfLW_iDJm_SJSH3ZrJgY9wNoiWflKgNYAENJ8lz6IhC0i_iTbiyH6EmuMH4zs10dY-VazEzFvtQawoOLdSJN2wskXxx_Pke68GNl9gaQmHIWfIMlBJEAWugJVlWhbs3KcFAjAYcwurBUmXrpKKQrnk6uMksaygPhCOG0CH-yLjCNad4QdEgymd_5lw9jNTdG4dMBFwVnYE3ouSK76-BfHk9-6giAnOeof1z9lPw29ZTXwrjZ18N4__Vuthh0JUPV57SoYeyJINH-jXORiMM5i-zZS7eMEzLfrvkABAlduJ1nt1mTz3QwTBwCaFvfp1d47PDXebHTaU_2ZY6UGBWrWXh2cMopa0NH1CCFTDQbykWEp11F7VEoOCqK7ssiXg-uTEOw2QM75RzolYHwqcHCINXFa8ntfgR403',icon:'🍸',fame:'Dolce&Gabbana ortaklığında Martini Bar. Galleria içinde şıklık.',tags:['Martini','D&G','Galleria'],lat:45.468376,lng:9.198661},
+{id:53,name:'Mom Café',cat:'bar-cafe',photo:'places/ChIJ19d0nJ_GhkcRI-CdZaC1AIw/photos/AaVGc3n7VJvRCbNS0tu9ALc_1n9-ne11coFoz17QZeiTImTNZjszoQ0uu543iFl5eM-rbUSjqafbzjvQ8JzZWzkZ8pdeX7hxEYdutdEpe9AuYLOxjnRGrwyF-U0-4QAlw6Nh_Sz1Z222aKGVONiRKi7BcfDggYem6A56fPglFX6AG0olbzezKTENeGLMO5XR1iafcGV82PLu2QI_97z9IQGPUzH-C9ZPXksJjz0UJ5adY0oF2WtwBGutkLiNprDf98n85SwSMe7i6Wvn58FP--kRZD9y9fgFhrXWMWVifoz-t09wUMJv0xPlMRs5myiSOwke0kdN36E8d4aRFhSikIEcaAcXQybBok6SPelUE5Y_ZJ5K6_LnT654VPQxQkyV5oMThK2nhtR6U_yabWnon7sX3MP57OpAdcmqhR7-sSHcpUR-dcXE4adHz_zzHwDVjprC',icon:'☕',fame:'Sevimli, ev sıcaklığında kafe. Avlu içi oturma alanı.',tags:['Kafe','Rahat','Avlu'],lat:45.458799,lng:9.206095},
+{id:54,name:'Princi',cat:'bar-cafe',photo:'places/ChIJI-rIdKzGhkcR59SrXM5p2Bg/photos/AaVGc3kjc_S1OJpGWNRZUwoaz8A-VJt7ktEbrLDq6QvULBVsRAf8k_j9F-0OdhwWyH88E6rukpgWcWQsc7ar2pnLRNbmXUXw6fPiKsS7zKPXe5gRBaNaNhVPlKu2zQ-ggOxCVoGEarPb6rw3ZxeOIu7963Oa6m_v4SXLXssw1ydUs4kp08s6UtTQgiIM0CEtUs3uW2s2fsZpBaB0wAez_51kQEfEojrM7lN3f5gvSIvYc6WHAk6H0HxJDSyXW5anNQsOF_NoFmvFOollm8r5ONzDHJeT2MQQVjGYMmRdi6wx53uMqADlaAU4PWYGi5cVDRaRPcW1HRDMvzDRwfPlV18ORt8VtfpsoU6NFv_lKrEz0X7U4JlZv1UG2tZqkqNFvp126Cu6je54tka4T3S3pY1j7tU2gd6GmyRdqcsZfhWMFAyPPwOUxUnivBEzM7ZJdg',icon:'🥐',fame:'Milano\'nun en iyi fırını. Kahvaltı ve öğle için kusursuz.',tags:['Fırın','Kahvaltı','İkonik'],lat:45.462992,lng:9.187995},
+{id:55,name:'Kitsune',cat:'bar-cafe',photo:'places/ChIJNW3ca0LHhkcR9YVJpMRT_tw/photos/AaVGc3k214P76ZQQTzQmFbkD1yEEB7IETlv5mkz3FoY91flBY95CHejVPZhBRPKY0q4Ef5vxpNJz94X05or7RpbGnORQCfn8LvyeUMuDU9oJYeHSC7tVwxbXwZPwicKsm8lgud5wRtNJgdZFCZJzBnI3nOcv6WINMHikXDUYbSqlUn010_QsDFwj6RV6HDwpaHzxgoBtMSds4Ux8kOqH9BM1AWDTfn0YCzV6jSirtG0DQVmCawAJG1bw6PZEoL6PZ60blbLOpVOkwAB6VvX0skpA1pvk56gyAe4RH9O2_viEkRfEVNw0h6LEsYzhtEOgdMUUg66tanivay1kDIcnVSSUnrUmu-Lt5irmTe1YaU1WG0gkJjoZwzFZMNiBlI9LKXYRSBgfvI1cx88mj5zEYg7awdfb2qIMFBIiOcSKn7NvvXk07s1zqM6I_6jmhWhA7X6g',icon:'🦊',fame:'Maison Kitsuné kafe şubesi. Japon-Fransız esintisi, harika kahve.',tags:['Japon','Fransız','Kahve'],lat:45.46499,lng:9.186358},
+{id:56,name:'Marchesi 1824',cat:'bar-cafe',photo:'places/ChIJQykP363GhkcR57Ljx7fpoWw/photos/AaVGc3mlRF-LCudUnrIJYoL7KB4wzUcn8Ve-9g9HAlgWyEMGZKQnY-cNYg_YnJJjPkayqm7Sw5G5h5y0_OZb3IZCzfxZAdjzKBZ0QjSEUHOkuLjYSzne9KLf3zu5KvjKRxo0OO_kqO2hgdmkotBfNQfpC2dtojpZk5T4l1mZv3c2_2zQjzMSr5aaxP4XazjwPBY6Uw7Z5kAMy-822tAq7JXMs-ZWUgw-FkS0mZ1AOx7DZ4gJqN4WvW9OI4FFD5iE7Zuim54lL9J-aP9_Ns_4uYuMqhA2zvFB5XOjJhsGaBb0E0krEpeaz5uADcYMMxGN-EAnxnZ2BRiM4lYeAVZa2YDQmgA_dNCisT6_OQ76ypnATAZKkzvUlSAq5vAsSjsXQD__J9xBfvYTEvvdVqLMU8qICMRBFJyIlCG4zE8UptMLBUYq_Cy2tCnGFQHf7CK1EcAa',icon:'👑',fame:'Prada\'nın sahiplendiği 200 yıllık pastacı. Via Montenapoleone.',tags:['Prada','1824','Pastacı','Lüks'],lat:45.465621,lng:9.190086},
+{id:57,name:'Cova Montenapoleone',cat:'bar-cafe',photo:'places/ChIJtw59UdzDhkcRQYDSBkctXfM/photos/AaVGc3k6nc-W8-H3YVJyrU0dEWawkyT3YAAH-pmdrpLisSM5EbnR9qqCA8VI490TyqGZBcNHVMJF4Rt5CccSuZqirIEUYFqM7jBqnZEfjxUyZ9fNO3XbP3ObrK4Tese84zJv64GfnovLkrF94Ca2wTyz2B4lT7y5QkvurlegK8gDXCBl2s9WxeOWIwKVwD-nEKImy9ocoHf_IV6RiBJKVCVgCrqkk0agYuLXC62dmLFR3SxOGQH0BdnNcakj8sGoqhBJut6hP9-y9e9Q5IsQFQiKE80fj3W-df2-K0J0Twf_vWjsZ-5tjRdz0FaQi39iBtC4aMLKXoH5TKb_hASHfu3q31V9lChZp8_8K3tugpIDgNQljWu_bvH5n2h44prb8BizOUHImqaBGFm48t1RnVOG477mhQJXPeRXC4YLmhpldqdZh8E',icon:'☕',fame:'1817\'den beri. Via Montenapoleone\'un en şık pastanesi.',tags:['1817','Pastane','Via Monte'],lat:45.468169,lng:9.195459},
+{id:58,name:'Cucchi',cat:'bar-cafe',photo:'places/ChIJHbneI_7DhkcRtYbVVMCFMNI/photos/AaVGc3lwFkcYthQ20aFZpc9VaTnB9Bn2oPvErdxURpDlSvA5BanR9Q-k2-wGqxs6YM79757d5cdIQwmGzXoMmk8r0V9UIX_DDp_xePEL7zeq7pE3fRI-GLzAlG8Hvykc08OgjgepJkjeiTapL4L5BZ620ITvoU6J3WulBntMrrZeyrO8PLZXHc3HahAgzxFE5yNfA_obEeo8VK7iol4M5NJ2MOHWV7v4f2Kv0QlauK8tz_viqAh-xoAz-5zSlVacSKRztaQBtFovFx-8V-8bSibZrIQE3jiR49dqI4mUaTcUzLBKO3f5eB9zFSccbbeEdVL4koPHLt2ddi5vGSy4Gh4sVjz8XgZJnMUvVm2V2ytpn3to22GhOebXQfX31gS6Xt7Cl_wI_9bi0pAOnlIEtOVu47_mrN1dHpIl06rGjw2aNs7bzVLL',icon:'🧁',fame:'Navigli bölgesinin köklü fırın-pastanesi. Harika cornetto.',tags:['Navigli','Pastane','Cornetto'],lat:45.458495,lng:9.177584},
+{id:59,name:'Taveggia',cat:'bar-cafe',photo:'places/ChIJfQGbR6TGhkcRodPx1GOm8Vs/photos/AaVGc3lctqCZRBmYSxaO4b-odzdPKQQkwhcuyElyMQgg28nb-y8rRh0xhIqHFRE9YypihXZTaezfWPqh_zRfn1MF3IGfOu_nVMLh7fJmQXJDzSnH3Rn3v9KMoXHBE3kFEsmtOswoTgiGeTyWkvmLIU6bmz1moDGyhKL1q_vHz6x-SaDBlZv6SMd94B-oyNUbZUXTrq1la1Uwbiv5R0PGXv8JYhoJa9rsRVZ3qR-7DGO4Vsdd0IoowH6AYqoEK6-esUzo1rAyR13Mv6zjotqTUXNt8BnDN0vyJhGK8jFa6Vl53kV9EjN3fd_FbMwjM1PXR-tood_9eg5y7A-CcTn8kcb58aNB5tNzH4Ty3y1XKUi1v52S6NFPIw38Uj5qYYspTIY6n06mb0IfxzCtPpI6UosR6gs6ZmFX_T5IXoARUtkSS9hcuZz4',icon:'🎂',fame:'Tarihi Milanese pastane. Süslü kek ve çikolatalı tatlılar.',tags:['Tarihi','Pastane','Tatlı'],lat:45.463355,lng:9.199088},
+{id:60,name:'Orsenero Coffee',cat:'bar-cafe',photo:'places/ChIJYV131cHGhkcRU3btwb85dQ4/photos/AaVGc3l4PA1kXztal7H8uDA5HXp8M9y2tfDYXx771a5UH_K8mq1c7UIK39GUoVQX-u_IP2DkM50QYN-oZ7rfCilwEgBn21P0FmgXVqqrifuJfSWrNHO6fq4wgNFdZEOnsSpwhiL4Bv9NlCXmhyLNPajILKRbhamRdlOfN63T-JjqoxPQuQiETAAOO7dfaC1yl7TFFuiHEdH-zAUhsDTGKeCXLft1erMi_CUguTZY7Jkaq_AspO3pdONPmdXLZftOjlEQx-HRrfv5Zu6jAeTqFeRyNzeitWQgJPbINWcIXgoravjqExXyc9z7XmRdUgAOWA4iQLbjQNwALpqD7DUyp8cksatLMNm1YTKvkZvy8S6ANLcf3DOPn-ibUkE56QBYQsc5wquRYgHu4SMRPJ1LE-m2QXm2yNCk66MR0sGKoz9PhJWkOw',icon:'☕',fame:'Specialty coffee. İyi V60 ve filtre kahve.',tags:['Specialty','V60','Kahve'],lat:45.477742,lng:9.211297},
+{id:61,name:'Combo',cat:'bar-cafe',photo:'places/ChIJyZwJyJ_DhkcRlIls7CbkBVc/photos/AaVGc3lDU4Te-5iTrkV5RruB7YGwjoAWw_0SCh93Eq0_C61N_jN9GBRa7TkALbwo2E6sB2PNdnYjFkPpX7FS4gu7rqlLjeymiMjmBCtKDGi_VIKMadVmZq_giXhNQzdnOFFSSalUSlJeIs2dRjUcNR6z69CF9rBonRghg8idLBUlx333isOoSd44twph_1QQtCJwIT1eGFYDoh4s3qf7zdCwexojj9h_N0GQJzFsGLxp8kr7IW-wEUThFBm4ZhzLGFLM2lgoF_-emnTJwCG2qhBoGkaluv7cX8bUOuka_DfEicBcWmMHhePUx-EfY3hlTVOeKCtaxmzemNF6SutOcenpKhrqIW1qXiyzBOCN-d2YvrRHM46PKK7YamZrxFtic_V4-6mUVHSMffo_6J-wjhIuRIXG4s-xACj9AC05NGQA-PE1kvg',icon:'🎨',fame:'Kafe + sanat galerisi + vinil dükkanı. Brera yakını.',tags:['Sanat','Vinil','Kafe'],lat:45.449758,lng:9.166897},
+{id:62,name:'MAG',cat:'bar-cafe',photo:'places/ChIJ6VMJJPrDhkcRBQ03OU6avRk/photos/AaVGc3mEG6Prq0pYB2thIwRYQWMx_PNSBxxMoPOeGeEQAy7qXFoI3uveXQNMqx53i_3Q0kdpw5f_UpcWvV-w4daMKzzg3q1YMv-83Enwm5eIKmptVKw6MfkzGa_PT_MiWKiLUL6OWSuHvouHCLxvN6iKlLQajwy7NPvsrvXGf3cPiX8YcmRzKsZhI0ktdBqdVZGSNqheM4PQ1aJOiGCYsnvQx1p8BNHwHTUejtT0sCunW3TYFmAjLocP_5N7EelOoXz9c4vMM09DLPUpfKDvL99MV316lyNSQ-qxAEvVucx5Ti7SzeVO1NQ5nUkeOrJYOkf_QRHhuKsdutU_19hlImMqFzWRexPq67ANnu59fexFQHNsvB07bSwI2s_N-tT-QebydTLUbFZQ-NBm8dlwSWyHb_3KTiXn2385duSBaCNSWlg',icon:'🍸',fame:'Navigli\'nin ikonik kokteyl barı.',tags:['Navigli','Kokteyl','İkonik'],lat:45.451278,lng:9.173436},
+{id:63,name:'Isola Rooftop',cat:'bar-cafe',photo:'places/ChIJ03cLgLnHhkcRN6Wz-jHImXY/photos/AaVGc3lgSG6T4YBeERkPNm0IYYsEJdRRYSRt5ZUtgeFtS-twhL_awVus984fazu6fZNbEmgD2ESReM4Wvv3Z8Gw3XaS4li60romgi4jo1zC6FP26nFWxzGjy_7UMV4rYKp2WaKFy9_9xnz4gv4WrcAGnchtuGWPTh1VR3sDecv7JoS4oqwCezOUyts2Dn8wxvHtKV1HCTwKxG2Tu7Abv0KinefsQMhVurubMyJvrc-CA376_bjfI3qxAyNmVfnnEBtEW5BDI3Oe4q8AggNM9X-vx_jgJ_QemtFF_l3CVlvssEKmHMbyvVzzUBsiubl1d871jme0J5Vx6muXGxoJXDd4Q1Eppcd3RjUKBZjs1rpqBip2XtXgmL5O-tP13soEu9kLjsO6SzhnApsgvio3an6dT3090QpbkaN4EpSCyPI56CiTFzh1Iz2FoXlm0JwTIeA',icon:'🌇',fame:'Isola mahallesinde rooftop bar. Şehir manzarası.',tags:['Rooftop','İsola','Manzara'],lat:45.465171,lng:9.186698},
+{id:64,name:'Radio Rooftop',cat:'bar-cafe',photo:'places/ChIJI5Spa8nGhkcRNezsTGsoWck/photos/AaVGc3lkjv8fN0Dz4o0JziFx1iIbhCMYoWo_2lYKvR5z5GX7MUxGjjBePDKWZFm6gXB_9Cr_mMMlR0ol-6FVA1mv__wE4Z2D27Eb_Bnddbdy9q1aAX6YR3oLxjCuJPEqIto7M8dkVPDmZSXSiq2VLcdf3859ZQ0I9ZMEXZUJWQ2Rxb5v_D0_mrSNIqe921kr9OTqOuEnHqFZLdUczQVFdUIXaVAwju3wEaSQqzMyjx9Oa1wcjSmnASvhmVkOS_iop9XHv1KSzt_Pn2WWBJ6oFVVXdh-n-ZCeG1nz7vfDARRm5YQs3zwjuDLV0kM176HM9xP5cylygy5ROu0QQ0xBwUuCKSAORwlbb4PG93fETUBxl2wyp1d2_aeWAa46UoAfVJ28yJGHmx_1IDFB73C74MRvvV91SUkXbPj0d5y3tiyO8UETyGr9GfMFWNrX3JBFtVFc',icon:'📻',fame:'ME Milano hotel tepesinde panoramik rooftop bar.',tags:['Rooftop','Hotel','Panorama'],lat:45.47949,lng:9.195954},
+{id:65,name:"Aally's Bar (Basil Smash)",cat:'bar-cafe',photo:'places/ChIJcWeVz9jHhkcRfHd3c2F6uT0/photos/AaVGc3lLfZYPrl4up74tdUiiyrWIvw9WftWY3hFZo4r-Hg1OyqMJts3mrKY-Tfds8zX2QvN2xIRhs4sqchY7bRsQQRCOT6sVomVYmb0Kw3_7zStpQKoJ1QRJbb3mDbSTq93J89rCvZGDTF-ckiaoK4rHv4CSOniDe_Tz_MisxlY1YNQZyeKD-yA1UAuQfFWYXv1gR4BASCZWYx0bcXivcipCOQlVL51KFa1V5rMgidjoHDNQWbF4EHhLpmvJRnG_bajcz3N8zIigWZTcxjKgvHnwh6fVloQxAE08_FpFkrd1hHFGjfcLEHqzp5hxxLWnnhxURxyDCrKrBZ--uZ8IjJndrZ3g1wy5CU2HdK8bx56GB9Igl65RBIktEOZH5mIsCpNvrN67wjr_pMx0AEkXSgpnj8w03OsjgaRXJLh1Ub-t0SJf_sXBJYQycA',icon:'🍹',fame:'Signature Basil Smash kokteyli ile ünlü.',tags:['Basil Smash','Kokteyl','Signature'],lat:45.467011,lng:9.1963},
+{id:66,name:'Vesta Bar',cat:'bar-cafe',photo:'places/ChIJEUpXWyfHhkcRpPrJFqvXd4E/photos/AaVGc3mAbcOa79dh10cwPL6w2Z0N4fK4ank5LBLHx7fbOluez_N9kv1KNiIW9gYfYKFdDP52nPWK4shpUGRleMvuqDsKzNz8ggOz41YOiZ29K8CT1XZNPcxEO3LFNVfZKCrbclqkZ9dIpj9g5R8GfHB2wn3VPmSKZAF1kahY2OFIvjn6fDEfrEB9SFik1meE2X8T19fHweJVyYvCdZAVDvFonCBrFOWE9QuosFEJZbWUGtfT2KQzWWC0tEZS1Jc9br672VDo7N58TD-wmloR6hu0tfQVU9i7a3mBYnP-hXwZbhAc3T1PIYsueBH-nn1pnoknsq-qNzjXGlmJjOh274WnS3O0I4QLZBOWO4lP0nArXRmZEqnpqSe62n_IF6FGjZFEJd3BDmNppP2Qt02G1FkQvIWlKby5Fs4g8FYboYF8MC7jbg',icon:'🔥',fame:'Şık ve yaratıcı kokteyller. Navigli civarı.',tags:['Kokteyl','Şık','Navigli'],lat:45.472142,lng:9.186967},
+{id:67,name:"Ralph's Bar",cat:'bar-cafe',photo:'places/ChIJdVYH3WTHhkcRaKpilfuzhiM/photos/AaVGc3n-4DWyrHh9xK0ryJiRCMQErV183kR5B46tXHGBaRK7o9T1O_A9OARBoiuPVx4Um-f3J9gkRBHhgJPw9fiiB2VlmI-Uq9ExHXnaML_uEui1VaovFggaBzmbUn6bYMR68vBLz5-VIbajdO00NUZDXTHAzV9BNA8Eg7TRFS1i7ODoxxTKgwLV7R2VRKIZ40h8O_DljNbhrM8CL9FeKKh6PT4Cfpux4AkEeYqKgU8_qChwcOz0QzI_mVVLWmiIYq-Ik5zNK3GEax8CSEtfdk8swonvBGea6xJu2zKOb0WFxqFVoInu-J-kzO2Ip26r48FaDAbzw_zFVG_1wo8zaNLvpuEeMC3fvaHO3KKH1Y7IkugPQc_QntJp1oI5iEb6vU9IcImPfTPkB0KuuVD9wMq0NU8VrhMyiJzw9klzUFrzMDOxzEjm',icon:'🏇',fame:'Ralph Lauren barı. Polo Club atmosferi.',tags:['Ralph Lauren','Polo','Şık'],lat:45.468941,lng:9.198109},
+{id:68,name:'Ten Eleven',cat:'bar-cafe',photo:'places/ChIJIYkRQeHHhkcRCtvCnR136Qg/photos/AaVGc3n3xHoZTs3V5-hEJx5tOyqA6sD6bgIPrRCb2P0vK9FgQDmz2uNxGH1cobQdaYnQo12onDKr6a923lmgsM-OHXfyZLzutZerpTJp4m-c0R-dRfEk-YLSCdqRk76_OxCqOjFUGjsRkMLj8eTMlai3WbheUC5NsyIpnG4E1CBmdSVuAkkRUQ8-Bam9l2z6lfXJcKFj8bEN7N07hN8io7mU_Y-53_JJwl_wINxW_2PA6P3mfXrypF6lIlCCThFfuR4PWkh8Ho-_3p_6ZjTna9ImpktLR4Zg-LjptMUs8LU5MYPG1XLxYBRaBoFk1cb7Zv-ZCB6lhd-r2Ov9MR-nVWoS7SBvacaaZ4fLZMwlNx-WSXDBlsycRQq4nQVuNVi6O-ipMMr16GDvOnaA-HcQBTg_462jqDZ0yMm1GSFQ6apmKZ-m-v-4R5b_4QNoZbXGK1-l',icon:'🍸',fame:'Şehrin yeni favori bar-restoranı.',tags:['Bar','Restoran','Modern'],lat:45.46862,lng:9.197581},
+{id:69,name:'Otto',cat:'bar-cafe',photo:'places/ChIJ4affJDfBhkcRAlbE7bGZUj8/photos/AaVGc3llq241hYEpvgMSjeOX-7_-Ja1FJ1YXwyajSZ-RMy6-Qcd29KXB2DwxxkijqsDW8qrm4GYfOzcNKX8rhx6ud3hvp3P1jf4mKJXuKd2zzlh407Hd9GahYrmr4REqLT3jX4UAmVfGbVqJFSjh-AbcqDjuiBrp1lM5FKcfD7f9GwWDBPBEQnsf61Gql_A4tulOzRgFoktJa0rKj8lKIO2w8wZsKI76VIiOKhpRQ4fg88p87bCpj_siUOUCIp87cupTECvEtXfBZ4jh10WHs2PQyR7-78JGWxfwscIJoiFNcVDIB46LE1fZMz_K_CI7ATdUBuZdlL22-QYKM9x0xGNywXpEf0_8GeaDE7SV3yzilpMXttigIVTsVEoI75J3tyhWv_56o3lqfJ0QtDkHgR94jo_ed7ZI4IP_h5M2ahJeqX8qdQ',icon:'🔢',fame:'Minimalist tasarım. Natural wine ve kokteyller.',tags:['Natural wine','Minimalist','Tasarım'],lat:45.481881,lng:9.179863},
+{id:70,name:'Starbucks Reserve Roastery',cat:'bar-cafe',photo:'places/ChIJveNf5KzGhkcR5evtDliEbRI/photos/AaVGc3m1vFpbFhCntZEvEk35sTVZ6n6Smu2ctKUrdFYdTQGF4goB1rfT0VMkCZnzycbzb1cY8N6mwh0MT4QHOznLYAdrTIYdR6UOqt6IZ5aAtAUOPltWffZgHb2V76x57gr2N8bCVc5Llr5pIFI7l00ljVrfs2IDFEzHaMXpVagUrNk3vfgkjFazWnUPxdUeLgFSMeHl8Psc08OQat-YTdADTZaZCECInzULD6m-HpHXz296z0pt7uh_pPnfuYIrQ5JRQJywWTMKx7wBEKcfFxdyhfeNcMXa_NzWioNDMGlIFM2Y5Wf3Gl1kB2XCC7R2R6051K2D9QY9dG2lkfF9Aul5AaJmQzeTrUn1bt1ZFQIsRIXRUPfAjjeqlJbbI2_TqSVENGQ6igTozkJDnIf7Dffde_LMwYKApp-ItMc1s_auYstywg8',icon:'☕',fame:'Galleria\'daki Starbucks Roastery. Mimari harika.',tags:['Starbucks','Roastery','Mimari'],lat:45.464946,lng:9.186186},
+{id:71,name:'Matchamì',cat:'bar-cafe',photo:'places/ChIJO0eBCoLBhkcR9XwC3VMooPc/photos/AaVGc3mZz8kQN7I2DDXB0MqiukBCNzfYGOlgXjXCKaR2DgCZXAreLF138_74JAyQeK58rfN27VkosNlklTKG34wid8cmEopzyT7AsG_sEipneqY3j6H9fN4U7UVQWgm-W00V05-d5oxV9zjTy5xvIzXVcFsvbaEDnwwkHrNhDkc7MuCqHBCPSLDhSVn5lhF0XRaY9o2x6cR2wQodmnHswj_XkV1k75EO_SyOwegjrhR9NApWOkqVc-3ujl7fInSfrR6OTHsxoIjOH5CQRrTILG8eGOMOOBrJn9Kd--X2YOqdb8x0a_I-3991RrbVgdTfpGbP0Lm-4YcEiEO_KE4FV-4V2rJXZH-oOBNzsQPKNQncRn-H7Yepo-zRcOi8lhIDiJrVpp6HsWLyrLsRge2uqypjMmu7e5Gdvpoy9vL7TMk38bg7dy5rhxdeeY5icU2Qug',icon:'🍵',fame:'Matcha odaklı kafe. İtalya\'nın en iyi matcha barı.',tags:['Matcha','Çay','Sağlıklı'],lat:45.48141,lng:9.17272},
+{id:72,name:'Egalite',cat:'bar-cafe',photo:'places/ChIJw0e1w7_GhkcR3S2mJAeAgKE/photos/AaVGc3m6Cge0Mqd5a3ygHrz1WPqrGGIevrFPTBzYLW3qe7rB9SyDG2FPLSPYKV-1wD4d-cGhN_-b97ozZwz1Y_P7lzyN1IogwAvxf0cfv6dCkOdl8_z93XYtGlqDBcvtBvNwUdZFPJq2zOr3Td_CqPMBgzYXUgmejEBoFBcJK2aFFJpzbWRb6sALM5rPdS1MZdfdNT-yljLRGTLoHyJyTjgv2TEDUwAQtb5d6RQ6vEuA9gemCkVI2ZRDkQEc6pT0FVlS9DeU0kjeeNDbyoCIRZi_ZnXT4aVpSRfZfajs0Dd-xVx4m44sPmH5ODtcAMKA1aILqj5hBHSbSv6xZKprfShnhUtPLHUTgvOlKgP4cd5JMdqbKCivgOQ1slatbpJltQfCBUjZ1RP8F5qkUoRNLwBxzQ7-Mp7ApWj2kqN1jK04baU',icon:'♟️',fame:'Satranç temalı kafe-bar. Kitaplar, oyunlar, atmosfer.',tags:['Satranç','Kafe','Entelektüel'],lat:45.474068,lng:9.209286},
+{id:73,name:'Cafezal',cat:'bar-cafe',photo:'places/ChIJz6MyjMnBhkcRXwZvSmkAzfc/photos/AaVGc3mkw5Fz5jigS7lnp1BUNvctJMEBqPm2odt5zxEH7fB45BG4c-bb8e0CwPcSGNoVg3jmQMsLh6ZiXbsTAmZmSPMOHeIJkxiAZ6bGCxWGrgotA8nc5Pe5lovuIDye3_l6THT_9mE5xcUl0R-8OI3e0RaH8LY1sgklG4e89VTq8VYegkoPqPbf1U1vGNSjs9y8istu-zY-lAE1an1EKtOiMOgvYoSwPEPKsIy7UXYYBelbqVJgXZ5XIKxPP6csM0BaYpK6T5kY-UVW7mhlvq_DjdhFS-eueoEBEtHaXcvTpx0SJ4Z4pxlHYBT0jhIiO-KmK36vzSBo2R0ZY0_lRvHYJyOJ7IK6ZpZF_oABoamEc8792SE1w4GKDPkC2w6Mryfjs1AdW1ahhJuPZq4DjL5PqzTTca3PDF6bB745CcQ_Wlk',icon:'🇧🇷',fame:'Brezilya kahvesi uzmanı. Single origin espresso.',tags:['Brezilya','Specialty','Espresso'],lat:45.478628,lng:9.188206},
+{id:74,name:'Cascina Cuccagna',cat:'bar-cafe',photo:'places/ChIJv2WZLCTEhkcR88JVP6X2bQs/photos/AaVGc3mPJT86tT-XJ17FIGAgCIEvgSwO0gBFcb20MdFaF-V4oM1AC1C_3M7GqwDJjDkzIWYkmC5jwPciZAyGrF04FE5xTnIBcLU0HyAKDwjMcFNmFGtdQm9zJfkJGJBdh6NC53cjV0h91N6Cslrvhhe7jIepiIED9bWMoR2DkNeturmzxhN-ZWyjbCVFP6kI3sGRR-SRvRX77esggXTsJ-Ke_2N4kXxXItEQzGEW2yO_s6fItO8HDslWx9C0tJ-HldIB42_mY7xHWaQHfFQAQToe41QK3NGFAQmdmy3IDZrGsuhB7xSvIO1nshKB2yDddaaGK1jQjenQE58Em23CRmpG6mDgM-rvLyzzAFSOzOY_e5Ol20q211Xuvb7Qme3UjWp48X9iKbauWZuzcLIYkL9Fi9kbxFlrAJGdPVzGdb_qUBtKGg',icon:'🌾',fame:'18. yüzyıl çiftlik evi kafe. Organik ürünler ve sakin bahçe.',tags:['Organik','Bahçe','Tarihi'],lat:45.451055,lng:9.211527},
+{id:75,name:'Ciacco',cat:'bar-cafe',photo:'places/ChIJH_gyYqzGhkcRe6BjXrAbilY/photos/AaVGc3n9jm7N9lWW3YmUIdTo05RrEf9giLb5Pht42KfKdAus0UilYGj9IilNn5HN28Qrvds8p1JLWwoAXJWIfT5FS19gN-Y65ipKVSzypF2VtRqbbsgmCr64BuLtHlD3qlPm_cUZTrEfUsQuZBoHodo0C4G1lLI0vsqIcc45poeAhdWkDrM1sV5jYTwQsES1W3hmB-Vtsm0HPRbFkME82nswm9zEOaErvJOU96pJs3rquKbnWE-qjPJC-BdhKtx1CLQscYYVmfowxOLrUy2NNacvbYHDwXCoac_w-m2t1jBKhxRJLWpGMo2ahvjm7GygLLybVhGzeWTiblxiFC7QuU2SbIfTzUvrGFQhxI0-7hbrwUHKaTon7ImdDlEivcKN4h1RDncOYpWFgZUMg5SBa-O37l1Ni4HGFcHTrsfwEvy0ivIwMc0',icon:'🍫',fame:'Çikolata ve tatlı odaklı konsept kafe.',tags:['Çikolata','Tatlı','Özel'],lat:45.463701,lng:9.18683},
+{id:76,name:'Loste Café',cat:'bar-cafe',photo:'places/ChIJF2qT1A7HhkcRi7jbuj5MX10/photos/AaVGc3nYWHlvdC5g0tyLofHJvdkQKjFJgplolkUe5L82zvK9ph-N4wmy7rrUKMcEdLHXZgSTuelamNHFGODSUKe8_J1LQyj2HmMKbQvHHG1RxO6648rjEb0axdLL1gZY8zr2RuYeXsfupGw9iHekwFrSV_RYBaRZBmzSNWpCE8JrZ6vivZRVGXLf3fvTsDZJk6_7NxK-iliAYOKgjmBh-t7EdyuoEiJ6jVJYKR3-3pjT4NEP7USEmihzg8lMyZvjtkS2geZtLar00LvqiUWQSlSvb3RgS4l6Ig-Guep4NJUK9XMCA1XsJlZkcGVEnwd4pmvKPtdAInX0aqnPw2ahJQuPihnKcGsvyi8DPXa92--gy76KH31SElxE1s3xUivVJpPSY13vhH_wOmAQkdJJ165wJKMqvu9147InVEvAcHTaAcutXQ',icon:'☕',fame:'Sakin, tasarım odaklı küçük kafe.',tags:['Kafe','Design','Sakin'],lat:45.467121,lng:9.208794},
+{id:77,name:'The Seed',cat:'bar-cafe',photo:'places/ChIJ0fz1olnHhkcRl_Qt_pN45sg/photos/AaVGc3lxjvqNSA31Mjmr5-ZeHbngjT2IKX26YEyP-tnKSxfxNddFI6AyHhfo-9jYIeZS7xMWG582PRLxswaGlSfINXnCgetJEKxY_dNgK_0YcKC9w3pCGApHCkbql9nw1huLCKQSdhg0d1axV1mwJ7e5zXLY7UtxbgRchZaRjQbEO1mIfrqVmmD94eHLOhzu77QgHUwQfbpX-0CtziJxQ46sEf99KeRja0_AMsQ-Slh8cW1Cb-47cMLbAKXjqLO49H0hf6nU3y2FnY3VRkSkDOGIvRez6Zd5Ac18irS-3jgfuLTR0Mklb_1OcXKMizNrddBAna5oY2u5C1MpvpJo9-D_MHSKvhQWPrbgQJM8WfeFDrydTePTFH9jM0BwzM8PZRSKGH8CtpxnNBwx6c11j3gzDZGXxqS-RXyrmHhxIHKS2v8sKR6iQCqAf7k4ZPYZorMi',icon:'🌱',fame:'Vegan ve sağlıklı yaşam odaklı kafe.',tags:['Vegan','Sağlıklı','Bitki bazlı'],lat:45.461355,lng:9.207967},
+{id:78,name:'Felicetta',cat:'bar-cafe',photo:'places/ChIJtc_v5xjBhkcR0q4ifsQQoC0/photos/AaVGc3mU5lzm65OJustRDfhKeu1KMZbc1z_v2LkvxxGj2E6zkO3PFGIeN8MkvTlhwOWNMXQlyYfLs2yVN8Ibpq9WDnllFzCA-0Q3NWVN41ISCunu1O-kS3pv5O2V7jsovLm_Z3SSMrpccRI05Oxi8FSiOxVUfQnQ4VzfThUblaDbZbNMMNAKD2Wp-QAgGu4SJkoeMHdtJ777HG9yigjp0bsRgdBBgyhmUbp3mf6i4PjYv93bLmA62oy6IsRUDAibDCAy0DAi4pNAfrb9vy804eUwR82999GOOc0A4c8PrPDce-3pmmHv6gcDHPm5zIIDJZ0TGmEbWlvaZhuLoyevVw0cR3084Dx3m5uL_VtNwUnABOq8idtbPyo6K-AneTHhNAEDIh-LeFa4LHPnDUDhu9IuD44ea_tKB0_PjVThzo8EVjs',icon:'😊',fame:'Sevimli mahalle kafesi. Brera yakını.',tags:['Mahalle','Rahat','Brera'],lat:45.47223,lng:9.16786},
+{id:79,name:'Camparino in Galleria',cat:'bar-cafe',photo:'places/ChIJp12yKazGhkcRf6_h7JBATK0/photos/AaVGc3l-BtYMacE_H4C5jFNmdX4yjLE52rlIWCsoDcJ27vVogN-lSW89zWKfv5o2wT1rvX--0zD2v6VmBkRKx4YnLgUKKDLI8nof73q-BtgI6rQrmkXWIq7zrYnS-rFUhrcAJ2HDC4N63shYSGUIVEbLK_qsCbMLl3V0CYf4GUG5iNu6NheVTBu8vZ2Bt2xr4Afbu6Wl9oJ4xCnWQ8vGJHguWK_uqoQJSJ7iGRe295DLPz6b6B0RebD4lApkxi-3fcN66kpS7t02x6whEravXV9fv2yDzmoOMnGe4CbRswE-0y_BtQuP7qs19oJiZl-Q44NppjsMadBHcD4HzLBxNEfdUGVEkzgkGxCdxnwYxVuEL8csUiCP6nKw7Z45-BNmI1X6ZFcki4pjh4ElzZyoPUBAnE7bZzC7hNELjUC10SGBTYVo-FUyvZGhh_Kp7hExIWM6',icon:'🍊',fame:'Galleria\'nın kalbi, Campari yaratanın barı.',tags:['Galleria','Campari','Tarihi'],lat:45.464806,lng:9.189924},
+// KÜLTÜR
+{id:100,name:'Duomo di Milano',cat:'kultur',photo:'places/ChIJoTZGw67GhkcREy4aECdOf6s/photos/AaVGc3kWX_aHYKDjoM4E4wx4HrekFnAiaXSkx0FZ9VVDxR2v0tImHq6_sR7RcH8fubU9xVIjN0nZ4fZgLARWeKLCgFnCRAZvnBsFbO_4vsqaK4A4QMcc3FB33KadQEdpKaBi_9vXGOZ_5MjAZe9OedHXyB1zpb2u9mbp6E-9mMWsfxyPpXbXZmngpezzWalx1pTEzwY0WR0T3QSy4sDrqRANxt-OckvQz_SaieGTbgQ5BfF_G3yUUyyXvyuqWwL2UcB_iJERLYucELxQMn9sWiKrcfOHVw1hdSI7-kt3iyyg1weAFxzM23I7u5DRKIpsH_DqxNEFIlNA2QEn-tTJ8AkRAi8lA5S4MPEBzuGjy6uoF1w0zIIZsWKvQqcH_LIFg8xlgVLcuQRTbLpCMEHoxO_Z270CJhEbTe6nBnCiABTmaksSrF8gidWi8xL4GG_WtdIP',icon:'⛪',fame:'Milano\'nun kalbi. Gotik şaheser. Terrazza\'ya çık, Duomo zirvesine yürü!',tags:['İkonik','Gotik','Terrazza'],lat:45.464098,lng:9.191926},
+{id:101,name:'Bosco Verticale',cat:'kultur',photo:'places/ChIJIZuktDLBhkcReyE6f2hoUFQ/photos/AaVGc3ldHWnS1ORvmM0KA34aKYO4jSjVx0IUIJQ81u-xxlGnc6ewAyG057HpkJmw7duflV--YBwi1I3YtSqKUqgqlfslfTcoYvHl4e_PdbXaoW6iAWkHVHxBASOrG-TQEs2G7kwC5xEIhyXR7y0Gkn5P61-VGCxkOttWOcLMDJbeF_DSXOk41qZzazKqXekGvMMnbOgNX2sIZmlryBAfdFD0Q9lnvhem7ByUFKLmjHcVM71PBUY_fOPLO5QncXJv2R394eabqsU_Qg_AWXQ0G0mFDkm_M5zWtHHUiDz7kU8j9eXOOJogtsIR4BER_zEAnuopB2FDumJ5Ck_k-5MxAXD-0cUp_GrXKF5D7DjsfMNpPM9We9v9KtmDnAs0KoQZqXIjpH5mCyl955PVQpT-4bCVL4E6mXYm3sYzsYLEf1xUbsXTbQ',icon:'🌳',fame:'Yeşil gökdelen. Porta Nuova\'da fotoğraf durağı.',tags:['Mimari','Porta Nuova','Fotoğraf'],lat:45.485704,lng:9.190538},
+{id:102,name:'Castello Sforzesco',cat:'kultur',photo:'places/ChIJPXupDrb8hkcRm8JyxGbdVmU/photos/AaVGc3k9m1aG2Wo4-u9evXRep452llQHErvX9oZSeO1EXigg6jXHBZmZRcwvaqUKMbb327sqJXS5DkcoccIpC9-z__LlnDIi3Zt_qG6Knyztjr7bKFNVfz_B80F1VRZscbScs-dYzNQ-92YDFOz7MsBVknUUCHFUwnCqwlPRMKHvCWcFQ1uczgM8mSfQYnE8cWE9up97X1lk4iWsYFVjhEOOLgC9zbv3O7x-yaLKw1MNOBxjuxGjxoh9VMLCZL-Y-1VeJlxoXytIVYVVRuNakRi200dBc18LoDivRBVhw7xJDS9dJv-CCSe1_LQg446zaA3nWHcTOpY_uPs26k2juyh3dJ_DK4J-53rlJs1vSDQVftNNA4hqgKRGfvGhbD-FhJc303d3YYgZObd4b5RBZmBaYZTEw1lw2qgnqMAoj7f7eAV31H43',icon:'🏰',fame:'Sforza hanedanlığının kalesi. İçinde Michelangelo\'nun Pietà Rondanini\'si.',tags:['Kale','Tarihi','Müze'],lat:45.470476,lng:9.179332},
+{id:103,name:'Pinacoteca di Brera',cat:'kultur',photo:'places/ChIJH05-WBHuhkcRNjexLI56Nhs/photos/AaVGc3n8RKkl3RsJ2nwaWIp5tUmwCpc1roJ6tbfrkL9SorEJ3CcuBosmXuPusHhbX755o1FXXMtmjxxujvc-ssH3Zy_UBsfbYkvLTXfff1dCBj_OPkqO2bApSuRlq8ciZ7ZwKkS4rszVaPXrjYT5_vYE_WYEIjCYHub3K9BVK0DaeBQSKS2FDihZGEbmAiU7Zz-UXoxqXdn13YcdQO9XcvfxTILCLtqGAXzIcJfLyXW989C55DcGDIJNe_B9uux0xj9uZLCEaAqHGU33Mbs5JF8Ccffd5EIBcbhHpCSGrfg9iUIRL2zl8gXQ_pt4MOmXSdT8SgXv02jBGu3F_hVdDP4fAHTlBhZffwk5xGWYH5Ppw-kGFKehgf6zouTkoYdz6vJCXfrCkBbBgRdpNAJvijLDNPHKGJyQPjjJy2JWP9XUGE-qJfCM',icon:'🎨',fame:'Milano\'nun en önemli sanat müzesi. Raphael, Caravaggio, Mantegna.',tags:['Müze','Sanat','Brera'],lat:45.471954,lng:9.187814},
+{id:104,name:'Santa Maria delle Grazie',cat:'kultur',photo:'places/ChIJgxy_RFrBhkcRWVrH08TNW-0/photos/AaVGc3lnh_rwCG0ggk1Ay6dBHTPnsnRL4y4m9Jc53tbfXh1PwFMfe9WQW0C5tIgD0l3V4EJ_0LZ1S72wlNIXwx3hKIhAmPtgeGkXaXinVnpFFpLqRlaLLkfY0RnjVPnamB4EM8hgBUxdVCOw1ZKhrtSwJOu_ZIaTH7ho2u-ZnKiliXDUGCFmq6jtgYW7pOPoKCr2uofIGBvepSrYoA_D0XcxwKOZsl-XJOz8TXjQSJ5wdk6CGxzmEpedatPSoqpsqQf2-Zc1ZpTAUFUUa4ULBpzgxV_QlFGCT6NO9vCKZTL0pC93v5vClt-JUqfJ4oA-DPkJ9B-DxDkxuzXQfSpmZp1JE_sSeQo65wTF5PeLnO0dYpWui7zHFbTsh_I0WEvuCYYYcFNNngiAb8bXmVRThFoe7YF6uZ602hJErdrKkmSVJt5Cxbg',icon:'🖼️',fame:'Da Vinci\'nin Son Akşam Yemeği burada. Rezervasyon zorunlu!',tags:['Da Vinci','UNESCO','Rezervasyon şart'],lat:45.465963,lng:9.170962},
+{id:105,name:'Triennale di Milano',cat:'kultur',photo:'places/ChIJRwVc7UXBhkcRIlGMal_aWHU/photos/AaVGc3kf8L-TH5hBLd4SJRZao5e6sRxJqhiiIGRsJ0Jh0-PK1euQD2qoHdanJSYvP6QEc-00kpDBKKu8GWrEMUhp_hqh8oBwJqLWkxJEdv2p0SsMpODDje7BdAe0SIKugGc7P_htd4pI_BpeK7HCrsnSqxUEBsAwKQSDzfeG25pREXWMlbEZa5Pe3aV7wa_kIjhOy3FnZEf9epzkq84k7ZlW-kCWlzSE44elePL1_43QhinOtUNQ6Gvs46Ru5WMOSAZ3twMolOcGiMW0y5qB4Jwa_U894yVTrxpq8hFN_9Py_XCsoVDPAMmNxH0RnCmn-RCKma5eYdwQQ0JpKSqAWAQdiMZVOiKQAuHnwtvucLKBZH-rGbm0bZJQAA0ZuhLl-91yS_0A3N6aYY_gf5Ug6r8btFIt-A6qN-yn3jRgZQ7WDCVQBcNwDBdQ6E5JfnJtaA',icon:'🎭',fame:'Tasarım, sanat ve mimarlık müzesi. Bar Triennale çok şık.',tags:['Tasarım','Mimarlık','Modern'],lat:45.472233,lng:9.173607},
+{id:106,name:'Museo del Novecento',cat:'kultur',photo:'places/ChIJLd2VYRsuVUARNjgLnq9U2dE/photos/AaVGc3mZnNN_4FeE1KROo9jJ0rgaP8bn35OD4lG1INE-WeM5E9Th5NQrxFgxoGRvIjdrQzU8DVdhOTVoPs3FpNnH9ZFzYYtdKRyPHZPmvPoiBGnpOV8bZyulgUiFT7w5El5Mb9Q-9Yqu9MQsiikhKk3QpZLmCZ-EoN4hwGrBuREvTHZeNiH3lXjH-T10qykFSJb2TQ4jXYfHsq-vczgOYBSnRKdPcLZAzSDNl1jfiDcn4CX4ZKSwjcIQ64FkWTeS7QuxkhORVYG8-OTHwV_LZUejjRfw4q4j_AQ8DtXsj_p35M0etW3H1bn7rvUKo64Dc2BScE-Y80KdltHqvMcRePkbp__j0ZyJrIpTlrt1L8tzFmriRu-Yshy6ynw7UlewEjauqAt_2zrC1ekYy4rdShEPJYHw5IcK3e7SdsleToZ4SczEDpQI',icon:'🎨',fame:'20. yüzyıl sanatı müzesi. Piazza del Duomo manzarası.',tags:['20.yüzyıl','Sanat','Duomo'],lat:45.463408,lng:9.190169},
+{id:107,name:'Fondazione Prada',cat:'kultur',photo:'places/ChIJ16AE-J7GhkcRnxchwJ_WRRU/photos/AaVGc3n8OCjfaTD-rUcbIILVIxvXQti9jA9_vq8vB-GFYpXwu_dEUzTAVjf3aNCt_xinOehmQPmLPpFSxlMRTYEBIIaVayM-0eh4tx4sioNgdRNDetudLlAZ2rvsC3Q1PgX52DYYV7Mwd00Qr1_ZS8kFCGJCWqWheQ4baBGSUAooNZRnLyQgVF7Xc_r4jKx_owL32hQn2T84NjH9zgwzvMM2m-QbTXgyswF1zem8Zfkw9UmgsKxmHgSJ4-BjUTamnDhuyAi0w72OUGZJtLtsej63a72qLAXcLMCXeaeJmgAP2zeQt2eApW1LQ9u5bLv7PeNbW5aqgc-iUUgLxUvj1q-bIBYwIvEBoGie1uyzRRaZsofQGAOEjLt0Lq1VV2HGZVxCMy6tsPMH6azNQvDjno1sYwbpqb-no_qoXR6beRbl-Hk',icon:'👜',fame:'Prada çağdaş sanat vakfı. Bar Luce — Wes Anderson tasarımı!',tags:['Prada','Wes Anderson','Çağdaş'],lat:45.444356,lng:9.205207},
+{id:108,name:'Villa Necchi Campiglio',cat:'kultur',photo:'places/ChIJn2UxgrvGhkcRNLCIIIOoylM/photos/AaVGc3kSH9_KG3f_4rZjKNBPaHnWdbro66LaJNc1jAaNXWAgyVmRW6qjCmEr0cqoMVxrP6gr086h3KY31Xr26kkkt_pkPEmWUWqJylR4qPS3IgA5JuILm4ll22-jyERAxm2K658nDgmHsfRMqNJ22JL3SX-V033Rkvve8UCpoILK0IwII6WHrAnnUdfTQwy2h3ary8dJt7N3y9dQdk981ODgNIR5QlB8BeWK4mhPg__PcAsw9TyieQHJtYECrzuTPOmcK7uKAtgBwl9DP04lVYbrRU5rgt-wDrPCo_pLEUIdM3mvPLVIpSKClobUU2rXqA92-rp9zHBADHlFACCwHGjW5UAHhkP84ADp9i5zRiaI_-UBj5xPNelAcnqjLDY571riZlVIK_Pboe_psEV5zqQ9t2KcjglclfpKxH8EOiipw5R-jOy8',icon:'🏡',fame:'1930\'lar Art Deco villa müzesi. Call Me By Your Name çekim mekanı.',tags:['Art Deco','1930','Film'],lat:45.468371,lng:9.201793},
+{id:109,name:'Cimitero Monumentale',cat:'kultur',photo:'places/ChIJ86AjdDDBhkcRlB_wfs_iB1U/photos/AaVGc3mAq9pGcDpcOwMIxQ55OKy7UMmxX-3Via5TFfJJdNbz3HouRx573OtaSLhBB3jOyuoCQAmuoVPJ1bgBpNgXUuMhn75ELMICssHII-EwyFV2c1lY80HvVy7rXr2U0ZbI0Dqhj4f05q62OXB02l3Qv4ZzM0dy7tqqZywMyq9Rmt3Bb0M3yl1EWaBuVOD81XrKPjR-SuSDrixj8Wdq0vYKcukljvQtW1g6DtsIRKZ51NUSReaGtg-Kgh7tD4EVSZG1XZIHBVlg2LwR-KyxD0kT383eKGqrFGIHrJ1770TXHNifhdb9-loyzAUgnFULrEY7zIgno6C9bw4eDWQtHMMTejFpzsc9L09Xn2qjx7L2LknlWG3kX8yDOdzNTquwDX_W3_6ZBGvisxpaMYDRjsigrWj2ne93qlCthEoGQOrX5R3YPe82R-TPcxf0aY5Q2w',icon:'🕊️',fame:'Mimari şaheser mezarlık. Heykeller büyüleyici.',tags:['Mimari','Heykel','Tarihi'],lat:45.484569,lng:9.180162},
+{id:110,name:'Arco della Pace',cat:'kultur',photo:'places/ChIJz7dBqkfBhkcRFcbFfk20vPs/photos/AaVGc3mJigNRCQZqCajEsHgG4tp8NCZFS2TJpwBciDE3cTVRu9k_0gFH3g8NYLcRjB6eHLB_gFbsh1uACsq2ogy4ERJYjiMSJ1LJGDn_ZJkFBLmgazxzJ91SeJJgjg7mu0S9Wl70LAkYV1q4nKnAdYBvuepGyCidP5d8l7-wR8T8YeJm-XmLkshUKbl7OV-wRADtT6Wb43bmCfTJg1v6r9nvtADZpqP9GtVKlVYrAXSYMJ57dUQJXdSSz6x8--5zBmO3xBYahbZpYdqnEm8LVkGzHuJzH9zsPPvxTTYY0tFFiGPTcACsW84XAhW2ncs1rQ4Di8feKR-ceYnY5ptr0tXCHCXsx7U4V_AC7WHboL6qnQ9ESQwrKvI1nDsOVh4CRmZKzQDbUSwvoDRUnlUOPoqHi-5_gipvz-8ZHdEajmii1gI',icon:'🏛️',fame:'Napolyon döneminden kalma zafer takı. Sempione Parkı girişi.',tags:['Napolyon','Zafer takı','Park'],lat:45.475693,lng:9.172451},
+{id:111,name:'Porta Ticinese Medievale',cat:'kultur',photo:'places/ChIJc6zh8v_DhkcRTYt4jsodOuI/photos/AaVGc3n9WDRDiL4vAFjfAfGRzHNHEdfnl4RJXpAjkquWiPNmZdntdRNZ2S_ONQYkmXLFgKrLcDpWeQC9H9jaF0H39iM8vdntk42EiMHvBg3SSO3peC0CW-e2ADUORniDE8I5p1R6M_4zY9YlDiytDB_sbWsTdZhHkMoKDRQ---VB2fgSEa94hsZ4CIpkyEoc-3kHYLVaKIMy9uxxccB3jCIWBTu2ZlxCCo7YDOhqhQ4ULVt3qgJ2YKkhJI-PcO34vKtnuq9EDN0EOY34i8oiEJiXAG2y6bF5-WFrGVxjZVDNaS-DZzQaQYd__CP-GNxiy0hlsTRJjTm-M_hnYbkvewuEfzTtqFtollHyPltDFt9z6HhYF7ty6UTgyW4kz-bsuljmoJ19Omi5pYxgZf3U0kvOskQo3Kbey6DTz22ENFKQdchCtu3YaA6NADZ6zPK7If82',icon:'🚪',fame:'Ortaçağ şehir kapısı. Columne di San Lorenzo yanında.',tags:['Ortaçağ','Tarihi','Navigli'],lat:45.457595,lng:9.180984},
+{id:112,name:'10 Corso Como',cat:'kultur',photo:'places/ChIJkVs2nDTBhkcRmiGdp8UAZP4/photos/AaVGc3mz3ZXADg__HTstER-I9krjSlH1olhHvPK1D9AIHmQm_W3jHAxMSX_tgGrXqc38GBDjH56nCfJsI4nykZypvHzV3mQXQW5Rr3nDIXSw55nCkrNR6aqe1XE3KSFhRT2DYn-4riGSoPeb4wVBGv-qCbAPUFucVpVSboYWFigSzSFyf0Pht5LpVGrXxJLC8o_yqIDJ06Uuklb9GForNiNf8-znfWm3EsdYeek6QRAPbj6W8DtlGtl5quYrrBkRGnR7Y69_kbaRROGdSCNEiuUOnJ6VbIdS2RWHi8OwJR5Ug9A2t0Mm9b4QsoAVOLG_N4BA_UzOEywhb2fpOwv3BgnF49A1_oVSgv-cenQdy_M3S8V6rknozPILjF3x7A3sSs865Afd38P9aedbwWb2FJRc9nAG2_L_fqNNFIXy3vs0WH9Mbf2v',icon:'🎪',fame:'Carla Sozzani\'nin efsanevi concept store\'u. Sanat, moda, kafe bir arada.',tags:['Concept store','Sanat','İkonik'],lat:45.481923,lng:9.187509},
+{id:113,name:'Villa Invernizzi',cat:'kultur',photo:'places/ChIJ_RtoCLTHhkcR4j6hpPirCYA/photos/AaVGc3npJxPUVRmd78m9hp_4gTDruCjC-uwGoAe6hlSp3tFD5p43IqWNENiKmCF8Lht4X8qXopUhE3IbJI3PxjApRvmn1RUbOvkAu9_4kOpho2buIbDaJ-QFxrBWrKexEKMBsHqkeq6MGlXLE5BrQ4Kx9TBYZsVc8BGzSj4sE69Tg0fy35REKh3b023mCPc_-8ftow4faRMFBAZXhiBEszKmMm82oMGOw-MRovA7A1VALfzB0QrGflgZgssvtW3Z-Ho5z2ln6syiqoneHNaxCgfjaxu3rqvhHmGQUzQr8jo_pCU4bMYIs57fu5vZa9sd5G1rCJg3DuJU11DVcFRUo5w6lEhyizOjrSq2nQE_bsEs7ns_twnTZpKncm1LEspxjwivvgUNnaXU_ZIQ1ANpM3KOR2CmhBeifyMa3fYkWz-oX4A',icon:'🦩',fame:'Flamingolarıyla ünlü özel villa bahçesi. Dışarıdan izlenebilir.',tags:['Flamingo','Villa','Porta Venezia'],lat:45.470369,lng:9.202121},
+{id:114,name:'Galleria Vittorio Emanuele II',cat:'kultur',photo:'places/ChIJw7aG_QY1eUcRFtQJWKmcCyc/photos/AaVGc3nXgq2eqJ6y-hUTpP6t0EaUTq1Ikg5dKIsCAvxK9kU23l9mHkvlVYhqPtExe-hCSsQUeubFhhrbMBOjzttRwMuP3e2lL5cx1wKUe1jHqIxu23HUOdCLswwRH3wJNpjh83yzaGIHhDeeOCTLvhCZERqGN0M1b8QifljyBpYVPZXjNRk4xF5P3PuNndcHsfiCepdZWlJVyYmDjhyKicK878y6PTP9SS9Ll4JKsD2ldkhGywdewOLCxBw_-ADKpnHJsSHjA72u32ajN-QGx9joSX__uh8UsIJGpJfnKqntC8TJETuJcGf88fPJLd-9EP1W75PbjmAYjHEnIwmQ0gp6JNKcSd3tAsLv1SB01KQmodD4Ys6KMp7V-N7Xb0J_fMhLBJU6p3tLkOXsVIyMdn7tf0i7Z7LCUgV552ZkH2tue2tgphGajhMyn1tNdyZ7zQ',icon:'🏛️',fame:'Dünyanın en eski alışveriş pasajı. Cam kubbe, mermer zemin.',tags:['İkonik','Galleria','Mimari'],lat:45.465843,lng:9.18994},
+{id:115,name:'Amanita Milano',cat:'kultur',photo:'places/ChIJU8rDotLGhkcRv86blTHzL-o/photos/AaVGc3m_b23UimkQPacBodb9nkKPFJp65gyWQga47rBi9SzhnVfiOmq78Xrg10SswYUXHaUulXHuCUlClr0sAZpxhDbUHUC9pow4ZhAHB1zo-Wa7ppuyb9T32CTC7dSDIObqUjbomiMNC8tY_tIX4Ictn8t_Ihyu3Imi5iAQJ1w0WMDuN1M6KljbEpCikiny-MpMl8IKr8cJHOT2UMVnI61tTR3g0kd3Hk597Fdy6dXJ7Axi7uvdNyzzxrJe6UaqK_VHeJagDmQGhf2t0tTyUwSOXPWBgTGrhXQwvpZ8Ghl-k08eStfuAWBwh_fDXonfHFwKr9_eCSKvzUWARPKWRS4T38GZO6F3fERdtNx4hID2YStz8x141GJr5uS7dGMm70VoCh27j9Tx6l3N6L9953KIA_Qo5-RHu0YQETO-pNnhYQ7f-4Xo',icon:'🍄',fame:'Mantar temalı sanat galerisi ve butik. Çok özgün.',tags:['Sanat','Özgün','Butik'],lat:45.486803,lng:9.192326},
+// ALIŞVERİŞ
+{id:150,name:'Rinascente Milano',cat:'alisveris',photo:'places/ChIJC5I0NzXHhkcRqEoVi4VsJaE/photos/AaVGc3n8YwJLqkqrBB7C68d6Yoxe1XYfwzKFpaQv6zUotHLHgbbB7fSd6DB40OrmqHV5UkXzF6QcTwr_L4ZLBjeIyaj8XOCgYS61QSU0C7178u4AukF3jvDxTdVo_hCT0SejZ1ujUI09NUxMLZ9TgEq0fU-8VXpuAuCEaYO23wgrtOaFPIJKTUwqPdzgaKEArDQ1s5zv1enF_Da8BCi7-qcz0D5u4KzhtvCZj2y7RjINt-j3b8TYJXoNB9ozTyr2qS9wxfrYHkObHJ69TiZLsr7qqK62aEXlUEyEB0Iei7Isy9VuMushjWL9cZFWq7e5sjT1kNgmPx5Wc5RXDTBCy_YnjRghADxqUGpleyDcfya9IxgWzMxzyvWIO25ltve4IPSjH7OLhrq7PwBl-FZ_IZDqC0qXKfd7aUcQL8cwWD5JIygdk-Y',icon:'🏬',fame:'6 katlı lüks department store. Duomo manzaralı teras ve food hall.',tags:['Department Store','Lüks','Duomo'],lat:45.464937,lng:9.191823},
+{id:151,name:'Corso Buenos Aires',cat:'alisveris',photo:'places/ChIJbSp4H8LGhkcRAjUhwcGI0Vw/photos/AaVGc3nCUIlMdE_mF29ZEGaJxEqPjNIpu3rmIMlLw3KxI3aqGmq8tIfgrDSoEo0bayYPDb3ONCx38h0m7dxP2Yt6eIrT5j3dIyEP8ZsoEGEapn6NcXoMAfS--3dP3La5XSotKYbOkdN_WdR70_p_BG5XRn0egYufNtjl5Gl22K-s07VfMecnGPEbI_xOe-aqon0KF0ZAn3YLcJhbN8SvNFRQILUZBLBz3azm76Lz4RmWaythAWOBnRK8l6JHcSs3Qdki-LtA5V8tRB8c_V0UCJ-Jhkj_NZ1CaReGPONJjGkV59eB3wLFsEQRfswB6RJBtysU0Y5Ms1n2WpfSa0sJwdcJJKCzEGyVKB9tF0JrJXoiTOin16SvcMjPA9MD6dSW3IWJ0NXJrHdCjENtxuCQuhrj7IhAHcNgRqpTrVlK4f1aTrIu5S_0',icon:'🛍️',fame:'Milano\'nun en uzun alışveriş caddesi. Her bütçeye uygun.',tags:['Cadde','Uzun','Her bütçe'],lat:45.474525,lng:9.205146},
+{id:152,name:'One Block Down',cat:'alisveris',photo:'places/ChIJJRkMJpnGhkcRw1uSwqqvOFI/photos/AaVGc3ms-OdlhdJ312DNhdvNBcv-RKJRtIqa_3ZHd7f6ftlh4VzvuzEQ41MuUYnwM1GiTYzRRGuhk-jOpvLiWhKrwxxoqSOnqgaSwiWL2pCW5SAlYDCL_PaSousAY2FA1Vr8vpTJm_0XuOnRYi15TyCS8amAGSnRlnp1Z4ZBK3OPmhiKbOqXEBC9L3Qw5voiSp21yfkX0dwVIb97BmUuvPK1BvPpqSrOMmKBxL0v0U_eereoNHfhngpmLwcD9LTd-N_I3uClN5lOzbuAD8NnrTxhJPGo7Q2YlPvfjLkjTgBfVs8zSYFTQUJMs9WK_mAR0y0CGlxfxsAw4xnXxHWD63MPwUQ4QViooLSBNU1DnqQmXoEnl0lInnuJeauUhBvDi3ppjLjlpW44CrFbldT_nKiOajGTRb1wrQufvSvAn0WHMt6MC3Y',icon:'🧢',fame:'Milano\'nun en iyi vintage-hype sneaker mağazası.',tags:['Vintage','Hype','Sneaker'],lat:45.462916,lng:9.189556},
+{id:153,name:'The Soccer Archive',cat:'alisveris',photo:'places/ChIJH7VgB_TFhkcRhxARWgDxqCo/photos/AaVGc3n5vOsnecqeekZ762UvU_piSvb1TwCxqqgQGu_0acmFJyc4ybxtgfRmA8zKxxvHwN-8kGDH8DT1Zv_ma1vIKfqC8Gx_Nw5UELuP2YLjsf-7JR4wheT0_1wZ2gbPY3NpofeWOnM4uQfDqHFDDTxj_HkMZAx0gQ6h-Tf4n8qId-OopZqXI3nTw_Ff2NqjYbXLa15sHT8mBO3evrrMTBgTFYCatJmGDGAPOdBh2FxXo3-221Rq7BUQSre53z66rLLYoelin6GnGlBdKNdppBsAyh6gHw8r0Jbl7n4GhqmTVKomtG9VsuB3uifC1-bpnGa8Uvrgz9zcf3lmZzc-3MonkKnUMQRWwuVGjZSGRq1_iFOTmL2uUHf7at9FopyEpn7pEO23mB30EKYDPVHH4mOlj-RzFxF6_tkl1W-uf2L9Ea49hPvM-6Q8TkQ6kiT6dxmW',icon:'⚽',fame:'Vintage futbol formaları koleksiyon. Futbolseverler için cennet.',tags:['Futbol','Vintage','Forma'],lat:45.454726,lng:9.180695},
+{id:154,name:'End.',cat:'alisveris',photo:'places/ChIJ07syaKLHhkcR1wWERFAiBsQ/photos/AaVGc3kkvR-IExwaAxmEt_lC-FFLZuYQuLextVDp8QtL1AjobcX36GRf1FqMF7RLvnEIzBsn0inTbPVyBLS-1DaNy75hGOeArH7HCXVwmwO7Ot7ZYWyXArnfhjhw9kii9ypGrYNiY-hY61tykkCjvJefHauOVeki3tjcOQdL3iVVZjdD5STstnxpqHM8NZuJpSrYjXL9JCDRYIPbOWI7MQD8JE45fdofmXk-BAsG0JqXZyaPRV7DVvuKMyMOboyZDhh_VSajahi8NieLhphRc4K-KE94ikbC0ddc6CknTaNetgEEOHY7YPqvhK6cnRJG5AETmNTy7PjI9N0JDbiOfYWwR_qk12NdWmVqfDJpH75A_xqfiN4jCHg7pmxJUcC2zz_xXnDEmogtCbpGuFRljPa2hLxxDFBdOIrD6X_KkVrmg8gvNA',icon:'👟',fame:'Premium sneaker ve streetwear. Sınırlı seri koleksiyonlar.',tags:['Sneaker','Streetwear','Premium'],lat:45.465065,lng:9.187318},
+{id:155,name:'Arket',cat:'alisveris',photo:'places/ChIJQVeriR7HhkcRXE5zpMM36dI/photos/AaVGc3mjckXITErtCS7bU3kWQLD011UGKpbA2VWPedL06_eqDiyo1G_fNjiHfmR8DMDJqWhN8ibTXlpZj1wr8Bj76dQcvXgcUCI6qP8o7IG3q62NZqx9bOoG6sSldHfRF_PKcJtSag6XH1GEdrQS8rN16zOsRCmNnA9xPUFdXYHCs1RSzqgwMsYr-D-ifgzd4WRuvPVPhh9KF_TqXzHFflSnS27ANv2zuJPONgrd4gv9Mi7IbUOlP7FMbmwBH3MKw16WuAfIrHtR0e_6BPwMRYbeLqfRLzUhl-0QmqUI2SBBkYVnUdgNmsCFIAm-rYwkjWKCb7OHUISKjoGXNjTnVYNpgOzynkXiesNXc-0tvfNs3jxxFnmVNJEhVJAMk13Ne-uXueJJML_l9jTdBSeRRpAfvHjbHbtFslNNUwPaD8YZ2PtvZyFq',icon:'🧥',fame:'H&M\'in premium markası. Kaliteli temel parçalar.',tags:['Arket','Skandinav','Kaliteli'],lat:45.46568,lng:9.187215},
+{id:156,name:'Seletti',cat:'alisveris',photo:'places/ChIJIbMKkDXBhkcRrNY5-LGhzxo/photos/AaVGc3mQsYGbdq3NbUHA9Imgj75dpgK71ZxQvpWIgfccysvy17P0WDIfTSw-lbYS93NfB6iA0VITb61gaREwwcacMHS2a3Jy6OAWyhKLX2w4uaChrBwcQF-17tCPl_wtzXOEDunbANm7w-bRqVrzGHxtJebeam56yRdVhU8GduvF9yUPThQx93IHoJnTelUUW3djoZeCwF92JusV06s-ropbnX629z-wvl3CZ6mkXGPjjKaJxmVt-GwqSYJmKC24UlkSR_tYotr4lQPZQIQUvxffzNkIvKvOaYdpivPSKpxVzN4jIW2YNlpWP5GJg8_q7PHCfa9-UX5d3P4ovLFzWn52EItpY8EVqZrPXhcN38gAIi1CJ1ovgBK-9RkqeKzGWk7r70lxY4WF1jeFdJJuYJSJLV0-PI9HQgdKaCd3AlVbEJPpzO1f',icon:'🏠',fame:'İtalyan tasarım evi. Özgün ev aksesuarları.',tags:['Tasarım','Ev','İtalyan'],lat:45.479454,lng:9.185806},
+{id:157,name:'Cavalli e Nastri',cat:'alisveris',photo:'places/ChIJhahU-LLGhkcRUPNVz-qLqDs/photos/AaVGc3muqbhT_J4ByfxWLGSq8oEbxn6Z5JR-fwIYIIY2SE91YGuKnjBzHhvld11xgbFmWYsQOaIOxPAnwotlQfXgTmUwgcDGIOv8i17NCtLITubgHs9xCiE9VyhCcXp9YKO56SBupUC3O6mWDw2wPgIXVzglmHM8f2_pz0C3bnPUwUlOufE_w5ESYYP0c0jkscy7RIc3FP-ewVuWWkcl0ON6hG4pwqvJE2p2Fk8bjTwTbylj3G2QyusKrpulR11IvQAmXAM0_78di9lLH258JLvXrlsgDQEEQ66T41gjS8OUo8AaYh94xlbiqQDJITTB96pG0bovv-EBIP4S3i1C1iie7MECpdRgEJld7m6NWwOG4Rsh3SNVlgV-_5ybXRtNE99BbWDRrSx4nxI7fUrGYa_gO6m9MrPQApYFRpbOdTASKtFiDA',icon:'🎀',fame:'Milano\'nun en iyi vintage giyim mağazası. Navigli yakını.',tags:['Vintage','Giyim','Navigli'],lat:45.469442,lng:9.188191},
+{id:158,name:'Humana People',cat:'alisveris',photo:'places/ChIJlQ_KKQ_BhkcRtR5xdOnnxe0/photos/AaVGc3lncwkZzYCJafaTIZVo3OsaaO-lo3KF-26d6zgzMrrNU1Ajr1ZidYC3x34f4NXzLkb9y6TgJW74P44SqqdyuXdzMxULer20bpd4YuFAGaaTPxs4eADeUVfTnrjJ4MyxjyGVQnQSu6IOf4pnYf96M4UtKE3pBwLR0zXtefbJXWZJ0tUchWGlu7u13MX5ghLDtQSLNDG3v7hB6aoXzVvSG0z-ALAhAq34IEIo65jFBZLPok9kUDx3PIxZknXED9tGxFHxWfjxpwi0PhJFsw-qVURGvwbfzbbcYXByILQccUMRipQ-Lgey8BicuI0Us8g1UMT8j7PCxIhNUShUjWUzPmBGUK_DOnTk_uCQmFGsEsydq3j0BqRvkxgcO4fTFVEDsh8au0snRCyOZwUFXkrJIHjPDfBwij4bgAoXhYkCOpMu0ND9UsfTyhrSb6FEqQ',icon:'♻️',fame:'Büyük vintage & ikinci el. Uygun fiyat.',tags:['Vintage','İkinci el','Uygun'],lat:45.460005,lng:9.175361},
+{id:159,name:'Art Parfums',cat:'alisveris',photo:'places/ChIJjT4HKyLHhkcRbyJLrSQ_4Yg/photos/AaVGc3ncyUXsUFZXZfetynpYvK78VGZruiPMlxARDmTH9VxCvCMFVvuk2R3BZRbxhyBmwcP0KAKdApTC-zCpu7iBZvNCIbl_Go3BBaJ4uZdP1Hvgk0hhOsupM0WGRV5fDTYD1ozXMrJWhk0aKvv-qVVC2k_BqdD3LEGPWP7Mdk5wA61KzBMFmMCxHBEqHIWZo0bd9CDPzOENZeYRwZirPuSO3X_lA9kHIvgXi2P-oMvugmCMsAzfIjSKLruNSOOB7mgoMTGHLvfS2x_mdWQenP_5zizb-qcDPqPZHPCjoFsfCQ3sdjp9e6B-iuGZIoDDpLSpYAMGMpfbetDGRTNImXyKVB-TERKe4gD9iaY7wZddc2Ho_oRN8FQe-sx6kdQ0aXlHdA2ShdN0FLOFH9FuZhRDF4yRiHBv-4-SzztjsdG5AD8_3iQwMVaNy6JRq7r0xA',icon:'🌸',fame:'Niche parfüm. Nadir ve artisan parfümler.',tags:['Parfüm','Niche','Artisan'],lat:45.469741,lng:9.194887},
+{id:160,name:'Bivio Milano',cat:'alisveris',photo:'places/ChIJ1WHTXVXBhkcRcfztbhrRrLA/photos/AaVGc3njuFu3zy3V-OQPG8OccUkN0W4pFzZUczBL4VNzCb4wPNDYmuww3G_fRroGRgxAXOLvF8M_3enlKb71G1EmHO2ZUzRhzdUOe1MovKHKX-90LQXS6eNQ3BARoU-NGVbr-VGtJy4mFQKBk7s6SgfCU7dPjVLsqfJEWYXL7GwTR-HN_OzVjVSAqd9FqcVlCMJs5jg4b-iqguzx-xWm-IUkQhk1CcGcdIijbczwSFersE4XB-gjLuCInmRK9ZdVwMZuyuYg7clJ3-s-6g1KUGF-VKBb1zslEy8ickfmbq7HhB4ZZB_9IliOP4B_TOSfDiNel3MZWfXwCf9I5Rl_TsrZH7lPHE-lyvWNEHwYtL5uU2xQ4rcO7BS31P0N4X0CSg-L2O0UU7912i0T7-oGKN-MxlvKFTk1sKBTdL-nCpu08rTlDXTd',icon:'👔',fame:'Lüks resale. Çanta, aksesuar, giyim ikinci el.',tags:['Resale','Lüks','İkinci el'],lat:45.459066,lng:9.180848},
+{id:161,name:'Kiko Milano',cat:'alisveris',photo:'places/ChIJpZDag_jHyhQRdaONhUdhRO4/photos/AaVGc3m-Fjwr9oZlROyvUEZmC1UwZLoA2YPmbj6q-SqBwk-Ny-D-IhMjihgn5EIuXc6A3UG2J1WpwVGVrjMIXuK5jvKhNpFJ7X7dG53kkkQiNzxFy4i13bkzdEbpriGgg1N11IqDGDLdCFwPSmJ6EzMrDfmgm4pAoYrWE-nt6VIUGjG0W53NQaWyChEcU--XWT9xdy6v5o7YXl7YSiwKyRgWvKcGwPsrI_UAXpfw5CDbyH1OL-fPmCxKHep4SbZcRLR8zo6zGoQI6SkZMFUIw91dVvM_bPsRYBbx74JRKqKw2PAq5snZHZrwJBfD23su8PEsl417FZIpl5CU58Lnhl937bxx0wHo3HC-FEx9yC2FwuuLW1D_-1crZr8smb6UJF55DX_g_eJ2noizvtgpsHNg1Wpc1RcaFHS5xDBD6qAMBK6VXg',icon:'💄',fame:'İtalyan kozmetik devi. Uygun fiyatlı, yüksek kalite.',tags:['Kozmetik','İtalyan','Uygun'],lat:40.999659,lng:29.031809},
+{id:162,name:'Groupies Vintage',cat:'alisveris',photo:'places/ChIJBfBrYlXBhkcRC_ju5NQraMQ/photos/AaVGc3loOIECdUG3J_mI-KWOTQcZdBy_ZC8KCO3Zv2TwCe3bUzGb7QxK0Ckz4o_A5N_3mLl0byE_8VnkOSaoR4DC5PGDuK5JLyNhsDRJcKPPCoGHhN6V8a-GihBvNuIY4fnzzv3KyjuTzIXffkB9fUMxX30EF5LHiiSGmmdNnQN-qkX8I2VmVvs_EvAHxbqfrQa8bx4x8wbE_n09Akdck_IY2qRY2efePFupTzCGdQSMYQVzyt8_xuJMczNTCkng7T-9784gZfhErxUDm1RBs8-EkZdh4jhzg-ae6YSxh6U2gTw0ZYC2pLHDoIkryak2oYHEm82qntLDZ-dC0peOE5IZZPuBn2Ls90YCIqIjX_NRsuHyCogxhJsynftLB-_pZQgXM-VUVGf2lIjbKro-SGFXviLbTRWBfOTVL79_koNwNtFt95tsuT4h8qj2DDA-L1H5',icon:'🎸',fame:'Müzik temalı vintage. Band tişörtleri ve retro.',tags:['Vintage','Müzik','Retro'],lat:45.45885,lng:9.180087},
+{id:163,name:'Rito',cat:'alisveris',photo:'places/ChIJHXLbp9_HhkcRt47q18MPXRU/photos/AaVGc3lj3PR16NzKN4nlengZunGwPzjETpV-YGlKiIuv61phZExHPRzNeVGM2SBQYHJuEtPi9fl7aZT1Uml6uWwsgyiqTQZm6Wr5bOmmvhIe2OznYcEG1L-qLyFNyjTPNf5jnUVk9nc4HjjXZoK70vGcvWAfJFHW8xT5u-OInPu3RQ-8-qqRDitIsZnDW3f3-cu9G8NUCogrYVZ0J6oMJ8yZiIUqrKWUCWIVI5yphnXXF83ybyOKkUGxAkYxBo6-SnSUrj7vi0lIRWDAgksc_neTi-DrtgqSR71-FS3rdVQvp52VTGVfoW5vzkoZlDW0aspixkP5AVxHJitva0K7KF6o4TsHNG9shHYDyARtr0HvSVCiGEyd_0Irnhxq9SHf6FJQXJDxWM17525BoPGQAscSNc06qmHYUSkVKj3cQQb0uf5vZzgDRbPmxJDY3ptHi9mh',icon:'🧶',fame:'Dekorasyon ve ev aksesuarları.',tags:['Dekorasyon','Ev','İtalyan'],lat:45.475459,lng:9.214071},
+{id:164,name:'Golden Goose',cat:'alisveris',photo:'places/ChIJq_afSk3BhkcRGKGt_BYJgqg/photos/AaVGc3nerLGxUxfwJ_ifSdGkiDZsZ3xX-At6FxVAt61HL1Zcq_PONnvDiTfWbuwIBmvJeEb2dEirq1OEL6xQ4pm6My668wiQFDFHrPihJ-S9ixZCoWZu6dWdGkXXLmzu5iauATP6OyoRQ2ka5YyKAOqvu2cs9jF9FDUqYExsMEcBXWMFyROlRZh69Nqy4k_bfk4lSsa7jHjGPJLiN4s6vczC00YJmYd4tJsi1aQLSJvk0Vq_eJLQ4g2t2OPC8gungZlhYCJR_AfmpmT-bSmMPB81w73-7KvByJA4He0wH-GXSz06I1N9TtDL2rkRjQRTdIpi8IXB9lhjNZVllM_p9h7113AmAbsGiweiff_kPru7oU4ZsISM7wKQi6NseTcqYIURJDU9prAFlSKgdZ2E3Dg1KSyhGcCGFSHqAViVkkRYpBGVfw',icon:'👟',fame:'Golden Goose sneaker flagship mağazası.',tags:['Sneaker','Golden Goose','Lüks'],lat:45.46902,lng:9.185},
+{id:165,name:'Lego Store',cat:'alisveris',photo:'places/ChIJ2cMzNKXGhkcRaFauh6-WDTQ/photos/AaVGc3mAGRc2gwpfTdNTBMdRkonNA5d5mVIey9-0Tn7PjZHa_iyNOCferKXe3cg8NbSlihUToY1l9xkUoPNuAf7SNnRDqRUw-gCTY-z23awN8GutGe80g3ljWu1l5ucV7K520gPZEH2yVl5bdEPnn3cffHaY2lnwJlGtz2vFzedMAD6HNoHJSMOXFm6mfWJiTOJFzPdMx3OoroLMi3Wq6f8DiyJtFOQCXTBUtmKxUUqoVDlu5Bb_vKXRabY4__bRirnOCAZ5_30IUjNLoXCeTOKDlAVIJzjSiP8v3sKi4Yp_Nz8McxieYd8kwjdrPsq15yIPs2M45CamRqXxVyIg8Smp0FUcvyvhgP9Jp4DyvwqmeIwj5W-RbC-kDwZCdEbYvsfINEz9JV0hbfGh9cONO5Jh46PmfAD6foJumYbrILpIkqy3S9U',icon:'🧱',fame:'Galleria\'da Lego Store. Sınırlı seri Milano seti.',tags:['Lego','Galleria','Özel seri'],lat:45.466663,lng:9.19801},
+// GELATO
+{id:200,name:'Gelato Umberto',cat:'gelato',photo:'places/ChIJ0wHKqJjGhkcRWQQrvNazSoI/photos/AaVGc3kYH11QGjlJ9oX8nJLCQR6N_hfJ0uGcMeNrDGKb5cXViEKMbDhVJHikPkxDsY9Eg4bK7lLKk_4WxvX587lYgLzRSZszFAEbhMTNAhSgle6nwqE4q2eRhPyFXRNzhvnvmmggi5YXMNPBR3yao3hSWUAnZu34l7MW_aocgXRdOQlr_RvC8Ak0irLi5UCYCEAmgYGZQ-gL8tVEHwdBDyYKbHBJ8Cv1BXRZjsBQddoib-g3DvOtAliHXDYpiSY-lLU7xSOR1g7dfkes3-WzM6NbK2Pi0bDLvL38J4VACtGNH8sy_QRrSELpow9yzlH7O-KeBWFCo8LXnmBM-3j65MtdRC8LTMs_vA7gw6PVZq0-X5e4tBcdYqpuuRsnT0SC0ixCcTlXOgOY1IxTxQYho87AZq0_PuWTeWE9qeLadDLWeK50TQ',icon:'🍦',fame:'Brera\'nın gizlisi. El yapımı, yoğun tatlar.',tags:['El yapımı','Brera','Gizli gem'],lat:45.461893,lng:9.206555},
+{id:201,name:'Gelateria La Romana dal 1947',cat:'gelato',photo:'places/ChIJM_YetkfFhkcRdssQWBfvHEs/photos/AaVGc3ng-NxOFzqEHy0J45BjefLAa6KtUYCaUinpS4ikd2Yw1TGm4XDU50r-mWHV4CsPV7LeeD5OxEq6WEuqDF569jzb2MH2aMhD1Bzj9T1AOsBCT5qTG0gx5xOPaYkVAOBYAtGZnXq5ZIcX_3n-TiLsta2bXHY15D_maRpuikNEHvcIToYEaupx0aFHC3JNimRiFfffm-3qx20M_vMUlivY-qB7DP9sQ_V-1-ZymqAgafFbXNR9_w9VvlR70lyw2z3D0yUGRka8kbxi0eq1cdeJjFLFdIioJ9Dp865WegFXJbvA2o-OS1gCtp7OEDFD939FPUXuP301tRBox_tZFj7BOo5g3YaOBbrSqi_modxvHJFjjbRyxHOXryxis8F-j46_rspfwepYUfcxyq9ClMSkI6MDxFiztE9HW0xbWwWC-B9gRd8N',icon:'🍦',fame:'1947\'den beri. Cremino ve mantecato ile ünlü.',tags:['1947','Cremino','Klasik'],lat:45.452112,lng:9.181371},
+{id:202,name:'Amorino Gelato al Naturale',cat:'gelato',photo:'places/ChIJ-1gtrkzBhkcRPfeo04EJwJ4/photos/AaVGc3lfyTLNgBjoJ6L7xGtLIKFbn_fjJOqrV-zUuHeTwKLzj1me-ZgpS4yzbUs4dvdwIzKde7lR76Key1oMXm2uVJqnIvx94MfQVGo1roPm7Rp_6f1PM4RMOdkdYs-nRpJ9XpiAC4QtQPIT3HcG3K3JgS5v6wiuLYfsUgJLdAOe5bvMErYAWOMovLR0_ZKQ8tuqVD8sJOHX1ummXGiIb2bIrK9X88Xerbvz-siw6-fJYQKy_SkHPgFeVbYpczKBtryBaPrGMp8VBhGvMIwlUNBNVJbUW4ys9LXlAIY8obEKXQlta8IRVXkNmDXQswsRprWLz6BZ-3aGmJc7uG-zNxP0EzEfXaxcx_mG1VBLc18iBeiA_ob_SX7JI5BkOsHpgm6TnJdhKi3q3zL-Mh1Uts-Ynys8xS0rAD4DkhmSHz6ZthwRw41SWlrvxVLzV_sJXD01',icon:'🌸',fame:'Çiçek şeklinde dondurma. Doğal malzeme.',tags:['Çiçek','Doğal','Görsel'],lat:45.47198,lng:9.185767},
+{id:203,name:'Artico',cat:'gelato',photo:'places/ChIJpUrfLCzBhkcRY4Sp11cKCYM/photos/AaVGc3nBFxW8ZHHx_wZAU4flF4rmaIhhYuVqkyWSQFOnbIMKHge6_4cVuKXos_2h9HWMsD93EEJvsjoTSMUFBpwbowo7etpwRtbt0lxfET57mVt_IDt1gPZl_33V-lAAET0b-horqREdGieepfgQN6ODGKrxmSt2WlR3G915IEG9g4iEbyG6c4k1HpeEDQ9vViVhcmCe4CUqwZumE7GE-OemOfB-f6W40Z_cbKnPuvrYuDPB3Q64hCKL0p5YvdSFh9Jls6YDxb8b6MliA_snqtS2CgoCId55fpi1AmIG1GB7kkjE-svmildLzBCNrVtc4KfCSj69aUITrUpvSP81nWwnUV-lvx5-nP0laSIORS03bEl7fNkK6Xv6-X-fHDnlmHEr7FrxbzJLrQ0-hxCo22WfstR6a5lxKpmtcNZuGxjfdM9SzaCq',icon:'❄️',fame:'Minimalist sunum, saf tatlar. Tek malzeme konsepti.',tags:['Minimalist','Saf','Premium'],lat:45.489252,lng:9.186716},
+{id:204,name:'Spun Tiramisu',cat:'gelato',photo:'places/ChIJ4xDwDLfHhkcRLpTl9jB6l3Q/photos/AaVGc3lfnVt43dBQ7lXiH3fJ60VuSPCSrmS_wGLQ3DXhgpPtknrDoBgZ12S5zmoXx_j_pK8q0SaykPZNSt1EBX8oskV3lzY69iJVToGlXMO03x6o61yhfBhq8JMh26FusAY-aNVXR7k64OhSHFu3ZObR0jeV85QDPjtbzCEh_Qv7apEPx4SvCwq7U3ZOsiGC_-drd-tzaIwKGgY2qrKAbCwdrDG5x94AmY5qIaj8XF8978SY5TfQBmS-xbyKGWDq4-H0aNuKK98tJZWzmpykTO358Tzzy2Y2ncCrT3YiRO7DxlRj-42zO7V05sQzcAilObOlJso7YAiHHALs41vcGba3aTp8IK-9d6qZSgHmBLy_jECxUkxdzOCm4yJtKEHwaJajfply_QC7dIEX1GVl147GprpJH-RUDmqMsZO7hR_XVPrEDoIX',icon:'☕',fame:'Sadece tiramisu. En iyi tiramisu yorumu diyenler var.',tags:['Tiramisu','Uzman','Özel'],lat:45.463723,lng:9.187233},
+{id:205,name:'Iginio Massari',cat:'gelato',photo:'places/ChIJ5fKHra7GhkcRNOBnUr0fftA/photos/AaVGc3mdvzx3-L4b5cgoZf4HtTlZpoi36Rtr9kQronhmXnNEesYH6VvU_DAeFDJp1SSEhfwsnNlD-5d0hzdboTnYm8HlcfJOx_y4AcD-1kg5kEW9tpc1VQvBsdybDk7e51M7Pd-136VEKWq1EI6UFwCOyQlun-b6Xi-rYzLxa3F4eRRDF2I7G8LAlIMuMIQh5zofnlCUfDk5j6pltuaHs_sd5HTm4wcfa_uzyXMZX29NnBMOZR70k5C_mSTUAqLUkp4wPPSDwQmwvhOwL9pbWgWFe5lZCrM4KsCXIf_vly6elBhgGKicI_f2Iw53I3HYY7V0OZJ_yhUPyGc1KQM_WB_1BFhGeu45vG900FTPKA9GISUVXhQz9Sz-G_zzM9F8xbXe-fduWntZeeNmvZWQJtgr5t9TYXafrSrDQ2nPMK9qeDu4tT-4',icon:'👨‍🍳',fame:'İtalya\'nın en ünlü pastacısı. Tatlı sanatı.',tags:['Şef','Pastane','Premium'],lat:45.462884,lng:9.189817},
+{id:206,name:'Pasticceria Gattullo',cat:'gelato',photo:'places/ChIJJQkSIQTEhkcRLX9Z21Gf9Qo/photos/AaVGc3llNc24DV_q9Wr9dGjmBcGbp5tXwd4_IeUJnen_8LcE_DC23LS5Hib0RCCEdzWzH8YbqH820MKgHGrXRyJmBNGLj6IPN1-ySjQ8sTE9KjCd0vKtEEyyV5Y2S-eozimqggpecMT09DRneqWydE9lD9JcHk2D5jOFMxvNpaLIehjbgkbmPrNnbPvVNsKuJQEAOno2ICpquQ3zOB8SVg9FvxVhipuIGg-HeTFJrLY63Afr3_9zZzI0MvIuyHybLX7iseSRx7uulx2RMt3WCp5A0WuwYz6j8auKsHpNugTJ8VI3DKhdOuhykmIC5N-ouSF_5SjQIoyLoX0SbnA_GLYI_EnV4O5bhytNRcYykbpRwgsXvlIgTiA3t_07-y02l_hbFulF8a7eMO_vUmEuWSwH8-YBEBWQkujTwiYzsP_J72iKqg',icon:'🎂',fame:'Navigli\'nin köklü pastanesi.',tags:['Navigli','Pastane','Tarihi'],lat:45.452008,lng:9.185846},
+{id:207,name:'Bastianello',cat:'gelato',photo:'places/ChIJs_S63KTGhkcR3wq1a1e15ZU/photos/AaVGc3nur4b6C3P0jQ-s7bRwcGF9axUzupXK_eDHA6NsU-DREhGaM6RrfmwyqI1KVLM7qyd-8lWY_v9L0RGC38TBpFjLg-BtFkXsF7aTlZ7PZroWHbhnbBwmEOFXwrl51NBNn8RR3oZR4wh02SmQvDtGM77ThbU-S0EIFC9nH0EriYeQxPdzG9Iqz7jgAOz4K_7nCa2qfTVxAaETpEqB_RpeMSp3jY7cY_5BZnXZJjAitJzIBF4ZcZ25Nn6QwKN9Fn7_QiWq_M8VNNZkOxb_rfvpGeiG3MSIXcI65urmUuWJEFSQfdoqmDTt0cS0xfk_WLuKQcscJiu8f7pD_VH4sFKjcYElkbD6CD6pr-hr47Qso1y6lAK8C746a0RaCmo_61nKozrsrz4-Grl6qgHTIZbC53O4Gds29ze75ITvffKaWP6hEZArViP2CGpdYZtrSzrc',icon:'🍦',fame:'Veneziana stili artisan dondurma.',tags:['Veneziana','Artisan','Kalite'],lat:45.465921,lng:9.199124},
+// COMO
+{id:300,name:'Villa Carlotta',cat:'como',photo:'places/ChIJV103u8sihEcRT9ewj_k5QUI/photos/AaVGc3lrCt79gPm7KSZvWAHbAVNB5xfYGec465Hx5pfUJrsugA5reR-KQqaq_jibsiuxhY64ATwQEc2PzmdDK0VVOrkjbVT43D5lvHunpFYqk67cw1cZFnG_B0ZNBPki4ayUOY1fgE_R61ONseGaufx5-D3R3E-AD5w_Zmzd3fwWL074MNnDK8TItYWgeexKL5QSLmaLSrmFR0ACFV7ZTy0DYdd_14Ild8yG8OmDX-kDdGHCHT-PsMiEtL-UpHPiiBj5G81hsTZRlvdwP0lEG6gFbrImpSrSRBfgXnWHC1eQi-l92WHiSO9h0F-on5iYL-9HEjsTb3zL5_AL3SmO9N18l9YiLAvF-HxhuhsPVqkaPG9juPU4nNx0VYTwWJq3maf_3tLF22ezJPAkOLErEfejAF3s0BVv0XjLPUmpA2qYptmdhg',icon:'🌺',fame:'Tremezzo\'da botanik bahçeli villa müzesi.',tags:['Botanik','Tremezzo','Müze'],lat:45.985852,lng:9.23064},
+{id:301,name:'Villa Monastero',cat:'como',photo:'places/ChIJGe2VLikdhEcR87_XMhQv31E/photos/AaVGc3m-lXlfP92N1bcP1i4SzTx742kfR2Lh3WHOLRDWVodlApgReozEb5_h1rUAOWWdxMdD_wZMYS_UGsxJrjCML5F-70ha9E4myU_ia9MzMKVIeAUwZ3f1kA_rRyTrBtu7quTxBAh4sFleGu_h_IEUuSBIdR0C08NwaMMp-A4X0R1LYibp-MaDM33rsnbmgRRQcKTHBswufpuIBmyLdZnfdAbxZxd8XbYkqQ1GSrYCHCEs6XjXD-5c12HtX7TgSHOZebPu-KBbD501e2C4phBZ8dmX2--BsFGH7LgZwcHiFGBmY9O3t1AwgM8BS-O11EbUIdj12uz-E8grkIw1EwNotw9zdynu7H5hFwMqi6c6E1UtpTCZapXy_GNYzfUjorbmQzVJEN4DGxFQsFQRGo4CwkxrIYoCbttvzOjBWWs21ps',icon:'⛪',fame:'Varenna\'da eski manastır. Göl kenarında muhteşem bahçe.',tags:['Manastır','Varenna','Bahçe'],lat:46.009266,lng:9.285561},
+{id:302,name:'Villa Cipressi',cat:'como',photo:'places/ChIJZ6_F_UHWgEcRbaJmcVa8T48/photos/AaVGc3kn09rl6wHkEe6fk9l2KHFbF3fAbEzJP1CV-nU46Jo__ByNsRcSN__ReN2xjcdmfi663bQn29pBzybWgZqXW2cDmWlLd9xLJt4IuNa265Vaa4NRlj5pXbJv7D3GkFlOPNy8A4eO6feoj9pQ9bUTWIvacBxBO02_6Y-SrnDQkB3iwahMI4-6aj1UpgrrW2QxmRCyJR9TiDdLn81JEJGcBFSOUU_13bk8lrhZRFJ5qe5kgJu12QPV9i8E1Zi12L1g8ILvHhfINVRcB_mPSJp0cP0IYmD60HshRiUMb3LoC4aiXGMOE0HNUkBBCv8cjgegFK489BXN7jpA7qC7e-no_icr2qmwWmgsGgJUejxYhMYvR1JJeaYVJ6KCxNYiipCTx7q_PFYS_HWGbLBMCo5DXuMs7bAC68BdDSgwXiys2zllW7ttGFcm3AMdAnJrDUq1',icon:'🏡',fame:'Varenna\'da romantik villa. Merdivenli terras bahçesi.',tags:['Romantik','Varenna','Terras'],lat:46.00938,lng:9.284826},
+{id:303,name:'Villa del Balbianello',cat:'como',photo:'places/ChIJf7_q2BgjhEcRlZDZBj_xdEw/photos/AaVGc3k8i7ZW8Kwf2QmGbtrTikzpaUPYz3yfxzs-x34pnExEbYSEVCanQaZBZzdRHg8KLS2tio2cROidsm4VyJKl85nW2QoeCs0Z-yBXsNPdayFC7I7crwRzxlGZZzq5DDOat1OnRRVqYXaReMIaegOHhSTGWsO4yCNypAb4B9rKJlHe82Jm-dY7nd4Z6yT7z6rA4p-CrrNBV8s1w6WTFZw1qI_P-CdIhD6x6g9fA_gVTVhAqTqT5A-ZE4DyqWanLze2OOoybrP_nrwm27hv38B8aSjukIha9nKSXixiy0rIBvXqKBhOvE7cOOKWjN_FTcY096DMXB4Uvg4-16yuydn2Y0j1GHGcP7J8AUVZ3JNwWzs3HzXUgWU9o2Bg2nEokJmUtyr90fhZRA9HcJkgGHb7fYfXinOA-D1IAnY1QjkEte6sGp0',icon:'🎬',fame:'James Bond ve Star Wars çekim mekanı! Tekneyle gidilir.',tags:['James Bond','Star Wars','Tekne'],lat:45.965253,lng:9.202492},
+{id:304,name:'Dispensa 63',cat:'como',photo:'places/ChIJeVnh0xoXhEcRtooINXHrq7I/photos/AaVGc3l7Je7z7HciQPy1hhhnRQ73DBYijRs2pN1MsNRxeKMDcb6L2CfOknEodT4vKVa9e1bAkzpXMxa-I7mnF17MjMPffmIPDWr5mefV7MhwMldSa8Tk7dX6Cso87XR0b9r5FM-3R5W5qKnCIBlDo2lofj0aja555MYpLjMNaXg4ycQ9QZD0YlqS-sVnSs3YUvpZjk8LTARYrg408mkBZemA0gIOiLNdxevyCDpEb9PY0wDyjgbsuCHEYdXm79rPSn4LpV6uGKeuZdkQS8RFzfQd4IHNR6EosY4mCERoFu6SDhTkWL8Pu1qO6W66jwOe8GIY55Gb4LOcISVK8kblwqn7AsVd-aJqRevZg6aI54bmuhwSMlE3N1OrcBYkutqiCCEVifsh4pBEYIDEiCK4QI5UDoE-gB7NdP-5OBqlnLNOkWuruQ',icon:'🍷',fame:'Varenna\'da göl manzaralı restoran. Yerel balık ve şarap.',tags:['Varenna','Balık','Göl manzarası'],lat:45.987214,lng:9.261288},
+{id:305,name:'Ristorante Suisse',cat:'como',photo:'places/ChIJYYnF8P8XhEcRK5YWpWitKjQ/photos/AaVGc3lur3lwrrU2rguEf_jkmHZGpb46e4aUAo0gOTjMI1IicaYE7SrR052TiMzg4ZOdpdEYj_4aFzcf_NCqYjBM1kv6QsBpp4eFc6NHfkpdTEf4mC2JN_MFqIgPlcXe3PB5xTBxGja9RGWuAjEd3uWdtFPRUTZ9BPLPD_OhhkRKu7YZd_p0NNlITfMkAJMF4XUCSiAJ5z0gX056rzGxvB9CmSWISyLTQ52uDB6Vjj8ttYkGnwd68fiFWIDE7dY2nLpopBEoSObSsMMPSZOMB5pB_PA55Mur1c_8wtU7vHWN895MWD7ug3D-dcwIlTgMFUvA0smF7Z-nL_bpg4yOYUQz2UggaMCNYdjUIbZcyg54B7E2btY-Nws0L9uv5gS0LhmOf_lwr7LtpWy1M0QtKT60YvnXnShenMhV-u4WrSlcfE9uj4ss',icon:'🏔️',fame:'Bellagio\'nun ikonu. 1894\'ten beri göl kenarında.',tags:['Bellagio','1894','İkonik'],lat:45.986986,lng:9.26072},
+{id:306,name:'Bellagio',cat:'como',photo:'places/ChIJfRnpaQcYhEcRLzf2ywTBe0U/photos/AaVGc3nHdE5ejLqkPBcZK0T5PeXJmw2QaCPPZWdcHIExhBr85vN6gOqAnvcLOfsfP3HlVFCrdeTJKvflwevCC2xvv059mX9UNvyEu5LZ2ETjXH_5w-Xhc0wnPDTDn8Cq9tHcFkwBZaXYYK5QNSFEtC8dm8Vy4IlKXClbPBKO7b3k0TimVDYSEK0BWNSDQaYOYw54ao0m6BfcIAcNr6y6kLXffj-mia464bpl-xnIy1Zut6K5zL8oqZbB6_gAVfPkWHUGqpQ4PW4Q4JQM1uYrmab-kLwYw_AX9b1cwx2jpnEJjXarWlIzTCUEh5ckMYXIfh9VSqHf8D-FYPz7BhcqxCKMSw1gSVi-DcSrFvvmzyEBKbcmn8PAfS3DEj3gYat8rMQCXrJgzqXpZ-_mkanACPDhX-Y94FQadLVok_TGVI8Un_h5PX69',icon:'🌟',fame:'Como Gölü\'nün mucevheri. Dar sokaklar, çiçekli teraslar.',tags:['İkonik','Mucevher','Yürüyüş'],lat:45.977267,lng:9.262537},
+{id:307,name:'Varenna',cat:'como',photo:'places/ChIJC1rRJcQXhEcRWYKLTTIbMLM/photos/AaVGc3nFWobhZdXeJd-uVEKC-mVyemZoQuV74TDCS-4e-TTLIv2ORH9zJx4SQmNjuqoO0k024ZV11I14hdRtmePx4PBV_y-lvwxfkMWQicU7Y1TV4q-MRmewhywdsi8JQ3mVhsINhCXfXhskQ0NhgDBBqMYn3YbUtgOTs5C-HmrVbJ4ezKkgd1l7J5SrrD8BpEwukmtx_UX2XV4ujJ12kaIZ4I5GIa2VOH0H9cyQ9_dT4eZLrbA5yQ7f6zp3XEskWt2HmaGj5wb0_9tRIIm5RxpSLvje-21bPBJAV8VglsJ87fPpdW4jlTY2iBf1s5MCe0eWYKTQ2-xRyhkYOQHNxUrL4EQCCFcBWNXqLCnU9LImUaDB_4dKM9b5kayw2lVQpeZnCAdRsHTB_6jneVOhRYjJ9gcVb-NH7X_rgbqE3MYck7XLEA',icon:'🚂',fame:'Trenle gidilebilir. Pastel renkli evler, romantik atmosfer.',tags:['Tren','Pastel','Romantik'],lat:46.009999,lng:9.283817},
+{id:308,name:'Orrido di Bellano',cat:'como',photo:'places/ChIJ7xJMcOwVhEcR9L9pZg2LBzo/photos/AaVGc3n1blA35eByhQH2oTsQNNW8UCzLC7-fgB0bc_fkxXAagdbm6NDVcypeeqO13Qu5zE6GtPB8K3BJahGRT0Fkrtj7qFcvcM2JFKRn0qq7WaRf4Aw0h60ztF66kCoSlZdpsqArbXhRWOaQJ9UqI60F4-UFE2JDtErFKRKLd1-H51Dn2Y2v07BwJGTFtmGYopNvhDbbDfORwqn9YcRwDlMncCzxKLZtOYjqCgfmjVsPMHQpsBb4X5Ae34LMVcN7I4pUlJUvK8QKA_RLyiwJkyAk_0G9cwrYZQjN02AuhjPH9m5g7nBGh7E58GS86N9tV0rvQOdz0y4haDIjy99rMAyT_ucQWGfMk4G1iHgAliJj6urpiTrau0LThd-zR0uGXWC6HDOQFGxgoiCGqmiurXacVtJ68kz4U8hNhz6W5UPK0RLsNZ8',icon:'🏔️',fame:'Bellano\'daki doğal kanyon. Asma köprü üzerinde macera.',tags:['Kanyon','Macera','Doğa'],lat:46.042686,lng:9.304908},
+];
+
+const DAYS=[
+{id:'day1',badge:'milano',label:'Gün 1',date:'7 Temmuz 2026, Salı',note:'15:00 check-in → Porta Venezia → Brera → Aperitivo',
+slots:[
+{time:'15:00',place:'Airbnb — Via Lodovico Mancini 1',cat:'🏠',note:'Check-in, eşyaları bırak, biraz dinlen'},
+{time:'16:30',place:'Villa Invernizzi',cat:'🦩',note:'Flamingolar — dışarıdan fotoğraf'},
+{time:'17:00',place:'Bosco Verticale',cat:'🌳',note:'Porta Nuova, fotoğraf durağı'},
+{time:'17:45',place:'10 Corso Como',cat:'🎪',note:'Concept store + bahçeli kafe'},
+{time:'19:00',place:'Camparino in Galleria',cat:'🍊',note:'Aperitivo — zorunlu durak!'},
+{time:'19:45',place:'Galleria Vittorio Emanuele II',cat:'🏛️',note:'Fotoğraf ve gece keşfi'},
+{time:'20:15',place:'Duomo di Milano (gece)',cat:'⛪',note:'Işıklı Duomo, Piazza'},
+{time:'21:00',place:'Trattoria Torre di Pisa / Brera 29',cat:'🍝',note:'Brera\'da akşam yemeği'},
+{time:'22:30',place:'Bar Basso',cat:'🍸',note:'Negroni Sbagliato — ikoniku dene!'},
+]},
+{id:'day2',badge:'milano',label:'Gün 2',date:'8 Temmuz 2026, Çarşamba',note:'Kültür + Sanat + Navigli akşamı',
+slots:[
+{time:'09:00',place:'Princi veya Marchesi 1824',cat:'🥐',note:'Kahvaltı'},
+{time:'10:00',place:'Santa Maria delle Grazie',cat:'🖼️',note:'Son Akşam Yemeği — önceden rezervasyon!'},
+{time:'11:00',place:'Castello Sforzesco + Pietà Rondanini',cat:'🏰',note:'1.5-2 saat'},
+{time:'13:00',place:'Panzerotti Luini',cat:'🥟',note:'Öğle — Milano simgesi'},
+{time:'14:00',place:'Pinacoteca di Brera',cat:'🎨',note:'Sanat müzesi — 1.5-2 saat'},
+{time:'16:30',place:'Combo veya Orsenero Coffee',cat:'☕',note:'Kafe molası'},
+{time:'17:30',place:'Via Montenapoleone + Cova + Marchesi',cat:'🛍️',note:'Saldiler! Alışveriş'},
+{time:'19:30',place:'Obicà Rinascente Terrace',cat:'🏛️',note:'Aperitivo + Duomo manzarası'},
+{time:'21:00',place:'Navigli akşam yemeği',cat:'🍷',note:'Felix Navigli, MAG Bar, Cucchi'},
+]},
+{id:'day3',badge:'como',label:'Gün 3 — Como',date:'9 Temmuz 2026, Perşembe',note:'Günübirlik Como — gün batımı sonrası Milano gece',
+slots:[
+{time:'07:30',place:'Milano Cadorna → Como Trenord',cat:'🚂',note:'~40 dakika, ~€5'},
+{time:'08:30',place:'Como Şehir Merkezi',cat:'🌊',note:'Kahvaltı + Como Katedrali'},
+{time:'09:30',place:'Como → Bellagio (Ferry)',cat:'⛵',note:'Day pass al, ~1 saat yolculuk'},
+{time:'10:30',place:'Bellagio Keşfi',cat:'🌟',note:'Dar sokaklar, çiçekler, alışveriş'},
+{time:'12:00',place:'Ristorante Suisse, Bellagio',cat:'🍽️',note:'Öğle — lavarello (göl balığı) dene'},
+{time:'13:30',place:'Bellagio → Varenna (Ferry)',cat:'⛵',note:'~15 dakika'},
+{time:'14:00',place:'Villa Monastero + Villa Cipressi',cat:'⛪',note:'Bahçe gezmesi, fotoğraf'},
+{time:'15:45',place:'Dispensa 63, Varenna',cat:'🍷',note:'Göl kenarında aperitivo'},
+{time:'17:30',place:'Varenna → Milano Centrale',cat:'🚂',note:'~50 dakika'},
+{time:'19:30',place:'Milano Gece',cat:'🌃',note:'Bar Basso veya Camparino veya Navigli'},
+]},
+{id:'day4',badge:'mixed',label:'Gün 4 — Veda',date:'10 Temmuz 2026, Cuma · 10:00 bitiş',note:'Sabah hızlı tur — veda kahvaltısı',
+slots:[
+{time:'08:00',place:'Cucchi veya Pasticceria Gattullo',cat:'🥐',note:'Son Milano kahvaltısı'},
+{time:'09:00',place:'Fondazione Prada / Bar Luce',cat:'👜',note:'Wes Anderson\'ın Bar Luce\'si!'},
+{time:'09:45',place:'Airbnb — Via Lodovico Mancini 1',cat:'🏠',note:'Check-out, eşyaları al'},
+{time:'10:00',place:'Ayrılış ✈️',cat:'✈️',note:'Güle güle Milano 💙'},
+]},
+];
+
+const COMO_TL=[
+{time:'07:30',icon:'🚂',place:'Milano Cadorna',note:'Trenord Como Nord Laghi — ~40dk, ~€5'},
+{time:'08:15',icon:'🌊',place:'Como Centro',note:'Kahvaltı, Como Katedrali, villa kenarı'},
+{time:'09:30',icon:'⛵',place:'Ferry: Como → Bellagio',note:'Day pass ~€25-30 · 1 saat yolculuk'},
+{time:'10:30',icon:'🌟',place:'Bellagio',note:'Dar sokaklar, çiçekli balkonlar'},
+{time:'12:00',icon:'🍽️',place:'Ristorante Suisse, Bellagio',note:'Öğle — lavarello balığı dene!'},
+{time:'13:30',icon:'⛵',place:'Ferry: Bellagio → Varenna',note:'~15 dakika'},
+{time:'14:00',icon:'⛪',place:'Villa Monastero + Villa Cipressi',note:'Bahçe gezmesi ve göl fotoğrafları'},
+{time:'15:45',icon:'🍷',place:'Dispensa 63, Varenna',note:'Göl kenarında aperitivo'},
+{time:'17:00',icon:'🏔️',place:'Orrido di Bellano (opsiyonel)',note:'Kanyon macerası — 30dk, 1 durak'},
+{time:'17:30',icon:'🚂',place:'Varenna → Milano Centrale',note:'Tren ~50 dakika'},
+{time:'19:30',icon:'🌃',place:'Milano Gece',note:'Bar Basso, Camparino, Navigli...'},
+];
+
+// Deduplicate
+const seen=new Set();
+let UPL=PLACES.filter(p=>{const k=p.name.toLowerCase().trim();if(seen.has(k))return false;seen.add(k);return true;});
+
+let customPlaces=[];
+try{const cs=localStorage.getItem('mlnCustomPlaces');if(cs)customPlaces=JSON.parse(cs);}catch(e){}
+customPlaces.forEach(p=>UPL.push(p));
+
+let hiddenIds=new Set();
+try{const hs=localStorage.getItem('mlnHidden');if(hs)hiddenIds=new Set(JSON.parse(hs));}catch(e){}
+UPL=UPL.filter(p=>!hiddenIds.has(p.id));
+function saveHidden(){try{localStorage.setItem('mlnHidden',JSON.stringify([...hiddenIds]));}catch(e){}}
+
+const GMAPS_KEY='__GMAPS_KEY__';
+function photoUrl(p,w){return p.photo?`https://places.googleapis.com/v1/${p.photo}/media?maxWidthPx=${w||480}&key=${GMAPS_KEY}`:null;}
+
+let exFilter='all',mapFilter='all',gmap=null,mapMarkers=[],selPlace=null;
+let mapMode='list',routeStops=[],travelMode='WALKING',dirService=null;
+let areaShape='polygon',currentShape=null;
+let areaListeners=[],tempPoints=[],tempPolyline=null,tempMarkers=[],tempCircle=null,circleCenter=null,circleDragging=false;
+let pData=DAYS.map(d=>({...d,slots:d.slots.map(s=>({...s}))}));
+try{const s=localStorage.getItem('mlnPlanner');if(s)pData=JSON.parse(s);}catch(e){}
+
+const DEFAULT_CHECKS={
+  booking:['Airbnb check-in bilgisini kaydet','Santa Maria delle Grazie bileti','Duomo rooftop bileti','Como ferry saatlerini kontrol et','Restoran rezervasyonları','Pasaport / kimlik kontrolü'],
+  packing:['Pasaport / kimlik','Şarj adaptörü','Powerbank','Rahat yürüyüş ayakkabısı','Güneş gözlüğü','İnce yağmurluk','Rezervasyon PDFleri']
+};
+const DEFAULT_BUDGET=[
+  {name:'Como tren + ferry',amount:70},
+  {name:'Müze / biletler',amount:90},
+  {name:'Aperitivo + kahve',amount:120},
+  {name:'Yemek',amount:320}
+];
+let tripState={checks:{booking:{},packing:{}},customChecks:{packing:[]},budget:DEFAULT_BUDGET.map(x=>({...x}))};
+try{
+  const saved=localStorage.getItem('mlnTripState');
+  if(saved)tripState={...tripState,...JSON.parse(saved)};
+}catch(e){}
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tabs button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  if(id==='map'&&!gmap)initMap();
+  if(id==='explore')renderEx();
+  if(id==='planner')renderPlanner();
+  if(id==='como')renderComoTl();
+  if(id==='dashboard')renderDashboard();
+}
+
+function filterEx(cat,btn){
+  exFilter=cat;
+  document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderEx();
+}
+
+function renderEx(){
+  const grid=document.getElementById('ex-grid');
+  const countEl=document.getElementById('ex-count');
+  const q=(document.getElementById('place-search')?.value||'').trim().toLowerCase();
+  const base=exFilter==='all'?UPL:UPL.filter(p=>p.cat===exFilter);
+  const f=!q?base:base.filter(p=>[p.name,p.fame,CAT_LABELS[p.cat],...(p.tags||[])].join(' ').toLowerCase().includes(q));
+  countEl.textContent=f.length+' mekan';
+  if(!f.length){grid.innerHTML='<div style="text-align:center;padding:60px;opacity:.3;font-family:Cormorant Garamond,serif;font-size:1.3rem">Mekan bulunamadı</div>';return;}
+  grid.innerHTML=f.map(p=>{const ph=photoUrl(p);return `
+<div class="e-card" onclick="openModal(${p.id})" style="position:relative">
+<button class="pl-del" onclick="event.stopPropagation();removePlace(${p.id})" style="position:absolute;top:8px;right:8px;background:rgba(26,22,18,.55);color:#fff;border-radius:50%;width:22px;height:22px;opacity:1;z-index:2">✕</button>
+<div class="e-img" ${ph?`style="background-image:url('${ph}');background-size:cover;background-position:center"`:''}>${ph?'':p.icon}</div>
+<div class="e-body">
+<div class="e-cat">${CAT_LABELS[p.cat]||p.cat}</div>
+<div class="e-name">${p.name}</div>
+<div class="e-fame">${p.fame}</div>
+<div class="e-badge" style="color:${CAT_COLORS[p.cat]}"><span style="width:6px;height:6px;border-radius:50%;background:${CAT_COLORS[p.cat]};display:inline-block"></span>${CAT_LABELS[p.cat]||p.cat}</div>
+</div></div>`;}).join('');
+}
+
+function filterMap(cat,btn){
+  mapFilter=cat;
+  document.querySelectorAll('.cb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  updateMarkers();renderList();
+}
+
+let activeBubble=null;
+let MapBubble=null;
+function ensureMapBubbleClass(){
+  if(MapBubble)return;
+  MapBubble=class extends google.maps.OverlayView{
+    constructor(position,html){super();this.position=position;this.html=html;this.div=null;}
+    onAdd(){
+      this.div=document.createElement('div');
+      this.div.className='map-bubble';
+      this.div.innerHTML=this.html;
+      this.getPanes().floatPane.appendChild(this.div);
+    }
+    draw(){
+      const proj=this.getProjection();
+      if(!proj||!this.div)return;
+      const pos=proj.fromLatLngToDivPixel(this.position);
+      if(pos){this.div.style.left=pos.x+'px';this.div.style.top=pos.y+'px';}
+    }
+    onRemove(){
+      if(this.div){this.div.parentNode&&this.div.parentNode.removeChild(this.div);this.div=null;}
+    }
+  };
+}
+
+function closeBubble(){
+  if(activeBubble){activeBubble.setMap(null);activeBubble=null;}
+}
+
+function showBubble(p){
+  closeBubble();
+  const ph=photoUrl(p,320);
+  const html=`${ph?`<img src="${ph}" class="mb-img" alt="">`:''}<div class="mb-cat">${CAT_LABELS[p.cat]||p.cat}</div><div class="mb-name">${p.icon} ${p.name}</div><div class="mb-fame">${p.fame.substring(0,70)}…</div><div class="mb-actions"><button onclick="event.stopPropagation();openAtp(${p.id})" class="mb-btn mb-btn-p">+ Planera Ekle</button><button onclick="event.stopPropagation();openModal(${p.id})" class="mb-btn mb-btn-s">Detay</button><button onclick="event.stopPropagation();closeBubble();removePlace(${p.id})" class="mb-btn mb-btn-del">Sil</button></div>`;
+  activeBubble=new MapBubble(new google.maps.LatLng(p.lat,p.lng),html);
+  activeBubble.setMap(gmap);
+}
+
+function initMap(){
+  ensureMapBubbleClass();
+  gmap=new google.maps.Map(document.getElementById('gmap'),{
+    center:{lat:45.4654,lng:9.1905},zoom:13,
+    styles:[{elementType:'geometry',stylers:[{color:'#F7F3EE'}]},{elementType:'labels.text.fill',stylers:[{color:'#1A1612'}]},{elementType:'labels.text.stroke',stylers:[{color:'#FDFAF7'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#FFFFFF'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#E8E2DA'}]}]
+  });
+  dirService=new google.maps.DirectionsService();
+  gmap.addListener('click',closeBubble);
+  createMarkers();renderList();renderRouteStops();
+}
+
+function createMarkers(){
+  mapMarkers.forEach(m=>{if(m.marker)m.marker.setMap(null);});mapMarkers=[];
+  UPL.filter(p=>p.cat!=='como').forEach(p=>{
+    const color=CAT_COLORS[p.cat]||'#888';
+    const marker=new google.maps.Marker({
+      position:{lat:p.lat,lng:p.lng},map:gmap,title:p.name,
+      icon:{path:google.maps.SymbolPath.CIRCLE,scale:9,fillColor:color,fillOpacity:1,strokeColor:'#FDFAF7',strokeWeight:2.5}
+    });
+    marker.addListener('click',()=>{
+      if(mapMode==='route'){addToRoute(p.id);return;}
+      showBubble(p);
+    });
+    mapMarkers.push({id:p.id,cat:p.cat,marker,visible:true});
+  });
+}
+
+function updateMarkers(){
+  mapMarkers.forEach(m=>{
+    const show=mapFilter==='all'||m.cat===mapFilter;
+    if(show&&!m.visible){m.marker.setMap(gmap);m.visible=true;}
+    else if(!show&&m.visible){m.marker.setMap(null);m.visible=false;}
+  });
+}
+
+let expandedPlaceId=null;
+let lastAreaPlaces=[];
+
+function renderExpandedCard(p){
+  const ph=photoUrl(p,300);
+  return `<div class="pl-expand" onclick="event.stopPropagation()">
+${ph?`<img src="${ph}" class="pl-expand-img" alt="">`:''}
+<div class="mb-fame" style="margin-bottom:8px">${p.fame}</div>
+<div class="mb-actions">
+<button class="mb-btn mb-btn-p" onclick="openAtp(${p.id})">+ Planera Ekle</button>
+<button class="mb-btn mb-btn-s" onclick="openModal(${p.id})">Detay</button>
+<button class="mb-btn mb-btn-del" onclick="removePlace(${p.id})">Sil</button>
+</div></div>`;
+}
+
+function flyToPlace(p){
+  if(!gmap||!p)return;
+  const targetZoom=15;
+  gmap.panTo({lat:p.lat,lng:p.lng});
+  google.maps.event.addListenerOnce(gmap,'idle',()=>{
+    if(gmap.getZoom()<targetZoom)gmap.setZoom(targetZoom);
+  });
+  const mm=mapMarkers.find(m=>m.id===p.id);
+  if(mm&&mm.marker){
+    mm.marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(()=>{mm.marker.setAnimation(null);},1400);
+  }
+}
+
+function toggleExpand(id,prefix){
+  expandedPlaceId=expandedPlaceId===id?null:id;
+  const p=UPL.find(x=>x.id===id);
+  if(expandedPlaceId===id&&p)flyToPlace(p);
+  if(mapMode==='area')renderAreaList(lastAreaPlaces);else renderList();
+  if(expandedPlaceId===id){
+    setTimeout(()=>{const el=document.getElementById((prefix||'li-')+id);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});},0);
+  }
+}
+
+function renderList(){
+  const list=document.getElementById('pl-list');
+  const q=(document.getElementById('map-search')?.value||'').trim().toLowerCase();
+  const base=mapFilter==='all'?UPL.filter(p=>p.cat!=='como'):UPL.filter(p=>p.cat===mapFilter);
+  const f=!q?base:base.filter(p=>[p.name,p.fame,CAT_LABELS[p.cat],...(p.tags||[])].join(' ').toLowerCase().includes(q));
+  document.getElementById('map-count').textContent=f.length+' mekan';
+  list.innerHTML=f.map(p=>`
+<div class="pl-item${expandedPlaceId===p.id?' expanded sel':''}" id="li-${p.id}">
+<div class="pl-row" onclick="toggleExpand(${p.id},'li-')">
+<span class="pl-dot" style="background:${CAT_COLORS[p.cat]||'#888'}"></span>
+<div>
+<div class="pl-name">${p.icon} ${p.name}</div>
+<div class="pl-cat">${CAT_LABELS[p.cat]||p.cat}</div>
+<div class="pl-fame">${p.fame.substring(0,55)}…</div>
+</div><button class="pl-del" onclick="event.stopPropagation();removePlace(${p.id})">✕</button></div>
+${expandedPlaceId===p.id?renderExpandedCard(p):''}</div>`).join('');
+}
+
+// ===== MAP MODES =====
+function setMapMode(mode){
+  mapMode=mode;
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('mode-'+mode).classList.add('active');
+  document.querySelectorAll('.mode-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+mode).classList.add('active');
+  if(mode==='area')enableAreaDrawing();else disableAreaDrawing();
+  closeBubble();
+}
+
+// ===== ROUTE =====
+function addToRoute(id){
+  if(routeStops.includes(id)){showToast('Bu mekan zaten rotada');return;}
+  routeStops.push(id);
+  renderRouteStops();
+  showToast('✓ Rotaya eklendi · '+routeStops.length+' nokta');
+}
+
+function removeFromRoute(idx){
+  routeStops.splice(idx,1);
+  renderRouteStops();
+}
+
+function moveStop(idx,dir){
+  const j=idx+dir;
+  if(j<0||j>=routeStops.length)return;
+  [routeStops[idx],routeStops[j]]=[routeStops[j],routeStops[idx]];
+  renderRouteStops();
+}
+
+function renderRouteStops(){
+  const el=document.getElementById('route-stops');
+  renderSavedRoutes();
+  if(!routeStops.length){el.innerHTML='<div style="padding:10px 18px;font-size:.72rem;opacity:.4">Henüz mekan eklenmedi</div>';return;}
+  el.innerHTML=routeStops.map((id,i)=>{
+    const p=UPL.find(x=>x.id===id);if(!p)return'';
+    return `<div class="rs-item"><span class="rs-num">${i+1}</span><span class="rs-name">${p.icon} ${p.name}</span><div class="rs-move"><button class="rs-arr" ${i===0?'disabled':''} onclick="moveStop(${i},-1)">↑</button><button class="rs-arr" ${i===routeStops.length-1?'disabled':''} onclick="moveStop(${i},1)">↓</button></div><button class="rs-rm" onclick="removeFromRoute(${i})">✕</button></div>`;
+  }).join('');
+}
+
+function setTravelMode(mode){
+  travelMode=mode;
+  document.getElementById('tt-walk').classList.toggle('active',mode==='WALKING');
+  document.getElementById('tt-transit').classList.toggle('active',mode==='TRANSIT');
+  if(routeStops.length>=2)calcRoute();
+}
+
+let legRenderers=[];
+
+function routeLeg(fromP,toP){
+  return new Promise(resolve=>{
+    dirService.route({
+      origin:{lat:fromP.lat,lng:fromP.lng},
+      destination:{lat:toP.lat,lng:toP.lng},
+      travelMode:google.maps.TravelMode[travelMode]
+    },(result,status)=>resolve({result,status,fromP,toP}));
+  });
+}
+
+function calcRoute(){
+  if(routeStops.length<2){showToast('En az 2 mekan ekle');return;}
+  const pts=routeStops.map(id=>UPL.find(x=>x.id===id));
+  legRenderers.forEach(r=>r.setMap(null));legRenderers=[];
+  document.getElementById('route-summary').innerHTML='<span style="opacity:.5">Hesaplanıyor…</span>';
+  document.getElementById('route-legs').innerHTML='';
+  const pairs=[];
+  for(let i=0;i<pts.length-1;i++)pairs.push([pts[i],pts[i+1]]);
+  Promise.all(pairs.map(([a,b])=>routeLeg(a,b))).then(results=>{
+    const failed=results.find(r=>r.status!=='OK');
+    if(failed){
+      const modeLabel=travelMode==='WALKING'?'yürüyüş':'toplu taşıma';
+      document.getElementById('route-summary').innerHTML=`<span style="color:#C4593A">${failed.fromP.name} → ${failed.toP.name} için ${modeLabel} rotası bulunamadı (${failed.status})</span>`;
+      document.getElementById('route-legs').innerHTML='';
+      return;
+    }
+    let totalDist=0,totalDur=0;
+    results.forEach(r=>{
+      const renderer=new google.maps.DirectionsRenderer({map:gmap,suppressMarkers:true,preserveViewport:true,polylineOptions:{strokeColor:'#3D5A7A',strokeWeight:4,strokeOpacity:.8}});
+      renderer.setDirections(r.result);
+      legRenderers.push(renderer);
+      const leg=r.result.routes[0].legs[0];
+      totalDist+=leg.distance.value;totalDur+=leg.duration.value;
+    });
+    const km=(totalDist/1000).toFixed(1);
+    const mins=Math.round(totalDur/60);
+    const modeLabel=travelMode==='WALKING'?'🚶 Yürüyüş':'🚇 Toplu Taşıma';
+    document.getElementById('route-summary').innerHTML=`${modeLabel} · <b>${km} km</b> · <b>${mins} dk</b> toplam`;
+    document.getElementById('route-legs').innerHTML=results.map(r=>{
+      const leg=r.result.routes[0].legs[0];
+      return `<div class="leg-item"><span class="leg-name">${r.fromP.icon} ${r.fromP.name} → ${r.toP.icon} ${r.toP.name}</span><span class="leg-meta">${leg.distance.text}<br>${leg.duration.text}</span></div>`;
+    }).join('');
+    const bounds=new google.maps.LatLngBounds();
+    pts.forEach(p=>bounds.extend({lat:p.lat,lng:p.lng}));
+    gmap.fitBounds(bounds,60);
+  });
+}
+
+function clearRoute(){
+  routeStops=[];
+  renderRouteStops();
+  legRenderers.forEach(r=>r.setMap(null));legRenderers=[];
+  document.getElementById('route-summary').innerHTML='';
+  document.getElementById('route-legs').innerHTML='';
+}
+
+// ===== SAVED ROUTES =====
+let savedRoutes=[];
+try{const sr=localStorage.getItem('mlnSavedRoutes');if(sr)savedRoutes=JSON.parse(sr);}catch(e){}
+
+function saveSavedRoutes(){try{localStorage.setItem('mlnSavedRoutes',JSON.stringify(savedRoutes));}catch(e){}}
+
+function saveCurrentRoute(){
+  const nameEl=document.getElementById('route-save-name');
+  const name=nameEl.value.trim();
+  if(!name){showToast('Rotaya bir ad ver (örn. Gün 1)');return;}
+  if(routeStops.length<2){showToast('Kaydetmek için en az 2 mekan ekle');return;}
+  const existing=savedRoutes.find(r=>r.name.toLowerCase()===name.toLowerCase());
+  const data={id:existing?existing.id:Date.now(),name,stops:[...routeStops],travelMode};
+  if(existing)Object.assign(existing,data);else savedRoutes.push(data);
+  saveSavedRoutes();
+  nameEl.value='';
+  renderSavedRoutes();
+  showToast('✓ "'+name+'" rotası kaydedildi');
+}
+
+function loadSavedRoute(id){
+  const r=savedRoutes.find(x=>x.id===id);if(!r)return;
+  routeStops=[...r.stops];
+  travelMode=r.travelMode||'WALKING';
+  document.getElementById('tt-walk').classList.toggle('active',travelMode==='WALKING');
+  document.getElementById('tt-transit').classList.toggle('active',travelMode==='TRANSIT');
+  renderRouteStops();
+  calcRoute();
+  showToast('✓ "'+r.name+'" yüklendi');
+}
+
+function deleteSavedRoute(id){
+  savedRoutes=savedRoutes.filter(x=>x.id!==id);
+  saveSavedRoutes();
+  renderSavedRoutes();
+}
+
+function renderSavedRoutes(){
+  const el=document.getElementById('saved-routes');
+  if(!el)return;
+  if(!savedRoutes.length){el.innerHTML='';return;}
+  el.innerHTML=savedRoutes.map(r=>`
+<div class="sr-item">
+<span class="sr-name" onclick="loadSavedRoute(${r.id})">${r.name}</span>
+<span class="sr-meta">${r.stops.length} nokta</span>
+<button class="sr-load" onclick="loadSavedRoute(${r.id})">Yükle</button>
+<button class="sr-del" onclick="deleteSavedRoute(${r.id})">✕</button>
+</div>`).join('');
+}
+
+// ===== AREA (manual draw — google.maps.drawing.DrawingManager was removed by Google in v3.65) =====
+function setAreaShape(shape){
+  areaShape=shape;
+  document.getElementById('area-polygon').classList.toggle('active',shape==='polygon');
+  document.getElementById('area-circle').classList.toggle('active',shape==='circle');
+  document.getElementById('poly-finish-btn').style.display=shape==='polygon'?'block':'none';
+  resetTempDrawing();
+  if(mapMode==='area'){disableAreaDrawing();enableAreaDrawing();}
+}
+
+function enableAreaDrawing(){
+  disableAreaDrawing();
+  gmap.setOptions({draggable:false,disableDoubleClickZoom:true,draggableCursor:'crosshair'});
+  resetTempDrawing();
+  if(areaShape==='polygon'){
+    areaListeners.push(gmap.addListener('click',onPolyClick));
+    areaListeners.push(gmap.addListener('dblclick',onPolyFinish));
+  }else{
+    areaListeners.push(gmap.addListener('mousedown',onCircleStart));
+    areaListeners.push(gmap.addListener('mousemove',onCircleDrag));
+    areaListeners.push(gmap.addListener('mouseup',onCircleFinish));
+  }
+}
+
+function disableAreaDrawing(){
+  areaListeners.forEach(l=>l.remove());
+  areaListeners=[];
+  if(gmap)gmap.setOptions({draggable:true,disableDoubleClickZoom:false,draggableCursor:null});
+  resetTempDrawing();
+}
+
+function resetTempDrawing(){
+  tempPoints=[];
+  if(tempPolyline){tempPolyline.setMap(null);tempPolyline=null;}
+  tempMarkers.forEach(m=>m.setMap(null));tempMarkers=[];
+  if(tempCircle){tempCircle.setMap(null);tempCircle=null;}
+  circleCenter=null;circleDragging=false;
+}
+
+function onPolyClick(e){
+  tempPoints.push(e.latLng);
+  const dot=new google.maps.Marker({position:e.latLng,map:gmap,icon:{path:google.maps.SymbolPath.CIRCLE,scale:4,fillColor:'#C4593A',fillOpacity:1,strokeWeight:0},clickable:false});
+  tempMarkers.push(dot);
+  if(!tempPolyline){
+    tempPolyline=new google.maps.Polyline({path:tempPoints,strokeColor:'#C4593A',strokeWeight:2,clickable:false,map:gmap});
+  }else{
+    tempPolyline.setPath(tempPoints);
+  }
+}
+
+function onPolyFinish(e){
+  if(tempPoints.length<3){showToast('En az 3 nokta gerekli');return;}
+  const path=tempPoints.slice();
+  resetTempDrawing();
+  const polygon=new google.maps.Polygon({paths:path,fillColor:'#C4593A',fillOpacity:.12,strokeColor:'#C4593A',strokeWeight:2,editable:true,clickable:false,map:gmap});
+  onShapeComplete(polygon,'polygon');
+}
+
+function onCircleStart(e){
+  circleDragging=true;circleCenter=e.latLng;
+  tempCircle=new google.maps.Circle({center:circleCenter,radius:1,fillColor:'#C4593A',fillOpacity:.12,strokeColor:'#C4593A',strokeWeight:2,clickable:false,map:gmap});
+}
+
+function onCircleDrag(e){
+  if(!circleDragging||!tempCircle)return;
+  const r=google.maps.geometry.spherical.computeDistanceBetween(circleCenter,e.latLng);
+  tempCircle.setRadius(r);
+}
+
+function onCircleFinish(e){
+  if(!circleDragging)return;
+  circleDragging=false;
+  if(!tempCircle||tempCircle.getRadius()<10){if(tempCircle)tempCircle.setMap(null);tempCircle=null;return;}
+  const circle=tempCircle;
+  circle.setOptions({editable:true});
+  tempCircle=null;
+  onShapeComplete(circle,'circle');
+}
+
+function onShapeComplete(shape,type){
+  if(currentShape)currentShape.shape.setMap(null);
+  currentShape={shape,type};
+  computeAreaPlaces();
+  shape.addListener(type==='polygon'?'mouseup':'radius_changed',computeAreaPlaces);
+  if(type==='circle')shape.addListener('center_changed',computeAreaPlaces);
+}
+
+function computeAreaPlaces(){
+  if(!currentShape)return;
+  const {shape,type}=currentShape;
+  let center;
+  if(type==='polygon'){
+    const bounds=new google.maps.LatLngBounds();
+    shape.getPath().forEach(pt=>bounds.extend(pt));
+    center=bounds.getCenter();
+  }else{
+    center=shape.getCenter();
+  }
+  const found=UPL.filter(p=>{
+    if(p.cat==='como')return false;
+    const pos=new google.maps.LatLng(p.lat,p.lng);
+    if(type==='polygon')return google.maps.geometry.poly.containsLocation(pos,shape);
+    return google.maps.geometry.spherical.computeDistanceBetween(pos,center)<=shape.getRadius();
+  });
+  found.forEach(p=>{p._dist=google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(p.lat,p.lng),center);});
+  found.sort((a,b)=>a._dist-b._dist);
+  lastAreaPlaces=found;
+  renderAreaList(found);
+}
+
+function renderAreaList(places){
+  document.getElementById('area-count').textContent=places.length+' mekan bu alanda · merkeze yakınlığa göre sıralı';
+  const list=document.getElementById('area-list');
+  if(!places.length){list.innerHTML='<div style="padding:14px 18px;font-size:.72rem;opacity:.4">Alanda mekan yok</div>';return;}
+  list.innerHTML=places.map(p=>`
+<div class="pl-item${expandedPlaceId===p.id?' expanded sel':''}" id="ali-${p.id}">
+<div class="pl-row" onclick="toggleExpand(${p.id},'ali-')">
+<span class="pl-dot" style="background:${CAT_COLORS[p.cat]||'#888'}"></span>
+<div>
+<div class="pl-name">${p.icon} ${p.name}</div>
+<div class="pl-cat">${CAT_LABELS[p.cat]||p.cat} · ${Math.round(p._dist)}m</div>
+</div><button class="pl-del" onclick="event.stopPropagation();removePlace(${p.id})">✕</button></div>
+${expandedPlaceId===p.id?renderExpandedCard(p):''}</div>`).join('');
+}
+
+function clearArea(){
+  if(currentShape){currentShape.shape.setMap(null);currentShape=null;}
+  document.getElementById('area-count').textContent='';
+  document.getElementById('area-list').innerHTML='';
+  resetTempDrawing();
+}
+
+function openModal(id){
+  const p=UPL.find(x=>x.id===id);if(!p)return;
+  selPlace=p;
+  document.getElementById('m-cat').textContent=CAT_LABELS[p.cat]||p.cat;
+  document.getElementById('m-name').textContent=p.name;
+  document.getElementById('m-fame').textContent=p.fame;
+  const ph=photoUrl(p,600);
+  document.getElementById('m-img').innerHTML=ph?`<img src="${ph}" style="width:100%;height:100%;object-fit:cover" alt="${p.name}">`:`<span style="font-size:3.2rem">${p.icon}</span>`;
+  document.getElementById('m-tags').innerHTML=p.tags.map(t=>`<span class="m-tag">${t}</span>`).join('');
+  document.getElementById('m-maps').href=`https://www.google.com/maps/search/${encodeURIComponent(p.name+' Milano')}`;
+  document.getElementById('modal-ov').classList.add('open');
+}
+
+function openAtp(id){
+  const p=UPL.find(x=>x.id===id);if(!p)return;
+  selPlace=p;
+  document.getElementById('atp-name').textContent=p.icon+' '+p.name;
+  document.getElementById('atp-note').value='';
+  document.getElementById('atp-ov').classList.add('open');
+}
+
+function closeAtp(e){if(e&&e.target!==document.getElementById('atp-ov'))return;closeAtpDirect();}
+function closeAtpDirect(){document.getElementById('atp-ov').classList.remove('open');selPlace=null;}
+
+function confirmAtp(){
+  if(!selPlace)return;
+  const dayId=document.getElementById('atp-day').value;
+  const time=document.getElementById('atp-time').value;
+  const note=document.getElementById('atp-note').value.trim();
+  const day=pData.find(d=>d.id===dayId);
+  day.slots.push({time,place:selPlace.name,cat:selPlace.icon,note});
+  day.slots.sort((a,b)=>a.time.localeCompare(b.time));
+  savePlanner();
+  closeAtpDirect();
+  showToast('✓ "'+selPlace.name+'" '+dayId.replace('day','Gün ')+' planına eklendi!');
+}
+
+function closeModal(e){if(e&&e.target!==document.getElementById('modal-ov'))return;closeModalDirect();}
+function closeModalDirect(){document.getElementById('modal-ov').classList.remove('open');selPlace=null;}
+
+function addToPlanner(){
+  if(!selPlace)return;
+  showToast('✓ "'+selPlace.name+'" planner\'a eklendi');
+  closeModalDirect();
+}
+
+function renderPlanner(){
+  const body=document.getElementById('planner-body');
+  body.innerHTML=pData.map(day=>`
+<div class="day-sec">
+<div class="day-hd">
+<span class="day-badge ${day.badge}">${day.label}</span>
+<div class="day-title">${day.note}</div>
+<div class="day-date">${day.date}</div>
+<button class="day-map-btn" onclick="goToMapRoute('${day.id}')">🧭 Rotayı Gör</button>
+<button class="day-map-btn" onclick="goToMapArea('${day.id}')">✏️ Alanı Gör</button>
+</div>
+<div class="timeline">
+${day.slots.map((s,si)=>`
+<div class="t-slot">
+<div class="t-dot" style="background:#1A1612"></div>
+<div class="t-time">${s.time}</div>
+<div class="t-card">
+<div class="t-card-hd"><span class="t-icon">${s.cat}</span><span class="t-place">${s.place}</span></div>
+${s.note?`<div class="t-note">${s.note}</div>`:''}
+</div>
+<button class="rm-slot" onclick="removeSlot('${day.id}',${si})">✕</button>
+</div>`).join('')}
+<div class="add-row">
+<div class="add-lbl">+ ekle</div>
+<div class="add-form">
+<input type="time" id="t-${day.id}" value="12:00">
+<input type="text" id="p-${day.id}" placeholder="Mekan veya aktivite…">
+<button onclick="addSlot('${day.id}')">Ekle</button>
+</div></div>
+</div></div>`).join('');
+}
+
+function addSlot(dayId){
+  const time=document.getElementById('t-'+dayId).value;
+  const place=document.getElementById('p-'+dayId).value.trim();
+  if(!place){showToast('Mekan adı yaz!');return;}
+  const day=pData.find(d=>d.id===dayId);
+  day.slots.push({time,place,cat:'📍',note:''});
+  day.slots.sort((a,b)=>a.time.localeCompare(b.time));
+  savePlanner();renderPlanner();showToast('✓ Eklendi!');
+}
+
+function removeSlot(dayId,si){
+  pData.find(d=>d.id===dayId).slots.splice(si,1);
+  savePlanner();renderPlanner();
+}
+
+function savePlanner(){try{localStorage.setItem('mlnPlanner',JSON.stringify(pData));}catch(e){}}
+
+// ===== DASHBOARD =====
+function saveTripState(){try{localStorage.setItem('mlnTripState',JSON.stringify(tripState));}catch(e){}}
+
+function allChecklistItems(type){
+  return [...DEFAULT_CHECKS[type],...((tripState.customChecks&&tripState.customChecks[type])||[])];
+}
+
+function renderDashboard(){
+  renderHiddenCount();
+  const start=new Date('2026-07-07T15:00:00+02:00');
+  const now=new Date();
+  const diff=start-now;
+  const cd=document.getElementById('trip-countdown');
+  if(diff>0){
+    const days=Math.floor(diff/86400000);
+    const hours=Math.floor(diff%86400000/3600000);
+    cd.textContent=days+' gün '+hours+' saat';
+  }else{
+    cd.textContent='Trip zamanı';
+  }
+  renderChecklist('booking');
+  renderChecklist('packing');
+  renderBudget();
+}
+
+function renderChecklist(type){
+  const items=allChecklistItems(type);
+  const done=items.filter(item=>tripState.checks[type]&&tripState.checks[type][item]).length;
+  const list=document.getElementById(type+'-list');
+  const progress=document.getElementById(type+'-progress');
+  progress.textContent=done+'/'+items.length+(type==='booking'?' tamam':' hazır');
+  list.innerHTML=items.map(item=>{
+    const checked=tripState.checks[type]&&tripState.checks[type][item];
+    const custom=((tripState.customChecks&&tripState.customChecks[type])||[]).includes(item);
+    return `<label class="check-row ${checked?'done':''}"><input type="checkbox" ${checked?'checked':''} onchange="toggleCheck('${type}',${items.indexOf(item)},this.checked)"><span>${item}</span>${custom?`<button class="row-rm" type="button" onclick="event.preventDefault();removeChecklistItem('${type}',${items.indexOf(item)})">✕</button>`:''}</label>`;
+  }).join('');
+}
+
+function toggleCheck(type,index,checked){
+  const item=allChecklistItems(type)[index];
+  if(!tripState.checks[type])tripState.checks[type]={};
+  tripState.checks[type][item]=checked;
+  saveTripState();renderChecklist(type);
+}
+
+function addChecklistItem(type){
+  const input=document.getElementById(type+'-custom');
+  const val=input.value.trim();
+  if(!val)return;
+  if(!tripState.customChecks[type])tripState.customChecks[type]=[];
+  if(!allChecklistItems(type).includes(val))tripState.customChecks[type].push(val);
+  input.value='';
+  saveTripState();renderChecklist(type);
+}
+
+function removeChecklistItem(type,index){
+  const item=allChecklistItems(type)[index];
+  tripState.customChecks[type]=((tripState.customChecks&&tripState.customChecks[type])||[]).filter(x=>x!==item);
+  if(tripState.checks[type])delete tripState.checks[type][item];
+  saveTripState();renderChecklist(type);
+}
+
+function resetChecklist(type){
+  tripState.checks[type]={};
+  if(type==='packing')tripState.customChecks.packing=[];
+  saveTripState();renderChecklist(type);
+}
+
+function renderBudget(){
+  const list=document.getElementById('budget-list');
+  const total=tripState.budget.reduce((sum,item)=>sum+(Number(item.amount)||0),0);
+  document.getElementById('budget-total').textContent='€'+total+' toplam';
+  list.innerHTML=tripState.budget.map((item,i)=>`
+<div class="budget-row"><span>${item.name}</span><strong>€${Number(item.amount)||0}</strong><button class="row-rm" onclick="removeBudgetItem(${i})">✕</button></div>`).join('');
+}
+
+function addBudgetItem(){
+  const name=document.getElementById('budget-name').value.trim();
+  const amount=Number(document.getElementById('budget-amount').value);
+  if(!name||!amount){showToast('Bütçe kalemi ve tutar gir');return;}
+  tripState.budget.push({name,amount});
+  document.getElementById('budget-name').value='';
+  document.getElementById('budget-amount').value='';
+  saveTripState();renderBudget();
+}
+
+function removeBudgetItem(i){
+  tripState.budget.splice(i,1);
+  saveTripState();renderBudget();
+}
+
+function resetBudget(){
+  tripState.budget=DEFAULT_BUDGET.map(x=>({...x}));
+  saveTripState();renderBudget();
+}
+
+function exportTripData(){
+  const data={planner:pData,customPlaces,tripState,exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='milano-trip-backup.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importTripData(event){
+  const file=event.target.files&&event.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const data=JSON.parse(reader.result);
+      if(data.planner)pData=data.planner;
+      if(data.customPlaces){
+        customPlaces=data.customPlaces;
+        UPL=PLACES.filter(p=>!customPlaces.some(c=>c.name.toLowerCase()===p.name.toLowerCase())).concat(customPlaces);
+      }
+      if(data.tripState)tripState=data.tripState;
+      savePlanner();saveCustomPlaces();saveTripState();
+      if(gmap){createMarkers();updateMarkers();renderList();}
+      renderDashboard();renderEx();renderPlanner();
+      showToast('✓ Yedek yüklendi');
+    }catch(e){showToast('JSON okunamadı');}
+  };
+  reader.readAsText(file);
+  event.target.value='';
+}
+
+// ===== DAY -> MAP (route / area) =====
+function matchSlotToPlace(str){
+  const clean=s=>s.replace(/\(.*?\)/g,'').replace(/[✈️🏨]/g,'').trim().toLowerCase();
+  const fragments=str.split(/\/| veya |→|->/).map(clean).filter(Boolean);
+  for(const frag of fragments){
+    if(!frag||frag.length<3)continue;
+    let found=UPL.find(p=>p.name.toLowerCase()===frag);
+    if(found)return found;
+    found=UPL.find(p=>frag.includes(p.name.toLowerCase())||p.name.toLowerCase().includes(frag));
+    if(found)return found;
+  }
+  return null;
+}
+
+function dayMatchedPlaces(dayId){
+  const day=pData.find(d=>d.id===dayId);
+  const matched=day.slots.map(s=>matchSlotToPlace(s.place)).filter(Boolean);
+  const seenIds=new Set();
+  return matched.filter(p=>{if(seenIds.has(p.id))return false;seenIds.add(p.id);return true;});
+}
+
+function goToMapRoute(dayId){
+  const day=pData.find(d=>d.id===dayId);
+  const places=dayMatchedPlaces(dayId);
+  if(places.length<2){showToast('Bu günde haritalanabilir en az 2 mekan bulunamadı');return;}
+  showPage('map');
+  setMapMode('route');
+  routeStops=places.map(p=>p.id);
+  renderRouteStops();
+  calcRoute();
+  document.getElementById('route-save-name').value=day.label;
+  showToast('✓ '+day.label+' rotası yüklendi · '+places.length+' mekan');
+}
+
+function goToMapArea(dayId){
+  const day=pData.find(d=>d.id===dayId);
+  const places=dayMatchedPlaces(dayId);
+  if(!places.length){showToast('Bu günde haritalanabilir mekan bulunamadı');return;}
+  showPage('map');
+  setMapMode('area');
+  const lat=places.reduce((s,p)=>s+p.lat,0)/places.length;
+  const lng=places.reduce((s,p)=>s+p.lng,0)/places.length;
+  const center=new google.maps.LatLng(lat,lng);
+  let maxDist=0;
+  places.forEach(p=>{const d=google.maps.geometry.spherical.computeDistanceBetween(center,new google.maps.LatLng(p.lat,p.lng));if(d>maxDist)maxDist=d;});
+  const radius=Math.max(maxDist*1.25,150);
+  const circle=new google.maps.Circle({center,radius,fillColor:'#C4593A',fillOpacity:.12,strokeColor:'#C4593A',strokeWeight:2,editable:true,clickable:false,map:gmap});
+  onShapeComplete(circle,'circle');
+  gmap.fitBounds(circle.getBounds(),60);
+  showToast('✓ '+day.label+' alanı yüklendi · '+places.length+' mekan');
+}
+
+function renderComoTl(){
+  document.getElementById('como-tl').innerHTML=COMO_TL.map(s=>`
+<div class="t-slot">
+<div class="t-dot" style="background:#4A7C8A"></div>
+<div class="t-time">${s.time}</div>
+<div class="t-card">
+<div class="t-card-hd"><span class="t-icon">${s.icon}</span><span class="t-place">${s.place}</span></div>
+<div class="t-note">${s.note}</div>
+</div></div>`).join('');
+}
+
+// ===== CUSTOM LOCATIONS (paste a Google Maps link or place name) =====
+let placesAutocomplete=null;
+let autocompletePlace=null;
+
+function ensurePlacesAutocomplete(){
+  if(placesAutocomplete||!window.google||!google.maps.places)return;
+  const input=document.getElementById('gmaps-search-input');
+  placesAutocomplete=new google.maps.places.Autocomplete(input,{
+    fields:['name','geometry','formatted_address'],
+    bounds:new google.maps.LatLngBounds({lat:45.30,lng:8.95},{lat:46.10,lng:9.45}),
+    componentRestrictions:{country:'it'}
+  });
+  placesAutocomplete.addListener('place_changed',()=>{
+    const place=placesAutocomplete.getPlace();
+    if(place&&place.geometry&&place.geometry.location){
+      autocompletePlace={lat:place.geometry.location.lat(),lng:place.geometry.location.lng(),name:place.name};
+      document.getElementById('custom-name').value=place.name||'';
+      document.getElementById('custom-status').textContent='✓ "'+(place.name||'')+'" seçildi — kategori seçip ekleyebilirsin';
+    }
+  });
+}
+
+function openCustomModal(){
+  document.getElementById('gmaps-search-input').value='';
+  document.getElementById('custom-input').value='';
+  document.getElementById('custom-name').value='';
+  document.getElementById('custom-cat').value='custom';
+  document.getElementById('custom-status').textContent='';
+  autocompletePlace=null;
+  document.getElementById('custom-ov').classList.add('open');
+  ensurePlacesAutocomplete();
+}
+function closeCustomModal(e){if(e&&e.target!==document.getElementById('custom-ov'))return;closeCustomModalDirect();}
+function closeCustomModalDirect(){document.getElementById('custom-ov').classList.remove('open');}
+
+function extractCoordsFromText(text){
+  let m=text.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+  if(m)return{lat:parseFloat(m[1]),lng:parseFloat(m[2])};
+  m=text.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+  if(m)return{lat:parseFloat(m[1]),lng:parseFloat(m[2])};
+  m=text.match(/[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/);
+  if(m)return{lat:parseFloat(m[1]),lng:parseFloat(m[2])};
+  m=text.match(/^\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*$/);
+  if(m)return{lat:parseFloat(m[1]),lng:parseFloat(m[2])};
+  return null;
+}
+
+function extractNameFromText(text){
+  const m=text.match(/\/maps\/place\/([^\/@]+)/);
+  if(m)return decodeURIComponent(m[1].replace(/\+/g,' '));
+  return null;
+}
+
+async function resolveShortLink(url){
+  try{
+    const res=await fetch(url,{redirect:'follow',mode:'cors'});
+    if(res.url&&res.url!==url)return res.url;
+  }catch(e){}
+  return null;
+}
+
+async function geocodePlaceName(query){
+  try{
+    const res=await fetch('https://places.googleapis.com/v1/places:searchText',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-Goog-Api-Key':GMAPS_KEY,'X-Goog-FieldMask':'places.displayName,places.location'},
+      body:JSON.stringify({textQuery:query})
+    });
+    const data=await res.json();
+    if(data.places&&data.places.length){
+      const pl=data.places[0];
+      return{lat:pl.location.latitude,lng:pl.location.longitude,name:pl.displayName&&pl.displayName.text};
+    }
+  }catch(e){}
+  return null;
+}
+
+async function addCustomPlace(){
+  const raw=document.getElementById('custom-input').value.trim();
+  const statusEl=document.getElementById('custom-status');
+  const nameOverride=document.getElementById('custom-name').value.trim();
+  const cat=document.getElementById('custom-cat').value;
+  let coords=null,name=nameOverride;
+  if(autocompletePlace){
+    coords={lat:autocompletePlace.lat,lng:autocompletePlace.lng};
+    if(!name)name=autocompletePlace.name;
+  }
+  if(!coords){
+    if(!raw){statusEl.textContent='Google Maps\'te ara, ya da bir link/mekan adı yapıştır';return;}
+    const isUrl=/^https?:\/\//i.test(raw);
+    statusEl.textContent='Aranıyor…';
+    coords=extractCoordsFromText(raw);
+    name=name||extractNameFromText(raw);
+    if(!coords&&isUrl&&/goo\.gl/i.test(raw)){
+      const expanded=await resolveShortLink(raw);
+      if(expanded){coords=extractCoordsFromText(expanded);if(!name)name=extractNameFromText(expanded);}
+    }
+    if(!coords){
+      const query=isUrl?(name||'Milano'):raw;
+      const geo=await geocodePlaceName(/milano|como|italy|italya/i.test(query)?query:query+', Milano, Italy');
+      if(geo){coords={lat:geo.lat,lng:geo.lng};if(!name)name=geo.name;}
+    }
+  }
+  if(!coords){
+    statusEl.textContent='Konum bulunamadı. Kısa linkse tarayıcıda açıp tam linki yapıştır, veya mekan adını yaz.';
+    return;
+  }
+  if(!name)name='Özel Konum';
+  const id=20000+Date.now()%100000;
+  const place={id,name,cat,icon:CAT_ICONS[cat]||'📌',fame:'Senin eklediğin özel konum.',tags:['Özel'],lat:coords.lat,lng:coords.lng,custom:true};
+  customPlaces.push(place);
+  UPL.push(place);
+  saveCustomPlaces();
+  closeCustomModalDirect();
+  showToast('✓ "'+name+'" eklendi');
+  if(gmap){createMarkers();updateMarkers();renderList();}
+  if(document.getElementById('page-explore').classList.contains('active'))renderEx();
+}
+
+function saveCustomPlaces(){try{localStorage.setItem('mlnCustomPlaces',JSON.stringify(customPlaces));}catch(e){}}
+
+function removePlace(id){
+  const p=UPL.find(x=>x.id===id);
+  if(!p)return;
+  if(p.custom){
+    customPlaces=customPlaces.filter(x=>x.id!==id);
+    saveCustomPlaces();
+  }else{
+    hiddenIds.add(id);
+    saveHidden();
+  }
+  UPL=UPL.filter(x=>x.id!==id);
+  if(expandedPlaceId===id)expandedPlaceId=null;
+  if(gmap){createMarkers();updateMarkers();renderList();}
+  if(document.getElementById('page-explore').classList.contains('active'))renderEx();
+  showToast('✓ "'+p.name+'" listeden kaldırıldı');
+}
+
+function restoreHiddenPlaces(){
+  if(!hiddenIds.size){showToast('Gizlenen mekan yok');return;}
+  const n=hiddenIds.size;
+  hiddenIds.forEach(id=>{
+    const p=PLACES.find(x=>x.id===id);
+    if(p&&!UPL.find(x=>x.id===id))UPL.push(p);
+  });
+  hiddenIds.clear();
+  saveHidden();
+  if(gmap){createMarkers();updateMarkers();renderList();}
+  if(document.getElementById('page-explore').classList.contains('active'))renderEx();
+  renderHiddenCount();
+  showToast('✓ '+n+' mekan geri getirildi');
+}
+
+function renderHiddenCount(){
+  const el=document.getElementById('hidden-count');
+  if(el)el.textContent=hiddenIds.size+' mekan gizli';
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+window.onload=()=>{renderEx();};
+</script>
+
+<!-- ADD TO PLANNER MODAL -->
+<div class="modal-ov" id="atp-ov" onclick="closeAtp(event)">
+  <div class="modal" style="max-width:380px">
+    <button class="m-close" onclick="closeAtpDirect()">✕</button>
+    <div class="m-body" style="padding-top:28px">
+      <div class="m-cat">Planera Ekle</div>
+      <div class="m-name" id="atp-name" style="font-size:1.3rem;margin-bottom:18px"></div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:8px;align-items:center">
+          <label style="font-size:.75rem;opacity:.5;width:48px;flex-shrink:0">Gün</label>
+          <select id="atp-day" style="flex:1;font-family:'DM Sans',sans-serif;font-size:.8rem;border:1px solid var(--mist);border-radius:8px;padding:8px 10px;background:var(--white);color:var(--ink);outline:none">
+            <option value="day1">Gün 1 — Salı 7 Tem</option>
+            <option value="day2">Gün 2 — Çarşamba 8 Tem</option>
+            <option value="day3">Gün 3 — Perşembe 9 Tem (Como)</option>
+            <option value="day4">Gün 4 — Cuma 10 Tem</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <label style="font-size:.75rem;opacity:.5;width:48px;flex-shrink:0">Saat</label>
+          <input type="time" id="atp-time" value="10:00" style="flex:1;font-family:'DM Sans',sans-serif;font-size:.8rem;border:1px solid var(--mist);border-radius:8px;padding:8px 10px;background:var(--white);color:var(--ink);outline:none">
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <label style="font-size:.75rem;opacity:.5;width:48px;flex-shrink:0">Not</label>
+          <input type="text" id="atp-note" placeholder="Opsiyonel not…" style="flex:1;font-family:'DM Sans',sans-serif;font-size:.8rem;border:1px solid var(--mist);border-radius:8px;padding:8px 10px;background:var(--white);color:var(--ink);outline:none">
+        </div>
+      </div>
+      <button onclick="confirmAtp()" style="margin-top:18px;width:100%;padding:11px;background:var(--ink);color:#fff;border:none;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.82rem;transition:opacity .2s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">✓ Ekle</button>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOM LOCATION MODAL -->
+<div class="modal-ov" id="custom-ov" onclick="closeCustomModal(event)">
+  <div class="modal" style="max-width:420px">
+    <button class="m-close" onclick="closeCustomModalDirect()">✕</button>
+    <div class="m-body" style="padding-top:28px">
+      <div class="m-cat">Özel Konum Ekle</div>
+      <div class="m-name" style="font-size:1.2rem;margin-bottom:6px">📌 Google Maps'ten Konum</div>
+      <div class="m-fame" style="margin-bottom:10px">Google Maps'te ara ve listeden seç — ya da link/mekan adı yapıştır.</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <input type="text" id="gmaps-search-input" placeholder="🔍 Google Maps'te mekan ara..." style="font-family:'DM Sans',sans-serif;font-size:.8rem;border:1.5px solid var(--ink);border-radius:8px;padding:9px 10px;background:var(--white);color:var(--ink);outline:none">
+        <div style="display:flex;align-items:center;gap:8px;opacity:.4;font-size:.68rem"><div style="flex:1;height:1px;background:var(--mist)"></div>veya<div style="flex:1;height:1px;background:var(--mist)"></div></div>
+        <textarea id="custom-input" placeholder="https://maps.app.goo.gl/... veya 'Mekan adı, Milano'" rows="2" style="font-family:'DM Sans',sans-serif;font-size:.8rem;border:1px solid var(--mist);border-radius:8px;padding:9px 10px;background:var(--white);color:var(--ink);outline:none;resize:vertical"></textarea>
+        <div style="display:flex;gap:8px;align-items:center">
+          <label style="font-size:.75rem;opacity:.5;width:60px;flex-shrink:0">İsim</label>
+          <input type="text" id="custom-name" placeholder="Bulunamazsa kullanılır…" style="flex:1;font-family:'DM Sans',sans-serif;font-size:.8rem;border:1px solid var(--mist);border-radius:8px;padding:8px 10px;background:var(--white);color:var(--ink);outline:none">
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <label style="font-size:.75rem;opacity:.5;width:60px;flex-shrink:0">Kategori</label>
+          <select id="custom-cat" style="flex:1;font-family:'DM Sans',sans-serif;font-size:.8rem;border:1px solid var(--mist);border-radius:8px;padding:8px 10px;background:var(--white);color:var(--ink);outline:none">
+            <option value="custom">📌 Özel</option>
+            <option value="yemek">🍽️ Yemek</option>
+            <option value="bar-cafe">☕ Bar & Kafe</option>
+            <option value="kultur">🏛️ Kültür</option>
+            <option value="alisveris">🛍️ Alışveriş</option>
+            <option value="gelato">🍦 Gelato</option>
+          </select>
+        </div>
+      </div>
+      <div id="custom-status" style="font-size:.7rem;opacity:.5;margin-top:8px;min-height:14px"></div>
+      <button id="custom-submit" onclick="addCustomPlace()" style="margin-top:10px;width:100%;padding:11px;background:var(--ink);color:#fff;border:none;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.82rem;transition:opacity .2s">✓ Konumu Ekle</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
